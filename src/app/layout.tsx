@@ -6,8 +6,8 @@ import { Navigation } from "@/components/Navigation";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Onur Ata Asar - Personal Website",
-  description: "Personal website and blog of Onur Ata Asar",
+  title: "Onur Ata Asar - Kişisel Notlar ve Blog",
+  description: "Kişisel notlar ve blog",
 };
 
 export default function RootLayout({
