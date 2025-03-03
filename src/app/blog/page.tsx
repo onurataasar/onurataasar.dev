@@ -36,7 +36,9 @@ export default async function BlogPage() {
         </div>
         <div className="grid gap-6">
           {localPosts.length === 0 ? (
-            <p className="text-zinc-600 dark:text-zinc-400">No posts yet...</p>
+            <p className="text-zinc-600 dark:text-zinc-400">
+              Henüz yazı yok...
+            </p>
           ) : (
             localPosts.map((post) => <BlogCard key={post.slug} post={post} />)
           )}

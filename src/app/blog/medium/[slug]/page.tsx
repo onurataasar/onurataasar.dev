@@ -64,18 +64,18 @@ export default async function MediumBlogPost(props: Props) {
               href={mediumPost.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center px-4 py-2 bg-black text-white rounded-lg hover:bg-zinc-800 transition-colors italic text-sm"
+              className="inline-flex items-center px-4 py-2 bg-black text-white rounded-lg hover:bg-zinc-800 transition-colors italic text-sm whitespace-nowrap"
             >
               <FaExternalLinkAlt size={16} className="mr-2" />
               Medium&apos;da oku
             </a>
           </div>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-4">
           <time className="text-sm text-zinc-600 dark:text-zinc-400">
             {new Date(mediumPost.pubDate).toLocaleDateString()}
           </time>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             {mediumPost.categories.map((category) => (
               <span
                 key={category}
