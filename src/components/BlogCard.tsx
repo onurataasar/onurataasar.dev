@@ -69,7 +69,7 @@ export function BlogCard({ post }: BlogCardProps) {
             </div>
           )}
           <div className="p-4 sm:p-5 flex-1">
-            <h3 className="text-lg sm:text-xl font-semibold group-hover:text-zinc-600 dark:group-hover:text-zinc-300">
+            <h3 className="text-lg sm:text-xl font-semibold group-hover:text-zinc-600 dark:group-hover:text-zinc-300 max-md:w-5/6">
               {_.truncate(post.title, { length: 70 })}
             </h3>
             <p className="mt-2 text-zinc-600 dark:text-zinc-400 text-sm sm:text-base line-clamp-3">

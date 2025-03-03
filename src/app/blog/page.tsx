@@ -25,7 +25,7 @@ export default async function BlogPage() {
   }));
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-4 sm:space-y-8">
       <h1 className="text-4xl font-bold">Blog</h1>
 
       <div className="space-y-8">

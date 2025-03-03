@@ -114,3 +114,13 @@
   color: var(--color-zinc-500);
   text-align: center;
 }
+
+.prose blockquote {
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 2rem;
+  padding-left: 1rem;
+  font-style: italic;
+  font-size: 0.95rem;
+  border-left: 2px solid var(--color-zinc-300);
+}
