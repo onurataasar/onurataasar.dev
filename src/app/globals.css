@@ -124,3 +124,17 @@
   font-size: 0.95rem;
   border-left: 2px solid var(--color-zinc-300);
 }
+
+.prose a {
+  color: var(--color-blue-400);
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
+  text-decoration-color: var(--color-blue-400);
+  text-decoration-thickness: 0.1rem;
+  transition: text-decoration-color 0.3s ease;
+}
+
+.prose a:hover {
+  text-decoration-color: var(--color-blue-500);
+  color: var(--color-blue-600);
+}
