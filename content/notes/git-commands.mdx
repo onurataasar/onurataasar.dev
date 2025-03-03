@@ -1,0 +1,44 @@
+---
+title: Useful Git Commands
+date: "2024-03-03"
+description: A collection of Git commands I frequently use
+---
+
+# Useful Git Commands
+
+Here's a collection of Git commands I find myself using frequently.
+
+## Daily Commands
+
+```bash
+# View status
+git status
+
+# Create and switch to new branch
+git checkout -b feature/new-branch
+
+# Stage all changes
+git add .
+
+# Commit with message
+git commit -m "feat: add new feature"
+```
+
+## Advanced Commands
+
+```bash
+# Interactive rebase
+git rebase -i HEAD~3
+
+# Force push safely
+git push --force-with-lease
+
+# Clean untracked files
+git clean -fd
+```
+
+## Tips
+
+1. Always use `--force-with-lease` instead of `--force`
+2. Use conventional commit messages
+3. Keep commits atomic and focused

@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+/* Import highlight.js styles */
+@import "highlight.js/styles/github.css";
+
+@theme {
+  --color-zinc-50: #fafafa;
+  --color-zinc-100: #f4f4f5;
+  --color-zinc-200: #e4e4e7;
+  --color-zinc-300: #d4d4d8;
+  --color-zinc-400: #a1a1aa;
+  --color-zinc-500: #71717a;
+  --color-zinc-600: #52525b;
+  --color-zinc-700: #3f3f46;
+  --color-zinc-800: #27272a;
+  --color-zinc-900: #18181b;
+
+  --color-blue-400: #60a5fa;
+
+  --tw-prose-code-bg: var(--color-zinc-100);
+  --tw-prose-pre-bg: var(--color-zinc-100);
+  --tw-prose-pre-code: var(--color-zinc-900);
+}
+
+@media (prefers-color-scheme: dark) {
+  @theme {
+    --tw-prose-code-bg: var(--color-zinc-800);
+    --tw-prose-pre-bg: var(--color-zinc-800);
+    --tw-prose-pre-code: var(--color-zinc-100);
+  }
+}
+
+@layer base {
+  body {
+    background-color: var(--color-zinc-50);
+    color: var(--color-zinc-900);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body {
+      background-color: var(--color-zinc-900);
+      color: var(--color-zinc-50);
+    }
+  }
+}
+
+@layer components {
+  .prose {
+    max-width: none;
+  }
+
+  .prose pre {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--tw-prose-pre-bg);
+    padding: 1rem;
+  }
+
+  .prose code {
+    font-size: 0.875em;
+    background-color: var(--tw-prose-code-bg);
+    padding: 0.2em 0.4em;
+    border-radius: 0.25rem;
+  }
+
+  .prose img {
+    margin: 2rem auto;
+    border-radius: 0.5rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .prose {
+      color: #d1d5db;
+    }
+
+    .prose h1,
+    .prose h2,
+    .prose h3,
+    .prose h4 {
+      color: var(--color-zinc-50);
+    }
+
+    .prose a {
+      color: var(--color-blue-400);
+    }
+
+    .prose strong {
+      color: var(--color-zinc-50);
+    }
+
+    .prose code {
+      color: var(--color-zinc-50);
+    }
+
+    .prose pre code {
+      color: var(--color-zinc-100);
+    }
+  }
+}
