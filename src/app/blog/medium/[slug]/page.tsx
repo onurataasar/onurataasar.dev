@@ -44,70 +44,96 @@ async function getMediumPost(slug: string): Promise<MediumPost> {
 }
 
 export default async function MediumBlogPost({ params }: Props) {
-  // Await params to resolve the promise and access slug
-  const { slug } = await params;
+  try {
+    // Await params to resolve the promise and access slug
+    const { slug } = await params;
 
-  if (!slug) {
-    return notFound();
-  }
+    if (!slug) {
+      return notFound();
+    }
 
-  const mediumPost = await getMediumPost(slug);
-  const sanitizedContent = DOMPurify.sanitize(
-    mediumPost.content || mediumPost.description
-  );
+    const mediumPost = await getMediumPost(slug);
+    const sanitizedContent = DOMPurify.sanitize(
+      mediumPost.content || mediumPost.description
+    );
 
-  return (
-    <article className="max-w-none">
-      <header className="mb-8">
-        <div className="flex justify-between items-start">
-          <h1 className="text-4xl font-bold mb-4">{mediumPost.title}</h1>
-          <div className="not-prose">
-            <a
-              href={mediumPost.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-4 py-2 bg-black text-white rounded-lg hover:bg-zinc-800 transition-colors italic text-sm whitespace-nowrap"
-            >
-              <FaExternalLinkAlt size={16} className="mr-2" />
-              Medium&apos;da oku
-            </a>
-          </div>
-        </div>
-        <div className="flex flex-wrap items-center gap-4">
-          <time className="text-sm text-zinc-600 dark:text-zinc-400">
-            {new Date(mediumPost.pubDate).toLocaleDateString()}
-          </time>
-          <div className="flex flex-wrap gap-2">
-            {mediumPost.categories.map((category) => (
-              <span
-                key={category}
-                className="px-2 py-1 text-xs rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400"
+    return (
+      <article className="max-w-none">
+        <header className="mb-8">
+          <div className="flex justify-between items-start">
+            <h1 className="text-4xl font-bold mb-4">{mediumPost.title}</h1>
+            <div className="not-prose">
+              <a
+                href={mediumPost.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-4 py-2 bg-black text-white rounded-lg hover:bg-zinc-800 transition-colors italic text-sm whitespace-nowrap"
               >
-                {category}
-              </span>
-            ))}
+                <FaExternalLinkAlt size={16} className="mr-2" />
+                Medium&apos;da oku
+              </a>
+            </div>
           </div>
-        </div>
-      </header>
-      {mediumPost.thumbnail && (
-        <div className="relative h-[400px] w-full mb-8 rounded-lg overflow-hidden">
-          <Image
-            src={mediumPost.thumbnail}
-            alt={mediumPost.title}
-            fill
-            className="object-cover"
-            priority
+          <div className="flex flex-wrap items-center gap-4">
+            <time className="text-sm text-zinc-600 dark:text-zinc-400">
+              {new Date(mediumPost.pubDate).toLocaleDateString()}
+            </time>
+            <div className="flex flex-wrap gap-2">
+              {mediumPost.categories.map((category) => (
+                <span
+                  key={category}
+                  className="px-2 py-1 text-xs rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400"
+                >
+                  {category}
+                </span>
+              ))}
+            </div>
+          </div>
+        </header>
+        {mediumPost.thumbnail && (
+          <div className="relative h-[400px] w-full mb-8 rounded-lg overflow-hidden">
+            <Image
+              src={mediumPost.thumbnail}
+              alt={mediumPost.title}
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+        )}
+        <div className="space-y-6">
+          <div
+            className="prose dark:prose-invert max-w-none"
+            dangerouslySetInnerHTML={{ __html: sanitizedContent }}
           />
         </div>
-      )}
-      <div className="space-y-6">
-        <div
-          className="prose dark:prose-invert max-w-none"
-          dangerouslySetInnerHTML={{ __html: sanitizedContent }}
-        />
-      </div>
-    </article>
-  );
+      </article>
+    );
+  } catch (error) {
+    if (error instanceof Error && error.message.includes("Rate limited")) {
+      return (
+        <div className="flex flex-col items-center justify-center min-h-[50vh] text-center">
+          <h1 className="text-2xl font-bold mb-4">
+            Fuck! We got rate limited by Medium 😤
+          </h1>
+          <p className="text-zinc-600 dark:text-zinc-400 mb-8">
+            Try again in a few minutes or read the post directly on Medium
+          </p>
+          <a
+            href="https://medium.com/@onurataasar"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center px-6 py-3 bg-black text-white rounded-lg hover:bg-zinc-800 transition-colors"
+          >
+            <FaExternalLinkAlt size={16} className="mr-2" />
+            Go to Medium Profile
+          </a>
+        </div>
+      );
+    }
+
+    return notFound();
+  }
 }
 
 export async function generateStaticParams() {

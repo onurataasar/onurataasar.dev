@@ -7,12 +7,23 @@ export type MediumPost = {
   thumbnail: string;
   description: string;
   categories: string[];
+  content?: string;
 };
 
 export async function getMediumPosts(): Promise<MediumPost[]> {
   try {
+    // Use fetch with caching
+    const response = await fetch("https://medium.com/feed/@onurataasar", {
+      next: { revalidate: 3600 }, // Cache for 1 hour
+    });
+
+    if (!response.ok) {
+      throw new Error(`Status code ${response.status}`);
+    }
+
+    const xmlData = await response.text();
     const parser = new Parser();
-    const feed = await parser.parseURL("https://medium.com/feed/@onurataasar");
+    const feed = await parser.parseString(xmlData);
 
     if (!feed.items || feed.items.length === 0) {
       console.error("No articles found");
@@ -39,12 +50,16 @@ export async function getMediumPosts(): Promise<MediumPost[]> {
         link: item.link || "",
         pubDate: item.pubDate || new Date().toISOString(),
         thumbnail,
+        content: item["content:encoded"] || "",
         description: item.description || item["content:encoded"] || "",
         categories,
       };
     });
   } catch (error) {
     console.error("Failed to fetch Medium posts:", error);
+    if (error instanceof Error && error.message.includes("429")) {
+      throw new Error("Rate limited by Medium. Please try again later.");
+    }
     return [];
   }
 }
