@@ -47,7 +47,7 @@ export default async function LocalBlogPost({ params }: Props) {
         </header>
         <div
           className="prose prose-zinc dark:prose-invert max-w-none"
-          dangerouslySetInnerHTML={{ __html: htmlContent }}
+          dangerouslySetInnerHTML={{ __html: htmlContent as string }}
         />
       </article>
     );

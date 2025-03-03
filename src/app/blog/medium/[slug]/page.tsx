@@ -2,6 +2,18 @@ import { getMediumPosts } from "@/lib/medium";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Metadata } from "next";
+import DOMPurify from "isomorphic-dompurify";
+import { FaExternalLinkAlt } from "react-icons/fa";
+
+interface MediumPost {
+  link: string;
+  title: string;
+  pubDate: string;
+  categories: string[];
+  thumbnail?: string;
+  content?: string;
+  description: string;
+}
 
 type Props = {
   params: {
@@ -9,11 +21,11 @@ type Props = {
   };
 };
 
-async function getMediumPost(slug: string) {
+async function getMediumPost(slug: string): Promise<MediumPost> {
   try {
     const mediumPosts = await getMediumPosts();
     const mediumPost = mediumPosts.find(
-      (post) =>
+      (post: MediumPost) =>
         post.link
           .split("/")
           .pop()
@@ -38,11 +50,27 @@ export default async function MediumBlogPost(props: Props) {
   }
 
   const mediumPost = await getMediumPost(props.params.slug);
+  const sanitizedContent = DOMPurify.sanitize(
+    mediumPost.content || mediumPost.description
+  );
 
   return (
     <article className="max-w-none">
       <header className="mb-8">
-        <h1 className="text-4xl font-bold mb-4">{mediumPost.title}</h1>
+        <div className="flex justify-between items-start">
+          <h1 className="text-4xl font-bold mb-4">{mediumPost.title}</h1>
+          <div className="not-prose">
+            <a
+              href={mediumPost.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-4 py-2 bg-black text-white rounded-lg hover:bg-zinc-800 transition-colors italic text-sm"
+            >
+              <FaExternalLinkAlt size={16} className="mr-2" />
+              Medium&apos;da oku
+            </a>
+          </div>
+        </div>
         <div className="flex items-center gap-4">
           <time className="text-sm text-zinc-600 dark:text-zinc-400">
             {new Date(mediumPost.pubDate).toLocaleDateString()}
@@ -71,19 +99,10 @@ export default async function MediumBlogPost(props: Props) {
         </div>
       )}
       <div className="space-y-6">
-        <div className="prose dark:prose-invert">
-          <p>{mediumPost.description}</p>
-        </div>
-        <div className="not-prose">
-          <a
-            href={mediumPost.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center px-4 py-2 bg-black text-white rounded-lg hover:bg-zinc-800 transition-colors"
-          >
-            Read on Medium →
-          </a>
-        </div>
+        <div
+          className="prose dark:prose-invert max-w-none"
+          dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+        />
       </div>
     </article>
   );

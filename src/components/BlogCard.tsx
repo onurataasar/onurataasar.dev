@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import DOMPurify from "isomorphic-dompurify";
 
 interface BaseBlogPost {
   title: string;
@@ -25,6 +26,11 @@ interface BlogCardProps {
   post: BlogPost;
 }
 
+function stripHtml(html: string) {
+  const cleanHtml = DOMPurify.sanitize(html);
+  return cleanHtml.replace(/<[^>]*>/g, "").trim();
+}
+
 export function BlogCard({ post }: BlogCardProps) {
   const isExternal = post.type === "medium";
   const slug = isExternal
@@ -34,6 +40,8 @@ export function BlogCard({ post }: BlogCardProps) {
         ?.replace(/[^a-zA-Z0-9-]/g, "-")
         .toLowerCase()
     : post.slug;
+
+  const formattedDescription = stripHtml(post.description);
 
   return (
     <article className="group relative overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors">
@@ -63,7 +71,7 @@ export function BlogCard({ post }: BlogCardProps) {
             {post.title}
           </h3>
           <p className="mt-2 text-zinc-600 dark:text-zinc-400 line-clamp-2">
-            {post.description}
+            {formattedDescription}
           </p>
           <div className="mt-4 flex items-center gap-4">
             <time className="text-sm text-zinc-500">
