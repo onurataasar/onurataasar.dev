@@ -44,68 +44,75 @@ async function getMediumPost(slug: string): Promise<MediumPost> {
   }
 }
 
-export default async function MediumBlogPost(props: Props) {
-  if (!props?.params?.slug) {
-    return notFound();
-  }
+export default async function MediumBlogPost({ params }: Props) {
+  try {
+    const { slug } = await params;
 
-  const mediumPost = await getMediumPost(props.params.slug);
-  const sanitizedContent = DOMPurify.sanitize(
-    mediumPost.content || mediumPost.description
-  );
+    if (!slug) {
+      return notFound();
+    }
 
-  return (
-    <article className="max-w-none">
-      <header className="mb-8">
-        <div className="flex justify-between items-start">
-          <h1 className="text-4xl font-bold mb-4">{mediumPost.title}</h1>
-          <div className="not-prose">
-            <a
-              href={mediumPost.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-4 py-2 bg-black text-white rounded-lg hover:bg-zinc-800 transition-colors italic text-sm whitespace-nowrap"
-            >
-              <FaExternalLinkAlt size={16} className="mr-2" />
-              Medium&apos;da oku
-            </a>
-          </div>
-        </div>
-        <div className="flex flex-wrap items-center gap-4">
-          <time className="text-sm text-zinc-600 dark:text-zinc-400">
-            {new Date(mediumPost.pubDate).toLocaleDateString()}
-          </time>
-          <div className="flex flex-wrap gap-2">
-            {mediumPost.categories.map((category) => (
-              <span
-                key={category}
-                className="px-2 py-1 text-xs rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400"
+    const mediumPost = await getMediumPost(slug);
+    const sanitizedContent = DOMPurify.sanitize(
+      mediumPost.content || mediumPost.description
+    );
+
+    return (
+      <article className="max-w-none">
+        <header className="mb-8">
+          <div className="flex justify-between items-start">
+            <h1 className="text-4xl font-bold mb-4">{mediumPost.title}</h1>
+            <div className="not-prose">
+              <a
+                href={mediumPost.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-4 py-2 bg-black text-white rounded-lg hover:bg-zinc-800 transition-colors italic text-sm whitespace-nowrap"
               >
-                {category}
-              </span>
-            ))}
+                <FaExternalLinkAlt size={16} className="mr-2" />
+                Medium&apos;da oku
+              </a>
+            </div>
           </div>
-        </div>
-      </header>
-      {mediumPost.thumbnail && (
-        <div className="relative h-[400px] w-full mb-8 rounded-lg overflow-hidden">
-          <Image
-            src={mediumPost.thumbnail}
-            alt={mediumPost.title}
-            fill
-            className="object-cover"
-            priority
+          <div className="flex flex-wrap items-center gap-4">
+            <time className="text-sm text-zinc-600 dark:text-zinc-400">
+              {new Date(mediumPost.pubDate).toLocaleDateString()}
+            </time>
+            <div className="flex flex-wrap gap-2">
+              {mediumPost.categories.map((category) => (
+                <span
+                  key={category}
+                  className="px-2 py-1 text-xs rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400"
+                >
+                  {category}
+                </span>
+              ))}
+            </div>
+          </div>
+        </header>
+        {mediumPost.thumbnail && (
+          <div className="relative h-[400px] w-full mb-8 rounded-lg overflow-hidden">
+            <Image
+              src={mediumPost.thumbnail}
+              alt={mediumPost.title}
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+        )}
+        <div className="space-y-6">
+          <div
+            className="prose dark:prose-invert max-w-none"
+            dangerouslySetInnerHTML={{ __html: sanitizedContent }}
           />
         </div>
-      )}
-      <div className="space-y-6">
-        <div
-          className="prose dark:prose-invert max-w-none"
-          dangerouslySetInnerHTML={{ __html: sanitizedContent }}
-        />
-      </div>
-    </article>
-  );
+      </article>
+    );
+  } catch (error) {
+    console.error("Error in MediumBlogPost:", error);
+    return <div>Error loading blog post.</div>; // Or a more graceful error display
+  }
 }
 
 export async function generateStaticParams() {
@@ -124,16 +131,18 @@ export async function generateStaticParams() {
   }
 }
 
-export async function generateMetadata(props: Props): Promise<Metadata> {
-  if (!props?.params?.slug) {
-    return {
-      title: "Blog Post Not Found",
-      description: "The requested blog post could not be found",
-    };
-  }
-
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
-    const mediumPost = await getMediumPost(props.params.slug);
+    const { slug } = await params;
+
+    if (!slug) {
+      return {
+        title: "Blog Post Not Found",
+        description: "The requested blog post could not be found",
+      };
+    }
+
+    const mediumPost = await getMediumPost(slug);
     return {
       title: mediumPost.title,
       description: mediumPost.description || "Read on Medium",
