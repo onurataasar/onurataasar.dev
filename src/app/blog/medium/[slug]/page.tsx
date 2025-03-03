@@ -60,7 +60,7 @@ export default async function MediumBlogPost({ params }: Props) {
     return (
       <article className="max-w-none">
         <header className="mb-8">
-          <div className="flex justify-between items-start">
+          <div className="flex flex-col md:flex-row max-md:mb-4 justify-between items-start">
             <h1 className="text-4xl font-bold mb-4">{mediumPost.title}</h1>
             <div className="not-prose">
               <a
