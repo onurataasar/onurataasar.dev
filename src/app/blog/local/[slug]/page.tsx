@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Marked } from "marked";
 import { markedHighlight } from "marked-highlight";
 import hljs from "highlight.js";
+import { Metadata } from "next";
 
 const marked = new Marked(
   markedHighlight({
@@ -23,7 +24,7 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
-export default async function BlogPost({ params }: Props) {
+export default async function LocalBlogPost({ params }: Props) {
   const { slug } = await params;
 
   if (!slug) {
@@ -35,13 +36,14 @@ export default async function BlogPost({ params }: Props) {
     const htmlContent = marked.parse(content);
 
     return (
-      <article className="space-y-8">
-        <header className="space-y-4">
-          <h1 className="text-4xl font-bold">{meta.title}</h1>
-          <p className="text-xl text-zinc-600 dark:text-zinc-400">
-            {meta.description}
-          </p>
-          <time className="text-sm text-zinc-500">{meta.date}</time>
+      <article className="max-w-none">
+        <header className="mb-8">
+          <h1 className="text-4xl font-bold mb-4">{meta.title}</h1>
+          <div className="flex items-center gap-4">
+            <time className="text-sm text-zinc-600 dark:text-zinc-400">
+              {meta.date}
+            </time>
+          </div>
         </header>
         <div
           className="prose prose-zinc dark:prose-invert max-w-none"
@@ -51,5 +53,29 @@ export default async function BlogPost({ params }: Props) {
     );
   } catch {
     notFound();
+  }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+
+  if (!slug) {
+    return {
+      title: "Blog Post Not Found",
+      description: "The requested blog post could not be found",
+    };
+  }
+
+  try {
+    const { meta } = await getContentBySlug("blog", slug);
+    return {
+      title: meta.title,
+      description: meta.description,
+    };
+  } catch {
+    return {
+      title: "Blog Post",
+      description: "Error loading blog post",
+    };
   }
 }

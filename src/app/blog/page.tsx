@@ -1,30 +1,51 @@
-import Link from "next/link";
 import { getContentList } from "@/lib/mdx";
+import { getMediumPosts } from "@/lib/medium";
+import { BlogCard } from "@/components/BlogCard";
 
 export default async function BlogPage() {
-  const posts = await getContentList("blog");
+  const [posts, mediumPosts] = await Promise.all([
+    getContentList("blog"),
+    getMediumPosts(),
+  ]);
+
+  const localPosts = posts.map((post) => ({
+    type: "local" as const,
+    ...post,
+    date: post.date,
+  }));
+
+  const externalPosts = mediumPosts.map((post) => ({
+    type: "medium" as const,
+    title: post.title,
+    description: post.description,
+    date: post.pubDate,
+    link: post.link,
+    thumbnail: post.thumbnail,
+    categories: post.categories,
+  }));
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-12">
       <h1 className="text-4xl font-bold">Blog</h1>
-      <div className="grid gap-6">
-        {posts.length === 0 ? (
-          <p className="text-zinc-600 dark:text-zinc-400">No posts yet...</p>
-        ) : (
-          posts.map((post) => (
-            <article key={post.slug} className="space-y-2">
-              <Link href={`/blog/${post.slug}`} className="block group">
-                <h2 className="text-2xl font-semibold group-hover:text-zinc-600 dark:group-hover:text-zinc-300">
-                  {post.title}
-                </h2>
-                <p className="text-zinc-600 dark:text-zinc-400">
-                  {post.description}
-                </p>
-                <time className="text-sm text-zinc-500">{post.date}</time>
-              </Link>
-            </article>
-          ))
-        )}
+
+      <div className="space-y-8">
+        <h2 className="text-2xl font-semibold">Local Posts</h2>
+        <div className="grid gap-6">
+          {localPosts.length === 0 ? (
+            <p className="text-zinc-600 dark:text-zinc-400">No posts yet...</p>
+          ) : (
+            localPosts.map((post) => <BlogCard key={post.slug} post={post} />)
+          )}
+        </div>
+      </div>
+
+      <div className="space-y-8">
+        <h2 className="text-2xl font-semibold">Medium Posts</h2>
+        <div className="grid gap-6">
+          {externalPosts.map((post) => (
+            <BlogCard key={post.link} post={post} />
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ interface ContentMeta {
   date: string;
   description: string;
   slug: string;
+  isLocal: boolean; // true if the post is local, false if it's a Medium post
 }
 
 export async function getContentList(
@@ -25,6 +26,7 @@ export async function getContentList(
       return {
         ...data,
         slug: file.replace(".mdx", ""),
+        isLocal: !source.includes("medium.com"),
       } as ContentMeta;
     })
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -41,6 +43,7 @@ export async function getContentBySlug(type: ContentType, slug: string) {
     meta: {
       ...data,
       slug,
+      isLocal: !source.includes("medium.com"),
     } as ContentMeta,
     content,
   };

@@ -19,11 +19,15 @@
     "highlight.js": "^11.11.1",
     "marked": "^15.0.7",
     "marked-highlight": "^2.2.1",
+    "medium-article-api": "^1.0.4",
     "next": "15.2.0",
     "next-mdx-remote": "^5.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "remark-gfm": "^4.0.1"
+    "rehype-pretty-code": "^0.14.0",
+    "remark-gfm": "^4.0.1",
+    "rss-parser": "^3.13.0",
+    "shiki": "^1.29.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
