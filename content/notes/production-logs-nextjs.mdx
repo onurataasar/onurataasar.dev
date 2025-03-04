@@ -1,125 +1,37 @@
 ---
 title: Next.js Uygulamalarında Console Log'ları Yönetme
-date: "2025-03-04"
+date: "04.03.2025"
 description: Next.js uygulamalarında üretim ortamında console log'larını yönetmek için bir yapılandırma örneği
 ---
 
 # Next.js Uygulamalarında Console Log'ları Yönetme
 
-## Giriş
+## Next.js Üretim Derlemelerinde Konsol Loglarını Otomatik Olarak Kaldırma
 
-Bu notta, Next.js uygulamalarında **üretim ortamında** (production) console log'larını yönetmek için bir yapılandırma örneği paylaşacağız. Bu yapılandırmayı projelerinize nasıl entegre edebileceğinizi detaylı bir şekilde inceleyeceğiz.
+Next.js projelerinde geliştirme sırasında kullandığımız `console.log` ifadelerinin üretim ortamına taşınmasını engellemek, performansı artırmak ve gereksiz bilgileri dışarıya sızdırmamak için önemlidir. Neyse ki, Next.js bu işlemi oldukça kolay bir şekilde yapmamızı sağlıyor. İşte adımlar:
 
----
+### `next.config.js` Dosyasını Düzenleme
 
-## Problem
+Projenizin ana dizininde bulunan `next.config.js` dosyasını açın. Eğer bu dosya yoksa oluşturun.
 
-Geliştirme sırasında `console.log`, `console.error` gibi log'lar hata ayıklama ve izleme açısından oldukça kullanışlıdır. Ancak, bu log'ların **üretim ortamında** kalması aşağıdaki sorunlara yol açabilir:
+![Next.js Console Log Management](https://pbs.twimg.com/media/Gk_hyuxXwAAZ9f0?format=jpg&name=900x900)
 
-- **Performans Düşüşü**: Gereksiz log çıktıları performansı olumsuz etkileyebilir.
-- **Güvenlik Riskleri**: Hassas bilgiler (örneğin, hata mesajları veya kullanıcı verileri) yanlışlıkla log'lanabilir ve bu, güvenlik riski oluşturur.
-- **Kod Temizliği**: Üretim ortamında gereksiz log'lar kodun okunabilirliğini ve bakımını zorlaştırır.
+### Kodun Açıklaması
 
-Bu nedenle, üretim ortamında gereksiz log'ları kaldırmak veya filtrelemek oldukça önemlidir.
+- **`compiler`:** Bu bölüm, Next.js derleyicisinin nasıl davranacağını kontrol etmemizi sağlar.
+- **`removeConsole`:** Bu ayar, konsol loglarının otomatik olarak kaldırılıp kaldırılmayacağını belirler.
+- **`process.env.NODE_ENV === 'production'`:** Bu ifade, uygulamanın üretim modunda olup olmadığını kontrol eder. Eğer üretim modundaysa (yani `NODE_ENV` değişkeni `'production'` değerine sahipse), `removeConsole` özelliği `true` olarak ayarlanır ve derleyici konsol loglarını otomatik olarak kaldırır.
 
----
+### Neden Önemli?
 
-## Çözüm: next.config.js ile Console Log Yönetimi
+Üretim ortamında konsol loglarının olmaması, tarayıcı konsolunda gereksiz çıktıların görünmesini engeller, performansı artırır ve güvenlik açısından da önemlidir. Geliştirme esnasında kullandığınız bazı hassas bilgilerin (örneğin API anahtarları) yanlışlıkla konsola yazdırılmasının önüne geçer.
 
-### Basit Yapılandırma
+### Sonuç
 
-Aşağıda, Next.js'in `next.config.js` dosyası kullanılarak log'ların üretim ortamında otomatik olarak kaldırılmasını sağlayan bir yapılandırma örneği görebilirsiniz:
-
-![Next.js removeConsole Örneği](https://x.com/mazeincoding/status/1895982281237623227)
-
-```typescript
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  compiler: {
-    removeConsole: process.env.NODE_ENV === "production",
-  },
-};
-
-export default nextConfig;
-
-### Açıklama
-
-*   next.config.js: Next.js projelerinde yapılandırma ayarlarını içeren dosyadır.
-
-*   compiler.removeConsole: Next.js'in SWC derleyicisi tarafından desteklenen bir özelliktir. Aktif olduğunda, belirtilen log'lar kaldırılır.
-
-*   process.env.NODE\_ENV === "production": Bu koşul, uygulama üretim modunda çalışırken log'ları kaldırır. Geliştirme modunda ise log'lar korunur.
-
-
-### Gelişmiş Yapılandırma: Belirli Log Türlerini Korumak
-
-Eğer tüm log'ları değil de, sadece bazılarını kaldırmak istiyorsanız, exclude seçeneğini kullanabilirsiniz:
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   nextConfig = {    compiler: {      removeConsole: {        exclude: ["error"],      },    },  };  module.exports = nextConfig;   `
-
-### Açıklama
-
-*   removeConsole.exclude: Burada belirtilen log türleri **korunur**. Yukarıdaki örnekte, console.error üretim ortamında kalır, diğer log'lar kaldırılır.
-
-*   Bu sayede, hata log'ları korunurken, gereksiz debug log'ları temizlenir.
-
-
-Uygulama Adımları
------------------
-
-1.  **next.config.js Dosyasını Kontrol Edin**Projenizin kök dizininde next.config.js yoksa, oluşturun.
-
-2.  **Yapılandırmayı Ekleyin**Yukarıdaki kodlardan ihtiyacınıza uygun olanı ekleyin ve gerekirse özelleştirin.
-
-3.  **Ortam Değişkenlerini Ayarlayın**Doğru ortam değişkenlerini kullandığınızdan emin olun:
-
-    *   Geliştirme: NODE\_ENV=development
-
-    *   Üretim: NODE\_ENV=production
-
-4.  Console log'larının beklenen şekilde çalışıp çalışmadığını kontrol edin.
-
-    *   Yerel ortam: npm run dev
-
-    *   arduinoKopyalaDüzenlenpm run buildnpm start
-
-
-Ek İpuçları
------------
-
-*   **Performans ve Güvenlik**Console log'larını üretimde kaldırmak hem performans hem de güvenlik açısından önerilir. Ancak, console.error gibi kritik log'ları korumakta fayda var.
-
-*   **SWC Desteği**Next.js 12 ve sonrasında SWC derleyicisi varsayılan olarak kullanılır ve removeConsole özelliği doğrudan SWC ile entegredir.
-
-*   **Ek Araçlar**Performans ve log yönetimini geliştirmek için:
-
-    *   **Lighthouse** veya **WebPageTest** gibi araçlarla analiz yapabilirsiniz.
-
-    *   Çevresel konfigürasyonlar kullanarak (örn: .env dosyaları) ortama özel log yönetimi sağlayabilirsiniz.
-
-
-Sonuç
------
-
-next.config.js kullanarak, Next.js projelerinde **geliştirme ve üretim ortamları için farklı log stratejileri** uygulamak oldukça kolaydır. Bu yöntemle:
-
-*   Geliştirme ortamında log'lar kalır.
-
-*   Üretim ortamında gereksiz log'lar kaldırılır.
-
-*   Kritik hata log'ları gerektiğinde korunabilir.
-
-
-Bu yaklaşım, hem temiz kod hem de güvenli ve performanslı bir uygulama için önemli bir adımdır.
-
-Kaynaklar
----------
-
-*   Resmi doküman: [Next.js Documentation](https://nextjs.org/docs)
-
-*   İlham kaynağı: [Maze Winther'in Tweet'i](https://x.com/mazeincoding/status/1895982281237623227)
-
+Bu basit konfigürasyon ile Next.js projelerinizde üretim derlemelerinden konsol loglarını otomatik olarak kaldırarak daha temiz ve güvenli bir uygulama elde edebilirsiniz.
 
 _Not: Bu içerik 4 Mart 2025 itibariyle geçerlidir. Next.js'in ilerleyen sürümlerinde bazı detaylar değişebilir_
+
+```
+
 ```
