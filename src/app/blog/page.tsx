@@ -28,15 +28,13 @@ export default async function BlogPage() {
     <div className="space-y-4 sm:space-y-8">
       <h1 className="text-4xl font-bold">Blog</h1>
 
-      <div className="space-y-8">
-        <div className="grid gap-6">
-          {[...externalPosts, ...localPosts].map((post) => (
-            <BlogCard
-              key={post.type === "local" ? post.slug : post.link}
-              post={post}
-            />
-          ))}
-        </div>
+      <div className="grid grid-cols-1 gap-6">
+        {[...externalPosts, ...localPosts].map((post) => (
+          <BlogCard
+            key={post.type === "local" ? post.slug : post.link}
+            post={post}
+          />
+        ))}
       </div>
     </div>
   );
