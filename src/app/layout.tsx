@@ -10,6 +10,18 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Onur Ata Asar - Kişisel Notlar ve Blog",
   description: "Kişisel notlar ve blog",
+  openGraph: {
+    title: "Onur Ata Asar",
+    description: "Kişisel notlar ve blog",
+    url: "https://onurataasar.vercel.app",
+    images: ["/onur_ata_asar_card_v2.png"],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@oenyuar",
+    creator: "@oenyuar",
+  },
 };
 
 export default function RootLayout({
