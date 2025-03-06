@@ -30,18 +30,12 @@ export default async function BlogPage() {
 
       <div className="space-y-8">
         <div className="grid gap-6">
-          {externalPosts.map((post) => (
-            <BlogCard key={post.link} post={post} />
+          {[...externalPosts, ...localPosts].map((post) => (
+            <BlogCard
+              key={post.type === "local" ? post.slug : post.link}
+              post={post}
+            />
           ))}
-        </div>
-        <div className="grid gap-6">
-          {localPosts.length === 0 ? (
-            <p className="text-zinc-600 dark:text-zinc-400">
-              Henüz yazı yok...
-            </p>
-          ) : (
-            localPosts.map((post) => <BlogCard key={post.slug} post={post} />)
-          )}
         </div>
       </div>
     </div>
