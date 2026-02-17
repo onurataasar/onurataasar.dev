@@ -37,13 +37,13 @@ const components = {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-blue-500 hover:text-blue-600 underline"
+      className="text-violet-500 hover:text-violet-600 underline underline-offset-4 decoration-violet-500/30 hover:decoration-violet-500 transition-colors"
     >
       {children}
     </a>
   ),
   code: ({ children }: { children: React.ReactNode }) => (
-    <code className="bg-zinc-800 text-zinc-200 rounded px-1.5 py-0.5 text-sm">
+    <code className="bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 rounded px-1.5 py-0.5 text-sm">
       {children}
     </code>
   ),

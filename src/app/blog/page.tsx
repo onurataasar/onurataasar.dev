@@ -1,6 +1,12 @@
 import { getContentList } from "@/lib/mdx";
 import { getMediumPosts } from "@/lib/medium";
 import { BlogCard } from "@/components/BlogCard";
+import {
+  PageTransition,
+  StaggerContainer,
+  StaggerItem,
+  FadeIn,
+} from "@/components/motion";
 
 export default async function BlogPage() {
   const [posts, mediumPosts] = await Promise.all([
@@ -25,17 +31,18 @@ export default async function BlogPage() {
   }));
 
   return (
-    <div className="space-y-4 sm:space-y-8">
-      <h1 className="text-4xl font-bold">Blog</h1>
+    <PageTransition className="space-y-4 sm:space-y-8">
+      <FadeIn>
+        <h1 className="text-4xl font-bold">Blog</h1>
+      </FadeIn>
 
-      <div className="grid grid-cols-1 gap-6">
+      <StaggerContainer className="grid grid-cols-1 gap-6" delay={0.2}>
         {[...externalPosts, ...localPosts].map((post) => (
-          <BlogCard
-            key={post.type === "local" ? post.slug : post.link}
-            post={post}
-          />
+          <StaggerItem key={post.type === "local" ? post.slug : post.link}>
+            <BlogCard post={post} />
+          </StaggerItem>
         ))}
-      </div>
-    </div>
+      </StaggerContainer>
+    </PageTransition>
   );
 }
