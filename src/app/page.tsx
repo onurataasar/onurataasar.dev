@@ -49,7 +49,7 @@ const skillCategories = [
 
 export default function Home() {
   return (
-    <div className="flex-1 flex flex-col gap-16 py-12 sm:py-20">
+    <div className="flex-1 flex flex-col gap-12 sm:gap-16 py-12 sm:py-20">
       {/* Hero Section */}
       <section className="space-y-6 max-w-2xl">
         <FadeIn delay={0}>
@@ -59,7 +59,7 @@ export default function Home() {
         </FadeIn>
 
         <FadeIn delay={0.1}>
-          <h1 className="text-5xl sm:text-6xl font-bold tracking-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
             Onur Ata <span className="gradient-text">Asar</span>
           </h1>
         </FadeIn>

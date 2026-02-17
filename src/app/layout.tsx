@@ -41,8 +41,13 @@ export default function RootLayout({
           <div className="absolute -bottom-8 left-20 w-72 h-72 bg-blue-200 dark:bg-blue-900/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-xl opacity-30 animate-blob animation-delay-4000" />
         </div>
 
+        <div className="sticky top-0 z-50 bg-zinc-50/80 dark:bg-zinc-900/80 backdrop-blur-md">
+          <div className="max-w-4xl mx-auto px-4">
+            <Navigation />
+          </div>
+        </div>
+
         <div className="max-w-4xl mx-auto px-4 py-2 sm:py-8 h-full min-h-screen flex flex-col relative">
-          <Navigation />
           {children}
           <Footer />
         </div>
