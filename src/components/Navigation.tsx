@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 const routes = [
   { href: "/blog", label: "Blog" },
   { href: "/notes", label: "Dev Notes" },
+  { href: "/projects", label: "Projects" },
+  { href: "/cv", label: "CV" },
 ];
 
 export function Navigation() {
