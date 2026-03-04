@@ -126,44 +126,44 @@
 | LAY-04 | Phase 2 | Pending |
 | LAY-05 | Phase 2 | Pending |
 | LAY-06 | Phase 2 | Pending |
-| DM-01 | Phase 3 | Pending |
-| DM-02 | Phase 3 | Pending |
-| DM-03 | Phase 3 | Pending |
-| DM-04 | Phase 3 | Pending |
-| ANIM-01 | Phase 4 | Pending |
-| ANIM-02 | Phase 4 | Pending |
-| ANIM-03 | Phase 4 | Pending |
-| ANIM-04 | Phase 4 | Pending |
-| ANIM-05 | Phase 4 | Pending |
-| ANIM-06 | Phase 4 | Pending |
-| I18N-01 | Phase 5 | Pending |
-| I18N-02 | Phase 5 | Pending |
-| I18N-03 | Phase 5 | Pending |
-| I18N-04 | Phase 5 | Pending |
-| HOME-01 | Phase 6 | Pending |
-| HOME-02 | Phase 6 | Pending |
-| HOME-03 | Phase 6 | Pending |
-| HOME-04 | Phase 6 | Pending |
-| HOME-05 | Phase 6 | Pending |
-| BLOG-01 | Phase 6 | Pending |
-| BLOG-02 | Phase 6 | Pending |
-| BLOG-03 | Phase 6 | Pending |
-| BLOG-04 | Phase 6 | Pending |
-| BLOG-05 | Phase 6 | Pending |
-| PROJ-01 | Phase 6 | Pending |
-| PROJ-02 | Phase 6 | Pending |
-| PROJ-03 | Phase 6 | Pending |
-| CV-01 | Phase 6 | Pending |
-| CV-02 | Phase 6 | Pending |
-| CV-03 | Phase 6 | Pending |
+| DM-01 | Phase 1 | Pending |
+| DM-02 | Phase 1 | Pending |
+| DM-03 | Phase 1 | Pending |
+| DM-04 | Phase 1 | Pending |
+| ANIM-01 | Phase 3 | Pending |
+| ANIM-02 | Phase 3 | Pending |
+| ANIM-03 | Phase 3 | Pending |
+| ANIM-04 | Phase 3 | Pending |
+| ANIM-05 | Phase 3 | Pending |
+| ANIM-06 | Phase 3 | Pending |
+| HOME-01 | Phase 4 | Pending |
+| HOME-02 | Phase 4 | Pending |
+| HOME-03 | Phase 4 | Pending |
+| HOME-04 | Phase 4 | Pending |
+| HOME-05 | Phase 4 | Pending |
+| BLOG-01 | Phase 5 | Pending |
+| BLOG-02 | Phase 5 | Pending |
+| BLOG-03 | Phase 5 | Pending |
+| BLOG-04 | Phase 5 | Pending |
+| BLOG-05 | Phase 5 | Pending |
+| PROJ-01 | Phase 5 | Pending |
+| PROJ-02 | Phase 5 | Pending |
+| PROJ-03 | Phase 5 | Pending |
+| CV-01 | Phase 5 | Pending |
+| CV-02 | Phase 5 | Pending |
+| CV-03 | Phase 5 | Pending |
+| I18N-01 | Phase 6 | Pending |
+| I18N-02 | Phase 6 | Pending |
+| I18N-03 | Phase 6 | Pending |
+| I18N-04 | Phase 6 | Pending |
 | POL-01 | Phase 7 | Pending |
 | POL-02 | Phase 7 | Pending |
 | POL-03 | Phase 7 | Pending |
 | POL-04 | Phase 7 | Pending |
 
 **Coverage:**
-- v1 requirements: 38 total
-- Mapped to phases: 38
+- v1 requirements: 46 total
+- Mapped to phases: 46
 - Unmapped: 0 ✓
 
 ---
