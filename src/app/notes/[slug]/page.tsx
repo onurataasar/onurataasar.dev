@@ -35,16 +35,16 @@ export default async function NotePage({ params }: Props) {
     const htmlContent = marked.parse(content);
 
     return (
-      <article className="space-y-8">
+      <article className="max-w-3xl mx-auto space-y-8">
         <header className="space-y-4">
-          <h1 className="text-4xl font-bold">{meta.title}</h1>
-          <p className="text-xl text-zinc-600 dark:text-zinc-400">
+          <h1 className="text-4xl font-bold font-[family-name:var(--font-instrument-serif)]">{meta.title}</h1>
+          <p className="text-xl text-[var(--color-text-secondary)]">
             {meta.description}
           </p>
-          <time className="text-sm text-zinc-500">{meta.date}</time>
+          <time className="text-sm text-[var(--color-text-ghost)]">{meta.date}</time>
         </header>
         <div
-          className="prose prose-zinc dark:prose-invert max-w-none"
+          className="prose dark:prose-invert max-w-3xl mx-auto"
           dangerouslySetInnerHTML={{ __html: htmlContent as string }}
         />
       </article>

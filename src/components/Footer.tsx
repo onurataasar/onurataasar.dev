@@ -1,59 +1,37 @@
 "use client";
-import { FaGithubSquare, FaLinkedin, FaMedium } from "react-icons/fa";
-import { motion } from "framer-motion";
+import { FaGithub, FaLinkedin, FaMedium } from "react-icons/fa";
 
 const socials = [
-  {
-    href: "https://medium.com/@onurataasar",
-    icon: FaMedium,
-    label: "Medium",
-  },
-  {
-    href: "https://github.com/onurataasar",
-    icon: FaGithubSquare,
-    label: "GitHub",
-  },
-  {
-    href: "https://www.linkedin.com/in/onur-ata-asar/",
-    icon: FaLinkedin,
-    label: "LinkedIn",
-  },
+  { href: "https://github.com/onurataasar", icon: FaGithub, label: "GitHub" },
+  { href: "https://www.linkedin.com/in/onur-ata-asar/", icon: FaLinkedin, label: "LinkedIn" },
+  { href: "https://medium.com/@onurataasar", icon: FaMedium, label: "Medium" },
 ];
 
 export default function Footer() {
   return (
     <footer className="mt-auto pt-8 pb-6">
-      {/* Gradient separator line */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-violet-500/40 to-transparent mb-8" />
+      {/* Separator line - indented from edges */}
+      <div className="mx-8 h-px bg-[var(--color-border)] mb-8" />
 
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <div>
-            <h3 className="font-semibold">
-              Onur Ata Asar{" "}
-              <span className="text-zinc-500 dark:text-zinc-500 font-normal text-xs">
-                © {new Date().getFullYear()}
-              </span>
-            </h3>
-            <p className="text-sm text-zinc-500 dark:text-zinc-500 max-md:text-center">
-              Developer
-            </p>
-          </div>
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="text-sm text-[var(--color-text-ghost)]">
+          <span className="font-[family-name:var(--font-instrument-serif)] italic text-[var(--color-text-secondary)]">
+            Onur Ata Asar
+          </span>
+          {" "}&middot; &copy; {new Date().getFullYear()}
         </div>
-        <div className="flex gap-3">
+        <div className="flex gap-2">
           {socials.map((social) => (
-            <motion.a
+            <a
               key={social.label}
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-lg text-zinc-500 dark:text-zinc-500 hover:text-violet-500 dark:hover:text-violet-400 hover:bg-violet-50 dark:hover:bg-violet-500/10 transition-colors"
-              whileHover={{ scale: 1.1, rotate: 3 }}
-              whileTap={{ scale: 0.95 }}
+              className="p-2 rounded-lg text-[var(--color-text-ghost)] hover:text-[var(--color-accent)] transition-colors duration-200"
               aria-label={social.label}
             >
-              <social.icon size={22} />
-            </motion.a>
+              <social.icon size={20} />
+            </a>
           ))}
         </div>
       </div>

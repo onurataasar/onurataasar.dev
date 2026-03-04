@@ -36,17 +36,17 @@ export default async function LocalBlogPost({ params }: Props) {
     const htmlContent = marked.parse(content);
 
     return (
-      <article className="max-w-none">
+      <article className="max-w-3xl mx-auto">
         <header className="mb-8">
-          <h1 className="text-4xl font-bold mb-4">{meta.title}</h1>
+          <h1 className="text-4xl font-bold mb-4 font-[family-name:var(--font-instrument-serif)]">{meta.title}</h1>
           <div className="flex items-center gap-4">
-            <time className="text-sm text-zinc-600 dark:text-zinc-400">
+            <time className="text-sm text-[var(--color-text-ghost)]">
               {meta.date}
             </time>
           </div>
         </header>
         <div
-          className="prose prose-zinc dark:prose-invert max-w-none"
+          className="prose dark:prose-invert max-w-3xl mx-auto"
           dangerouslySetInnerHTML={{ __html: htmlContent as string }}
         />
       </article>

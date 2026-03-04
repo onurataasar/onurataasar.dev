@@ -31,12 +31,14 @@ export default async function BlogPage() {
   }));
 
   return (
-    <PageTransition className="space-y-4 sm:space-y-8">
+    <PageTransition className="space-y-6 sm:space-y-8">
       <FadeIn>
-        <h1 className="text-4xl font-bold">Blog</h1>
+        <h1 className="text-4xl font-bold font-[family-name:var(--font-instrument-serif)]">
+          Blog
+        </h1>
       </FadeIn>
 
-      <StaggerContainer className="grid grid-cols-1 gap-6" delay={0.2}>
+      <StaggerContainer className="grid grid-cols-1 gap-8" delay={0.2}>
         {[...externalPosts, ...localPosts].map((post) => (
           <StaggerItem key={post.type === "local" ? post.slug : post.link}>
             <BlogCard post={post} />

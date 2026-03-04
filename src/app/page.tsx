@@ -1,7 +1,11 @@
 "use client";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { FadeIn, StaggerContainer, StaggerItem } from "@/components/motion";
+import {
+  FadeIn,
+  ParallaxLayer,
+  StaggerContainer,
+  StaggerItem,
+} from "@/components/motion";
 import { FaGithub, FaLinkedin, FaMedium } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 
@@ -49,48 +53,57 @@ const skillCategories = [
 
 export default function Home() {
   return (
-    <div className="flex-1 flex flex-col gap-12 sm:gap-16 py-12 sm:py-20">
+    <div className="flex-1 flex flex-col gap-12 sm:gap-16">
       {/* Hero Section */}
-      <section className="space-y-6 max-w-2xl">
-        <FadeIn delay={0}>
-          <p className="text-sm font-medium tracking-widest uppercase text-violet-500 dark:text-violet-400">
+      <section className="relative py-16 sm:py-24">
+        {/* Decorative year numeral */}
+        <div className="absolute top-8 right-0 text-[12rem] sm:text-[16rem] font-bold leading-none text-[var(--color-text-ghost)] opacity-[0.04] select-none pointer-events-none font-[family-name:var(--font-instrument-serif)]">
+          2026
+        </div>
+
+        <FadeIn>
+          <p className="text-sm font-medium tracking-widest uppercase text-[var(--color-text-ghost)] mb-4">
             Selam, ben
           </p>
         </FadeIn>
 
-        <FadeIn delay={0.1}>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
-            Onur Ata <span className="gradient-text">Asar</span>
-          </h1>
-        </FadeIn>
+        <ParallaxLayer offset={0.015}>
+          <FadeIn delay={0.1}>
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-[family-name:var(--font-instrument-serif)] tracking-tight leading-[1.1]">
+              Onur Ata Asar
+            </h1>
+          </FadeIn>
+        </ParallaxLayer>
 
-        <FadeIn delay={0.2}>
-          <p className="text-xl sm:text-2xl text-zinc-600 dark:text-zinc-400 font-light">
-            Software Developer
-          </p>
-        </FadeIn>
+        <ParallaxLayer offset={0.025}>
+          <FadeIn delay={0.2}>
+            <p className="text-xl sm:text-2xl text-[var(--color-accent)] font-light mt-3">
+              Software Developer
+            </p>
+          </FadeIn>
+        </ParallaxLayer>
 
         <FadeIn delay={0.3}>
-          <p className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-lg">
+          <p className="text-base text-[var(--color-text-secondary)] leading-relaxed max-w-lg mt-6">
             Yazılım geliştirme üzerine düşüncelerimi, öğrendiklerimi ve
             deneyimlerimi paylaşıyorum.{" "}
             <Link
               href="/blog"
-              className="text-violet-500 dark:text-violet-400 hover:text-violet-600 dark:hover:text-violet-300 underline underline-offset-4 decoration-violet-500/30 hover:decoration-violet-500 transition-colors"
+              className="text-[var(--color-accent)] underline underline-offset-4 decoration-[var(--color-accent)]/30 hover:decoration-[var(--color-accent)] transition-colors"
             >
               Bloglara
             </Link>
             ,{" "}
             <Link
               href="/notes"
-              className="text-violet-500 dark:text-violet-400 hover:text-violet-600 dark:hover:text-violet-300 underline underline-offset-4 decoration-violet-500/30 hover:decoration-violet-500 transition-colors"
+              className="text-[var(--color-accent)] underline underline-offset-4 decoration-[var(--color-accent)]/30 hover:decoration-[var(--color-accent)] transition-colors"
             >
               dev notlarıma
             </Link>{" "}
             ve{" "}
             <Link
               href="/projects"
-              className="text-violet-500 dark:text-violet-400 hover:text-violet-600 dark:hover:text-violet-300 underline underline-offset-4 decoration-violet-500/30 hover:decoration-violet-500 transition-colors"
+              className="text-[var(--color-accent)] underline underline-offset-4 decoration-[var(--color-accent)]/30 hover:decoration-[var(--color-accent)] transition-colors"
             >
               projelerime
             </Link>{" "}
@@ -99,40 +112,31 @@ export default function Home() {
         </FadeIn>
 
         <FadeIn delay={0.4}>
-          <div className="flex items-center gap-4 pt-2">
+          <div className="flex items-center gap-3 mt-6">
             {socials.map((social) => (
-              <motion.a
+              <a
                 key={social.label}
                 href={social.href}
-                target={
-                  social.href.startsWith("mailto") ? undefined : "_blank"
-                }
+                target={social.href.startsWith("mailto") ? undefined : "_blank"}
                 rel={
                   social.href.startsWith("mailto")
                     ? undefined
                     : "noopener noreferrer"
                 }
-                className="p-2 rounded-lg text-zinc-500 hover:text-violet-500 dark:text-zinc-400 dark:hover:text-violet-400 hover:bg-violet-50 dark:hover:bg-violet-500/10 transition-colors"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
+                className="p-2.5 rounded-xl bg-[var(--color-bg-layer-1)] shadow-[var(--shadow-sm)] text-[var(--color-text-ghost)] hover:text-[var(--color-accent)] hover:shadow-[var(--shadow-md)] transition-all duration-200"
                 aria-label={social.label}
               >
-                <social.icon size={22} />
-              </motion.a>
+                <social.icon size={20} />
+              </a>
             ))}
           </div>
-        </FadeIn>
-
-        <FadeIn delay={0.5}>
-          <div className="w-24 h-1 rounded-full gradient-bg opacity-60" />
         </FadeIn>
       </section>
 
       {/* Profile Section */}
-      <FadeIn delay={0.6}>
-        <section className="relative overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-800/50 backdrop-blur-sm p-6">
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500 to-transparent opacity-60" />
-          <p className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
+      <FadeIn delay={0.5}>
+        <section className="card-static p-6 sm:p-8">
+          <p className="text-base text-[var(--color-text-secondary)] leading-relaxed">
             Experienced Frontend Developer specializing in React, Next.js, and
             TypeScript, with a strong background in developing and maintaining
             production-level web applications. I focus on building scalable
@@ -147,24 +151,24 @@ export default function Home() {
 
       {/* Skills Section */}
       <section className="space-y-6">
-        <FadeIn delay={0.7}>
-          <h2 className="text-2xl font-bold">
-            Technical <span className="gradient-text">Skills</span>
+        <FadeIn delay={0.6}>
+          <h2 className="text-2xl font-bold font-[family-name:var(--font-instrument-serif)]">
+            Technical Skills
           </h2>
         </FadeIn>
 
-        <StaggerContainer className="space-y-4" delay={0.8} staggerDelay={0.1}>
+        <StaggerContainer className="space-y-4" delay={0.7} staggerDelay={0.08}>
           {skillCategories.map((category) => (
             <StaggerItem key={category.label}>
               <div className="space-y-2">
-                <h3 className="text-sm font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
+                <h3 className="text-sm font-medium text-[var(--color-text-ghost)] uppercase tracking-wider">
                   {category.label}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {category.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="px-3 py-1 text-sm rounded-full border border-zinc-200 dark:border-zinc-700 bg-white/50 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 hover:border-violet-300 dark:hover:border-violet-700 hover:text-violet-600 dark:hover:text-violet-400 transition-colors"
+                      className="px-3 py-1 text-sm rounded-lg bg-[var(--color-bg-layer-1)] border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] hover:border-[var(--color-accent)]/30 transition-colors"
                     >
                       {skill}
                     </span>

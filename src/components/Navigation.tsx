@@ -1,35 +1,75 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
 
-const routes = [
+const routes: { href: string; label: string }[] = [
   { href: "/blog", label: "Blog" },
   { href: "/notes", label: "Dev Notes" },
   { href: "/projects", label: "Projects" },
   { href: "/cv", label: "CV" },
 ];
 
-export function Navigation() {
+export function Navigation(): React.JSX.Element {
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [scrolled, setScrolled] = useState<boolean>(false);
 
-  // Close menu on route change
+  // Track scroll position for background transition
+  useEffect(() => {
+    function handleScroll(): void {
+      setScrolled(window.scrollY > 60);
+    }
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Close mobile menu on route change
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   return (
-    <nav className="relative py-4 border-b border-zinc-200/50 dark:border-zinc-800/50">
-      <div className="flex items-center justify-between">
-        <Link href="/" className="text-lg font-semibold group">
-          <span className="group-hover:gradient-text transition-all duration-300">
-            Onur Ata Asar
-          </span>
+    <nav className="relative py-4">
+      {/* Full-viewport-width scroll background that fades in */}
+      <motion.div
+        className="absolute inset-0 bg-[var(--color-bg-layer-1)]/80 backdrop-blur-md border-b border-[var(--color-border)] pointer-events-none"
+        style={{
+          left: "calc(-50vw + 50%)",
+          right: "calc(-50vw + 50%)",
+          width: "100vw",
+        }}
+        initial={false}
+        animate={{ opacity: scrolled ? 1 : 0 }}
+        transition={{ duration: 0.2 }}
+      />
+
+      <div className="relative flex items-center justify-between">
+        {/* Logo */}
+        <Link
+          href="/"
+          className="font-[family-name:var(--font-instrument-serif)] italic text-lg text-[var(--color-text-primary)] hover:text-[var(--color-accent)] transition-colors duration-200"
+        >
+          Onur Ata Asar
         </Link>
 
-        {/* Desktop nav */}
+        {/* Desktop links */}
         <ul className="hidden md:flex gap-1">
           {routes.map((route) => {
             const isActive =
@@ -39,17 +79,17 @@ export function Navigation() {
               <li key={route.href}>
                 <Link
                   href={route.href}
-                  className={`relative px-3 py-1.5 text-sm font-medium rounded-md transition-colors duration-200 ${
+                  className={`relative px-3 py-1.5 text-sm font-medium transition-colors duration-200 ${
                     isActive
-                      ? "text-violet-600 dark:text-violet-400"
-                      : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100"
+                      ? "text-[var(--color-accent)]"
+                      : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
                   }`}
                 >
                   {route.label}
                   {isActive && (
                     <motion.div
                       layoutId="nav-indicator"
-                      className="absolute inset-0 bg-violet-50 dark:bg-violet-500/10 rounded-md -z-10"
+                      className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[var(--color-accent)]"
                       transition={{
                         type: "spring",
                         stiffness: 350,
@@ -63,77 +103,61 @@ export function Navigation() {
           })}
         </ul>
 
-        {/* Hamburger button */}
+        {/* Mobile hamburger */}
         <button
-          className="md:hidden relative w-8 h-8 flex items-center justify-center"
           onClick={() => setIsOpen(!isOpen)}
+          className="md:hidden p-2 text-[var(--color-text-secondary)]"
           aria-label={isOpen ? "Close menu" : "Open menu"}
           aria-expanded={isOpen}
         >
-          <span className="sr-only">{isOpen ? "Close menu" : "Open menu"}</span>
-          <div className="w-5 h-4 relative flex flex-col justify-between">
-            <motion.span
-              className="block h-0.5 w-5 bg-zinc-600 dark:bg-zinc-400 rounded-full origin-center"
-              animate={isOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.2 }}
-            />
-            <motion.span
-              className="block h-0.5 w-5 bg-zinc-600 dark:bg-zinc-400 rounded-full"
-              animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-              transition={{ duration: 0.15 }}
-            />
-            <motion.span
-              className="block h-0.5 w-5 bg-zinc-600 dark:bg-zinc-400 rounded-full origin-center"
-              animate={isOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.2 }}
-            />
-          </div>
+          {isOpen ? <HiOutlineX size={24} /> : <HiOutlineMenu size={24} />}
         </button>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile menu (bottom sheet) */}
       <AnimatePresence>
         {isOpen && (
           <>
             {/* Backdrop */}
             <motion.div
-              className="fixed inset-0 z-40 md:hidden"
+              className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm md:hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
               onClick={() => setIsOpen(false)}
             />
 
-            {/* Menu panel */}
-            <motion.ul
-              className="absolute left-0 right-0 top-full z-50 mt-px bg-zinc-50/95 dark:bg-zinc-900/95 backdrop-blur-md border-b border-zinc-200/50 dark:border-zinc-800/50 rounded-b-lg py-2 md:hidden"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2, ease: "easeInOut" }}
+            {/* Bottom sheet */}
+            <motion.div
+              className="fixed bottom-0 left-0 right-0 z-50 bg-[var(--color-bg-layer-1)] rounded-t-2xl p-6 pb-safe md:hidden"
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "100%" }}
+              transition={{ type: "spring", damping: 30, stiffness: 300 }}
             >
-              {routes.map((route) => {
-                const isActive =
-                  pathname === route.href ||
-                  pathname.startsWith(route.href + "/");
-                return (
-                  <li key={route.href}>
-                    <Link
-                      href={route.href}
-                      onClick={() => setIsOpen(false)}
-                      className={`block px-4 py-3 text-sm font-medium transition-colors duration-200 ${
-                        isActive
-                          ? "text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-500/10"
-                          : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800"
-                      }`}
-                    >
-                      {route.label}
-                    </Link>
-                  </li>
-                );
-              })}
-            </motion.ul>
+              <ul className="space-y-1">
+                {routes.map((route) => {
+                  const isActive =
+                    pathname === route.href ||
+                    pathname.startsWith(route.href + "/");
+                  return (
+                    <li key={route.href}>
+                      <Link
+                        href={route.href}
+                        onClick={() => setIsOpen(false)}
+                        className={`block py-4 px-4 text-base font-medium rounded-lg transition-colors duration-200 ${
+                          isActive
+                            ? "text-[var(--color-accent)] bg-[var(--color-accent-wash)]"
+                            : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-accent-wash)]"
+                        }`}
+                      >
+                        {route.label}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </motion.div>
           </>
         )}
       </AnimatePresence>

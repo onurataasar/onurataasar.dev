@@ -58,16 +58,16 @@ export default async function MediumBlogPost({ params }: Props) {
     );
 
     return (
-      <article className="max-w-none">
+      <article className="max-w-3xl mx-auto">
         <header className="mb-8">
           <div className="flex flex-col md:flex-row max-md:mb-4 justify-between items-start">
-            <h1 className="text-4xl font-bold mb-4">{mediumPost.title}</h1>
+            <h1 className="text-4xl font-bold mb-4 font-[family-name:var(--font-instrument-serif)]">{mediumPost.title}</h1>
             <div className="not-prose">
               <a
                 href={mediumPost.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center px-4 py-2 bg-black text-white rounded-lg hover:bg-zinc-800 transition-colors italic text-sm whitespace-nowrap"
+                className="inline-flex items-center px-4 py-2 bg-[var(--color-accent)] text-white rounded-xl hover:opacity-90 transition-colors italic text-sm whitespace-nowrap"
               >
                 <FaExternalLinkAlt size={16} className="mr-2" />
                 Medium&apos;da oku
@@ -75,14 +75,14 @@ export default async function MediumBlogPost({ params }: Props) {
             </div>
           </div>
           <div className="flex flex-wrap items-center gap-4">
-            <time className="text-sm text-zinc-600 dark:text-zinc-400">
+            <time className="text-sm text-[var(--color-text-ghost)]">
               {new Date(mediumPost.pubDate).toLocaleDateString()}
             </time>
             <div className="flex flex-wrap gap-2">
               {mediumPost.categories.map((category) => (
                 <span
                   key={category}
-                  className="px-2 py-1 text-xs rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400"
+                  className="px-2 py-1 text-xs rounded-md bg-[var(--color-accent-wash)] text-[var(--color-accent)]"
                 >
                   {category}
                 </span>
@@ -91,7 +91,7 @@ export default async function MediumBlogPost({ params }: Props) {
           </div>
         </header>
         {mediumPost.thumbnail && (
-          <div className="relative h-[400px] w-full mb-8 rounded-lg overflow-hidden">
+          <div className="relative h-[400px] w-full mb-8 rounded-2xl overflow-hidden">
             <Image
               src={mediumPost.thumbnail}
               alt={mediumPost.title}
@@ -103,7 +103,7 @@ export default async function MediumBlogPost({ params }: Props) {
         )}
         <div className="space-y-6">
           <div
-            className="prose dark:prose-invert max-w-none"
+            className="prose dark:prose-invert max-w-3xl mx-auto"
             dangerouslySetInnerHTML={{ __html: sanitizedContent }}
           />
         </div>
@@ -114,16 +114,16 @@ export default async function MediumBlogPost({ params }: Props) {
       return (
         <div className="flex flex-col items-center justify-center min-h-[50vh] text-center">
           <h1 className="text-2xl font-bold mb-4">
-            Fuck! We got rate limited by Medium 😤
+            Fuck! We got rate limited by Medium
           </h1>
-          <p className="text-zinc-600 dark:text-zinc-400 mb-8">
+          <p className="text-[var(--color-text-secondary)] mb-8">
             Try again in a few minutes or read the post directly on Medium
           </p>
           <a
             href="https://medium.com/@onurataasar"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center px-6 py-3 bg-black text-white rounded-lg hover:bg-zinc-800 transition-colors"
+            className="inline-flex items-center px-6 py-3 bg-[var(--color-accent)] text-white rounded-xl hover:opacity-90 transition-colors"
           >
             <FaExternalLinkAlt size={16} className="mr-2" />
             Go to Medium Profile

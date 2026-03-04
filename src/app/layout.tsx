@@ -1,18 +1,35 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Instrument_Serif, Instrument_Sans, Fira_Code } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/next";
 
-const inter = Inter({ subsets: ["latin"] });
+const instrumentSerif = Instrument_Serif({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-instrument-serif",
+  display: "swap",
+});
+
+const instrumentSans = Instrument_Sans({
+  subsets: ["latin"],
+  variable: "--font-instrument-sans",
+  display: "swap",
+});
+
+const firaCode = Fira_Code({
+  subsets: ["latin"],
+  variable: "--font-fira-code",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "Onur Ata Asar - Kişisel Notlar ve Blog",
-  description: "Kişisel notlar ve blog",
+  title: "Onur Ata Asar - Kisisel Notlar ve Blog",
+  description: "Kisisel notlar ve blog",
   openGraph: {
     title: "Onur Ata Asar",
-    description: "Kişisel notlar ve blog",
+    description: "Kisisel notlar ve blog",
     url: "https://onurataasar.vercel.app",
     images: ["/onur_ata_asar_card_v2.png"],
     type: "website",
@@ -30,27 +47,29 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="tr"
+      className={`${instrumentSerif.variable} ${instrumentSans.variable} ${firaCode.variable}`}
+      suppressHydrationWarning
+    >
       <body
-        className={`${inter.className} min-h-screen bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-50 relative overflow-x-hidden`}
+        className="min-h-screen bg-[var(--color-bg-base)] text-[var(--color-text-primary)] relative overflow-x-hidden font-[family-name:var(--font-instrument-sans)]"
       >
-        {/* Decorative background blobs */}
-        <div className="fixed inset-0 -z-10 overflow-hidden">
-          <div className="absolute top-0 -left-4 w-72 h-72 bg-violet-200 dark:bg-violet-900/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-xl opacity-30 animate-blob" />
-          <div className="absolute top-0 -right-4 w-72 h-72 bg-fuchsia-200 dark:bg-fuchsia-900/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-xl opacity-30 animate-blob animation-delay-2000" />
-          <div className="absolute -bottom-8 left-20 w-72 h-72 bg-blue-200 dark:bg-blue-900/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-xl opacity-30 animate-blob animation-delay-4000" />
-        </div>
+        {/* Dot grid background */}
+        <div className="fixed inset-0 -z-10 dot-grid opacity-[0.04]" />
+        {/* Top light band */}
+        <div className="fixed top-0 left-0 right-0 -z-10 light-band" />
 
-        <div className="sticky top-0 z-50 bg-zinc-50/80 dark:bg-zinc-900/80 backdrop-blur-md">
-          <div className="max-w-4xl mx-auto px-4">
+        <div className="sticky top-0 z-50">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <Navigation />
           </div>
         </div>
 
-        <div className="max-w-4xl mx-auto px-4 py-2 sm:py-8 h-full min-h-screen flex flex-col relative">
+        <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-8 min-h-screen flex flex-col relative">
           {children}
           <Footer />
-        </div>
+        </main>
         <Analytics />
       </body>
     </html>

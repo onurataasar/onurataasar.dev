@@ -1,10 +1,11 @@
 "use client";
-import { motion, type Variants } from "framer-motion";
-import { type ReactNode } from "react";
+import { motion, useScroll, useTransform, type Variants } from "framer-motion";
+import { type ReactNode, useRef } from "react";
 
+// Updated variants with subtle rotation
 export const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: 12, rotate: 0.5 },
+  visible: { opacity: 1, y: 0, rotate: 0 },
 };
 
 interface FadeInProps {
@@ -21,18 +22,18 @@ export function FadeIn({
   direction = "up",
 }: FadeInProps) {
   const directionOffset = {
-    up: { y: 20 },
-    down: { y: -20 },
-    left: { x: 20 },
-    right: { x: -20 },
+    up: { y: 12 },
+    down: { y: -12 },
+    left: { x: 12 },
+    right: { x: -12 },
     none: {},
   };
 
   return (
     <motion.div
-      initial={{ opacity: 0, ...directionOffset[direction] }}
-      animate={{ opacity: 1, x: 0, y: 0 }}
-      transition={{ duration: 0.5, delay, ease: "easeOut" }}
+      initial={{ opacity: 0, rotate: direction === "up" || direction === "down" ? 0.5 : 0, ...directionOffset[direction] }}
+      animate={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
+      transition={{ duration: 0.5, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
       className={className}
     >
       {children}
@@ -51,7 +52,7 @@ export function StaggerContainer({
   children,
   className,
   delay = 0.1,
-  staggerDelay = 0.1,
+  staggerDelay = 0.08,
 }: StaggerContainerProps) {
   return (
     <motion.div
@@ -83,7 +84,7 @@ export function StaggerItem({ children, className }: StaggerItemProps) {
   return (
     <motion.div
       variants={fadeInUp}
-      transition={{ duration: 0.4, ease: "easeOut" }}
+      transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
       className={className}
     >
       {children}
@@ -99,9 +100,49 @@ interface PageTransitionProps {
 export function PageTransition({ children, className }: PageTransitionProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
+      transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+// Parallax layer component
+interface ParallaxLayerProps {
+  children: ReactNode;
+  className?: string;
+  offset?: number; // multiplier: 0.02 = 2% slower, -0.02 = 2% faster
+}
+
+export function ParallaxLayer({ children, className, offset = 0.02 }: ParallaxLayerProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [offset * -100, offset * 100]);
+
+  return (
+    <motion.div ref={ref} style={{ y }} className={className}>
+      {children}
+    </motion.div>
+  );
+}
+
+// Card hover wrapper with lift effect
+interface CardHoverProps {
+  children: ReactNode;
+  className?: string;
+}
+
+export function CardHover({ children, className }: CardHoverProps) {
+  return (
+    <motion.div
+      whileHover={{ y: -4 }}
+      transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
       className={className}
     >
       {children}

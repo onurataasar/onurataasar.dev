@@ -69,10 +69,10 @@ export default function CVPage() {
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
         <FadeIn>
           <div>
-            <h1 className="text-4xl font-bold">
-              <span className="gradient-text">CV</span>
+            <h1 className="text-4xl font-bold font-[family-name:var(--font-instrument-serif)]">
+              CV
             </h1>
-            <p className="text-lg text-zinc-600 dark:text-zinc-400 mt-1">
+            <p className="text-lg text-[var(--color-text-secondary)] mt-1">
               Frontend Web Developer — Computer Science Engineer
             </p>
           </div>
@@ -83,7 +83,7 @@ export default function CVPage() {
             href="/Onur-Ata-Asar-CV.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg gradient-bg text-white hover:opacity-90 transition-opacity shrink-0"
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-xl bg-[var(--color-accent)] text-white hover:opacity-90 transition-opacity shrink-0"
           >
             <HiOutlineDownload size={18} />
             Download PDF
@@ -95,39 +95,44 @@ export default function CVPage() {
       <section className="space-y-4">
         <FadeIn delay={0.2}>
           <h2 className="text-2xl font-bold flex items-center gap-3">
-            <span className="p-2 rounded-lg bg-violet-50 dark:bg-violet-500/10 text-violet-500 dark:text-violet-400">
+            <span className="p-2 rounded-xl bg-[var(--color-accent-wash)] text-[var(--color-accent)]">
               <HiOutlineBriefcase size={20} />
             </span>
             Work Experience
           </h2>
         </FadeIn>
 
-        <StaggerContainer className="space-y-4" delay={0.3} staggerDelay={0.15}>
-          {experiences.map((exp) => (
+        <StaggerContainer className="space-y-0" delay={0.3} staggerDelay={0.15}>
+          {experiences.map((exp, index) => (
             <StaggerItem key={exp.period}>
-              <article className="group relative overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-800/50 backdrop-blur-sm p-6 hover:border-violet-300 dark:hover:border-violet-800 shadow-sm hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
-                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
+              <article
+                className="card p-6 group"
+                style={{
+                  marginTop: index > 0 ? "-8px" : undefined,
+                  zIndex: experiences.length - index,
+                  position: "relative",
+                }}
+              >
                 <div className="space-y-3">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
                     <div>
-                      <h3 className="text-lg font-semibold group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
+                      <h3 className="text-lg font-semibold group-hover:text-[var(--color-accent)] transition-colors">
                         {exp.role}
                       </h3>
-                      <p className="text-sm text-violet-500 dark:text-violet-400 font-medium">
+                      <p className="text-sm text-[var(--color-accent)] font-medium">
                         {exp.company}
                       </p>
                     </div>
-                    <div className="text-sm text-zinc-500 dark:text-zinc-400 sm:text-right">
+                    <div className="text-sm text-[var(--color-text-ghost)] sm:text-right">
                       <p>{exp.period}</p>
                       <p>{exp.location}</p>
                     </div>
                   </div>
 
-                  <ul className="space-y-1.5 text-sm text-zinc-600 dark:text-zinc-400">
+                  <ul className="space-y-1.5 text-sm text-[var(--color-text-secondary)]">
                     {exp.bullets.map((bullet, i) => (
                       <li key={i} className="flex gap-2">
-                        <span className="text-violet-400 mt-1.5 shrink-0">
+                        <span className="text-[var(--color-accent)] mt-1.5 shrink-0">
                           •
                         </span>
                         <span>{bullet}</span>
@@ -145,7 +150,7 @@ export default function CVPage() {
       <section className="space-y-4">
         <FadeIn delay={0.2}>
           <h2 className="text-2xl font-bold flex items-center gap-3">
-            <span className="p-2 rounded-lg bg-violet-50 dark:bg-violet-500/10 text-violet-500 dark:text-violet-400">
+            <span className="p-2 rounded-xl bg-[var(--color-accent-wash)] text-[var(--color-accent)]">
               <HiOutlineAcademicCap size={20} />
             </span>
             Education
@@ -153,19 +158,17 @@ export default function CVPage() {
         </FadeIn>
 
         <FadeIn delay={0.3}>
-          <article className="group relative overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-800/50 backdrop-blur-sm p-6 hover:border-violet-300 dark:hover:border-violet-800 shadow-sm hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
+          <article className="card p-6 group">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
               <div>
-                <h3 className="text-lg font-semibold group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
+                <h3 className="text-lg font-semibold group-hover:text-[var(--color-accent)] transition-colors">
                   {education.institution}
                 </h3>
-                <p className="text-sm text-violet-500 dark:text-violet-400 font-medium">
+                <p className="text-sm text-[var(--color-accent)] font-medium">
                   {education.degree}
                 </p>
               </div>
-              <div className="text-sm text-zinc-500 dark:text-zinc-400 sm:text-right">
+              <div className="text-sm text-[var(--color-text-ghost)] sm:text-right">
                 <p>{education.period}</p>
                 <p>{education.location}</p>
               </div>
@@ -178,7 +181,7 @@ export default function CVPage() {
       <section className="space-y-4">
         <FadeIn delay={0.2}>
           <h2 className="text-2xl font-bold flex items-center gap-3">
-            <span className="p-2 rounded-lg bg-violet-50 dark:bg-violet-500/10 text-violet-500 dark:text-violet-400">
+            <span className="p-2 rounded-xl bg-[var(--color-accent-wash)] text-[var(--color-accent)]">
               <HiOutlineGlobeAlt size={20} />
             </span>
             Languages
@@ -192,12 +195,11 @@ export default function CVPage() {
         >
           {languages.map((lang) => (
             <StaggerItem key={lang.name}>
-              <div className="group relative overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-800/50 backdrop-blur-sm p-4 hover:border-violet-300 dark:hover:border-violet-800 shadow-sm hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300 text-center">
-                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <p className="font-semibold group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
+              <div className="card p-4 group text-center">
+                <p className="font-semibold group-hover:text-[var(--color-accent)] transition-colors">
                   {lang.name}
                 </p>
-                <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                <p className="text-sm text-[var(--color-text-ghost)]">
                   {lang.level}
                 </p>
               </div>

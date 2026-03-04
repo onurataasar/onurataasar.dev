@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import DOMPurify from "isomorphic-dompurify";
 import _ from "lodash";
+import { SiMedium } from "react-icons/si";
 
 interface BaseBlogPost {
   title: string;
@@ -27,7 +28,7 @@ interface BlogCardProps {
   post: BlogPost;
 }
 
-function stripHtml(html: string) {
+function stripHtml(html: string): string {
   const cleanHtml = DOMPurify.sanitize(html);
   return cleanHtml.replace(/<[^>]*>/g, "").trim();
 }
@@ -45,12 +46,11 @@ export function BlogCard({ post }: BlogCardProps) {
   const formattedDescription = stripHtml(post.description);
 
   return (
-    <article className="group relative overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-800/50 backdrop-blur-sm hover:border-violet-300 dark:hover:border-violet-800 shadow-sm hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
-      {/* Gradient top accent line */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+    <article className="card group overflow-hidden">
       {isExternal && (
         <div className="absolute top-3 right-3 z-10">
-          <span className="px-2 py-1 text-xs font-medium rounded-full bg-black/80 text-white">
+          <span className="inline-flex items-center gap-1.5 px-2 py-1 text-xs font-medium rounded-lg bg-[var(--color-bg-layer-2)] text-[var(--color-text-secondary)] border border-[var(--color-border)]">
+            <SiMedium size={14} />
             Medium
           </span>
         </div>
@@ -66,19 +66,19 @@ export function BlogCard({ post }: BlogCardProps) {
                 src={post.thumbnail}
                 alt={post.title}
                 fill
-                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                className="object-cover rounded-t-2xl sm:rounded-t-none sm:rounded-l-2xl transition-transform duration-300 group-hover:scale-105"
               />
             </div>
           )}
-          <div className="p-4 sm:p-5 flex-1">
-            <h3 className="text-lg sm:text-xl font-semibold group-hover:text-violet-600 dark:group-hover:text-violet-400 max-md:w-3/4 transition-colors">
+          <div className="p-5 sm:p-6 flex-1">
+            <h3 className="text-lg sm:text-xl font-semibold group-hover:text-[var(--color-accent)] max-md:w-3/4 transition-colors">
               {_.truncate(post.title, { length: 70 })}
             </h3>
-            <p className="mt-2 text-zinc-600 dark:text-zinc-400 text-xs sm:text-sm line-clamp-4">
+            <p className="mt-2 text-[var(--color-text-secondary)] text-xs sm:text-sm line-clamp-4">
               {formattedDescription}
             </p>
             <div className="mt-4 flex flex-wrap items-center gap-3 text-sm">
-              <time className="text-zinc-500">
+              <time className="text-[var(--color-text-ghost)] text-sm">
                 {new Date(post.date).toLocaleDateString()}
               </time>
               {isExternal && post.categories.length > 0 && (
@@ -86,7 +86,7 @@ export function BlogCard({ post }: BlogCardProps) {
                   {post.categories.map((category) => (
                     <span
                       key={category}
-                      className="px-2 py-1 rounded-full bg-violet-50 dark:bg-violet-500/10 text-violet-600 dark:text-violet-400 text-xs"
+                      className="px-2 py-0.5 rounded-md bg-[var(--color-accent-wash)] text-[var(--color-accent)] text-xs"
                     >
                       {category}
                     </span>

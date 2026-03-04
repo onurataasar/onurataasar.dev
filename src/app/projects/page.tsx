@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 const projects = [
   {
-    title: "Ördek B2B",
+    title: "Ordek B2B",
     subtitle: "VIP Vehicle Transfer Platform",
     description: "Admin Panel & Web Application",
     tech: ["React", "Next.js", "TypeScript"],
@@ -54,13 +54,13 @@ export default function ProjectsPage() {
   return (
     <PageTransition className="space-y-8 py-8">
       <FadeIn>
-        <h1 className="text-4xl font-bold">
-          <span className="gradient-text">Projects</span>
+        <h1 className="text-4xl font-bold font-[family-name:var(--font-instrument-serif)]">
+          Projects
         </h1>
       </FadeIn>
 
       <FadeIn delay={0.1}>
-        <p className="text-zinc-600 dark:text-zinc-400 max-w-2xl">
+        <p className="text-[var(--color-text-secondary)] max-w-2xl">
           Production applications I&apos;ve built and contributed to as a
           frontend developer.
         </p>
@@ -69,19 +69,17 @@ export default function ProjectsPage() {
       <StaggerContainer className="grid gap-6" delay={0.2} staggerDelay={0.15}>
         {projects.map((project) => (
           <StaggerItem key={project.title}>
-            <article className="group relative overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-800/50 backdrop-blur-sm p-6 hover:border-violet-300 dark:hover:border-violet-800 shadow-sm hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
-              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
+            <article className="card p-6 group">
               <div className="flex items-start gap-4">
-                <div className="p-2 rounded-lg bg-violet-50 dark:bg-violet-500/10 text-violet-500 dark:text-violet-400 shrink-0 mt-0.5">
+                <div className="p-2 rounded-xl bg-[var(--color-accent-wash)] text-[var(--color-accent)] shrink-0 mt-0.5">
                   <HiOutlineCode size={20} />
                 </div>
                 <div className="space-y-3 flex-1 min-w-0">
                   <div>
-                    <h2 className="text-xl font-semibold group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
+                    <h2 className="text-xl font-semibold group-hover:text-[var(--color-accent)] transition-colors">
                       {project.title}
                     </h2>
-                    <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                    <p className="text-sm text-[var(--color-text-ghost)]">
                       {project.subtitle} — {project.description}
                     </p>
                   </div>
@@ -90,17 +88,17 @@ export default function ProjectsPage() {
                     {project.tech.map((t) => (
                       <span
                         key={t}
-                        className="px-2.5 py-0.5 text-xs font-medium rounded-full bg-violet-50 dark:bg-violet-500/10 text-violet-600 dark:text-violet-400 border border-violet-200 dark:border-violet-500/20"
+                        className="px-2.5 py-0.5 text-xs font-medium rounded-lg bg-[var(--color-accent-wash)] text-[var(--color-accent)] border border-[var(--color-accent)]/20"
                       >
                         {t}
                       </span>
                     ))}
                   </div>
 
-                  <ul className="space-y-1.5 text-sm text-zinc-600 dark:text-zinc-400">
+                  <ul className="space-y-1.5 text-sm text-[var(--color-text-secondary)]">
                     {project.bullets.map((bullet, i) => (
                       <li key={i} className="flex gap-2">
-                        <span className="text-violet-400 mt-1.5 shrink-0">
+                        <span className="text-[var(--color-accent)] mt-1.5 shrink-0">
                           •
                         </span>
                         <span>{bullet}</span>
