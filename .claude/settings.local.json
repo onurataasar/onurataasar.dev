@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd:*)",
+      "Bash(wc:*)",
+      "WebSearch",
+      "Bash(node:*)",
+      "Bash(echo === Requirement Coverage Check ===:*)"
+    ]
+  }
+}
