@@ -41,7 +41,7 @@ export function HeroSection() {
             <div className="inline-flex items-center gap-3 mt-4">
               <div className="w-12 h-1 rounded-full gradient-bg" />
               <p className="font-[family-name:var(--font-display)] text-xl sm:text-2xl lg:text-3xl font-semibold text-[var(--color-text-muted)]">
-                Software Developer
+                Frontend Developer
               </p>
             </div>
           </HeroEntranceItem>

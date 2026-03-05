@@ -23,7 +23,7 @@ export function Section({
   fullHeight = true,
   grid = false,
 }: SectionProps) {
-  const heightClasses = fullHeight ? "min-h-[70svh] lg:min-h-svh" : "";
+  const heightClasses = fullHeight ? "min-h-[70svh] lg:min-h-[95svh]" : "";
 
   const innerClasses = [
     "max-w-[1400px] mx-auto px-6 lg:px-12 py-16 lg:py-24",

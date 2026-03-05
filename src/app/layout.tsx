@@ -7,6 +7,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { GrainOverlay } from "@/components/GrainOverlay";
+import { InitialLoader } from "@/components/InitialLoader";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -54,10 +55,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${dmSans.variable} ${syne.variable} ${firaCode.variable} ${dmSans.className} min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] relative overflow-x-hidden`}
+        className={`${dmSans.variable} ${syne.variable} ${firaCode.variable} ${dmSans.className} min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] relative overflow-x-hidden initial-load`}
       >
         <GrainOverlay />
         <ThemeProvider>
+          <InitialLoader />
+          <div id="app-content">
           <SmoothScroll>
             <Navigation />
             <main className="flex-1">
@@ -65,6 +68,7 @@ export default function RootLayout({
             </main>
             <CompactFooter />
           </SmoothScroll>
+          </div>
           <Analytics />
         </ThemeProvider>
       </body>

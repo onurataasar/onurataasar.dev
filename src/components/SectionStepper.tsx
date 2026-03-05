@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   HiOutlineHome,
@@ -23,8 +24,18 @@ const SECTIONS: { id: string; icon: IconType; label: string }[] = [
 export function SectionStepper() {
   const activeId = useScrollSpy(SECTIONS.map((s) => s.id));
   const scrollProgress = useScrollProgress();
+  const [optimisticId, setOptimisticId] = useState<string | null>(null);
+
+  const displayId = optimisticId ?? activeId;
+
+  useEffect(() => {
+    if (optimisticId && activeId === optimisticId) {
+      setOptimisticId(null);
+    }
+  }, [optimisticId, activeId]);
 
   const handleClick = (id: string) => {
+    setOptimisticId(id);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -48,7 +59,7 @@ export function SectionStepper() {
         aria-label="Bölüm navigasyonu"
       >
         {SECTIONS.map(({ id, icon: Icon, label }) => {
-          const isActive = activeId === id;
+          const isActive = displayId === id;
           return (
             <motion.button
               key={id}
@@ -64,7 +75,7 @@ export function SectionStepper() {
                 <motion.span
                   layoutId="stepper-active"
                   className="absolute inset-0 rounded-xl bg-current/15 border border-current/25"
-                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                  transition={{ type: "spring", stiffness: 700, damping: 40 }}
                 />
               )}
               <Icon
