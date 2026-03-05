@@ -7,12 +7,12 @@
 
 ### Design System
 
-- [ ] **DS-01**: Site uses Electric Warm color palette with CSS custom properties (hot orange, coral, electric yellow on deep charcoal)
-- [ ] **DS-02**: Site uses distinctive display font (Syne or similar) for headlines — no Inter, Roboto, Arial, or system fonts
-- [ ] **DS-03**: Site uses readable body font (DM Sans or similar) paired with display font
-- [ ] **DS-04**: Site uses monospace font (Fira Code) for code blocks
-- [ ] **DS-05**: Typography scales fluidly across breakpoints using clamp() for oversized headlines (100px+ on desktop)
-- [ ] **DS-06**: Color tokens have both light and dark mode variants
+- [x] **DS-01**: Site uses Electric Warm color palette with CSS custom properties (hot orange, coral, electric yellow on deep charcoal)
+- [x] **DS-02**: Site uses distinctive display font (Syne or similar) for headlines — no Inter, Roboto, Arial, or system fonts
+- [x] **DS-03**: Site uses readable body font (DM Sans or similar) paired with display font
+- [x] **DS-04**: Site uses monospace font (Fira Code) for code blocks
+- [x] **DS-05**: Typography scales fluidly across breakpoints using clamp() for oversized headlines (100px+ on desktop)
+- [x] **DS-06**: Color tokens have both light and dark mode variants
 
 ### Layout
 
@@ -114,12 +114,12 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DS-01 | Phase 1 | Pending |
-| DS-02 | Phase 1 | Pending |
-| DS-03 | Phase 1 | Pending |
-| DS-04 | Phase 1 | Pending |
-| DS-05 | Phase 1 | Pending |
-| DS-06 | Phase 1 | Pending |
+| DS-01 | Phase 1 | Complete |
+| DS-02 | Phase 1 | Complete |
+| DS-03 | Phase 1 | Complete |
+| DS-04 | Phase 1 | Complete |
+| DS-05 | Phase 1 | Complete |
+| DS-06 | Phase 1 | Complete |
 | LAY-01 | Phase 2 | Pending |
 | LAY-02 | Phase 2 | Pending |
 | LAY-03 | Phase 2 | Pending |
