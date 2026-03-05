@@ -1,21 +1,34 @@
 "use client";
 
+import { useCallback, useEffect, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { Section } from "@/components/Section";
-import { ScrollReveal, ScrollStagger } from "@/components/motion";
+import { ScrollReveal } from "@/components/motion";
 import { skillCategories } from "@/lib/home-data";
-import Image from "next/image";
+import {
+  FaReact,
+  FaDatabase,
+  FaPalette,
+  FaFlask,
+  FaTools,
+  FaChevronLeft,
+  FaChevronRight,
+} from "react-icons/fa";
 
-/** Bento grid layout: Frontend büyük, diğerleri küçük kartlar */
-const BENTO_LAYOUT: Record<string, string> = {
-  Frontend: "md:col-span-2 md:row-span-2",
-  "State & Data": "md:col-span-1",
-  Styling: "md:col-span-1",
-  "Testing & DevOps": "md:col-span-1",
-  Tools: "md:col-span-1",
-};
+function useReducedMotion() {
+  const [reduceMotion, setReduceMotion] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduceMotion(mq.matches);
+    const handler = () => setReduceMotion(mq.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+  return reduceMotion;
+}
 
-/** Placeholder görsel — her kategori için benzersiz gradient */
 const PLACEHOLDER_COLORS: Record<string, { from: string; to: string }> = {
   Frontend: { from: "#FF6B35", to: "#FFD23F" },
   "State & Data": { from: "#FF4444", to: "#FF6B35" },
@@ -24,29 +37,35 @@ const PLACEHOLDER_COLORS: Record<string, { from: string; to: string }> = {
   Tools: { from: "#FF6B35", to: "#FF4444" },
 };
 
+const CATEGORY_ICONS: Record<
+  string,
+  React.ComponentType<{ className?: string }>
+> = {
+  Frontend: FaReact,
+  "State & Data": FaDatabase,
+  Styling: FaPalette,
+  "Testing & DevOps": FaFlask,
+  Tools: FaTools,
+};
+
+function PlaceholderIcon({ label }: { label: string }) {
+  const Icon = CATEGORY_ICONS[label] ?? FaReact;
+  return <Icon className="w-12 h-12 lg:w-14 lg:h-14 opacity-70" aria-hidden />;
+}
+
 function SkillCard({
   category,
-  layoutClass,
-  index,
+  reduceMotion,
 }: {
   category: (typeof skillCategories)[0];
-  layoutClass: string;
-  index: number;
+  reduceMotion: boolean;
 }) {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
   const springConfig = { stiffness: 300, damping: 25 };
-  const rotateX = useSpring(
-    useMotionValue(0),
-    springConfig
-  );
-  const rotateY = useSpring(
-    useMotionValue(0),
-    springConfig
-  );
+  const rotateX = useSpring(useMotionValue(0), springConfig);
+  const rotateY = useSpring(useMotionValue(0), springConfig);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!e.currentTarget) return;
+    if (reduceMotion || !e.currentTarget) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
@@ -66,64 +85,57 @@ function SkillCard({
     to: "#FFD23F",
   };
 
-  const isLarge = layoutClass.includes("row-span-2");
-
   return (
     <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 24 },
-        visible: { opacity: 1, y: 0 },
-      }}
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className={layoutClass}
+      className="embla__slide min-w-0 flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] pr-4 lg:pr-6 h-full"
     >
       <motion.div
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        style={{
-          rotateX,
-          rotateY,
-          transformStyle: "preserve-3d",
-          perspective: 1000,
-        }}
+        style={
+          reduceMotion
+            ? undefined
+            : {
+                rotateX,
+                rotateY,
+                transformStyle: "preserve-3d",
+                perspective: 1000,
+              }
+        }
         className="h-full rounded-2xl border-2 border-current/20 bg-white/10 backdrop-blur-sm hover:bg-white/20 hover:border-current/30 transition-all duration-300 overflow-hidden group"
       >
         <div className="flex flex-col h-full">
-          {/* Placeholder görsel alanı */}
           <div
-            className="relative w-full aspect-video overflow-hidden"
+            className="relative w-full h-36 lg:h-3/5 overflow-hidden shrink-0 flex flex-col items-center justify-center"
             style={{
-              background: `linear-gradient(135deg, ${colors.from}22, ${colors.to}33)`,
+              background: `linear-gradient(135deg, ${colors.from}40, ${colors.to}60)`,
             }}
           >
-            {/* Placeholder pattern overlay */}
             <div
-              className="absolute inset-0 opacity-30"
+              className="absolute inset-0 opacity-40"
               style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20v20H0zM20 20h20v20H20z' fill='none' stroke='%23fff' stroke-width='0.5' opacity='0.3'/%3E%3C/svg%3E")`,
+                backgroundImage: `url("data:image/svg+xml,%3Csvg width='32' height='32' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23fff' stroke-width='0.5' opacity='0.5'%3E%3Cpath d='M0 16h32M16 0v32'/%3E%3C/g%3E%3C/svg%3E")`,
               }}
             />
-            <Image
-              src={`https://placehold.co/${isLarge ? "600x400" : "400x200"}/1a1a2e/ff6b35?text=${encodeURIComponent(category.label)}&font=inter`}
-              alt={`${category.label} placeholder`}
-              fill
-              className="object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-500"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
-            <div
-              className="absolute inset-0 flex items-center justify-center"
-              style={{
-                background: `linear-gradient(180deg, transparent 0%, var(--color-section-skills) 100%)`,
-                opacity: 0.5,
-              }}
-            />
+            <div className="relative z-10 flex flex-col items-center justify-center gap-1.5 text-center px-3">
+              <PlaceholderIcon label={category.label} />
+              <span className="font-[family-name:var(--font-display)] text-xs lg:text-sm font-bold uppercase tracking-widest opacity-80">
+                {category.label}
+              </span>
+              {category.description && (
+                <p className="text-xs opacity-75 leading-snug max-w-[90%]">
+                  {category.description}
+                </p>
+              )}
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/10 pointer-events-none" />
           </div>
 
-          <div className="p-5 lg:p-6 flex-1 flex flex-col">
-            <h3 className="font-[family-name:var(--font-display)] text-lg lg:text-xl font-bold mb-3 uppercase tracking-tight">
-              {category.label}
-            </h3>
-            <ul className="flex flex-wrap gap-2">
+          <div className="p-4 lg:p-5 flex-1 min-h-0 overflow-y-auto">
+            <ul className="flex flex-wrap gap-4">
               {category.skills.map((skill) => (
                 <motion.li
                   key={skill}
@@ -133,7 +145,7 @@ function SkillCard({
                     y: -2,
                     transition: { duration: 0.2 },
                   }}
-                  className="px-3 py-1.5 text-sm font-medium rounded-full bg-current/15 hover:bg-current/25 border border-current/20 hover:border-current/40 transition-colors cursor-default"
+                  className="px-6 tracking-wider py-3 text-xl font-medium rounded-full bg-current/15 hover:bg-current/25 border border-current/20 hover:border-current/40 transition-colors cursor-default"
                 >
                   {skill}
                 </motion.li>
@@ -147,30 +159,70 @@ function SkillCard({
 }
 
 export function SkillsSection() {
+  const reduceMotion = useReducedMotion();
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      loop: true,
+      align: "start",
+      containScroll: "trimSnaps",
+    },
+    [Autoplay({ delay: 3500 })],
+  );
+
+  useEffect(() => {
+    emblaApi?.plugins().autoplay?.play();
+  }, [emblaApi]);
+
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+
   return (
     <Section id="skills" colorToken="skills" grid>
-      <div className="col-span-12">
-        <ScrollReveal>
-          <h2 className="font-[family-name:var(--font-display)] text-[var(--font-size-h2)] font-bold mb-4">
-            Technical <span className="opacity-90">Skills</span>
-          </h2>
-          <p className="text-lg opacity-90 mb-12 max-w-2xl">
-            UI/UX odaklı geliştirme araçları ve teknolojiler.
-          </p>
-        </ScrollReveal>
+      <div className="col-span-12 overflow-visible space-y-24">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <ScrollReveal className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
+            <div>
+              <h2 className="font-[family-name:var(--font-display)] text-[var(--font-size-h2)] font-bold mb-2">
+                Technical <span className="opacity-90">Skills</span>
+              </h2>
+              <p className="text-base lg:text-5xl opacity-90 max-w-2xl">
+                Alanımda kullandığım geliştirme araçları ve teknolojiler.
+              </p>
+            </div>
+            <div className="flex items-center gap-2 shrink-0">
+              <button
+                type="button"
+                onClick={scrollPrev}
+                className="p-3 rounded-xl text-current/80 hover:text-current hover:bg-current/10 transition-all"
+                aria-label="Önceki"
+              >
+                <FaChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                type="button"
+                onClick={scrollNext}
+                className="p-3 rounded-xl text-current/80 hover:text-current hover:bg-current/10 transition-all"
+                aria-label="Sonraki"
+              >
+                <FaChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+          </ScrollReveal>
+        </div>
 
-        <ScrollStagger staggerDelay={0.08}>
-          <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-4 lg:gap-6 auto-rows-fr">
-            {skillCategories.map((category, index) => (
-              <SkillCard
-                key={category.label}
-                category={category}
-                layoutClass={BENTO_LAYOUT[category.label] ?? ""}
-                index={index}
-              />
-            ))}
+        <div className="relative w-[100vw] h-4/5 left-1/2 -translate-x-1/2">
+          <div className="overflow-hidden h-full" ref={emblaRef}>
+            <div className="flex touch-pan-y  h-full">
+              {skillCategories.map((category) => (
+                <SkillCard
+                  key={category.label}
+                  category={category}
+                  reduceMotion={reduceMotion}
+                />
+              ))}
+            </div>
           </div>
-        </ScrollStagger>
+        </div>
       </div>
     </Section>
   );

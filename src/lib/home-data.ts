@@ -23,10 +23,12 @@ export const socials = [
 export const skillCategories = [
   {
     label: "Frontend",
+    description: "Bileşen tabanlı UI, hooks ve modern web standartları.",
     skills: ["React.js", "Next.js", "TypeScript", "JavaScript", "HTML5", "CSS"],
   },
   {
     label: "State & Data",
+    description: "Global state, sunucu verisi ve API entegrasyonu.",
     skills: [
       "Redux Toolkit",
       "Context API",
@@ -37,6 +39,7 @@ export const skillCategories = [
   },
   {
     label: "Styling",
+    description: "Utility-first CSS, animasyon ve component kütüphaneleri.",
     skills: [
       "Tailwind CSS",
       "Styled Components",
@@ -47,10 +50,12 @@ export const skillCategories = [
   },
   {
     label: "Testing & DevOps",
+    description: "E2E test, CI/CD ve hata takibi.",
     skills: ["Playwright", "Jest", "Azure Pipelines", "Sentry", "Vercel"],
   },
   {
     label: "Tools",
+    description: "Versiyon kontrolü, linting ve tasarım araçları.",
     skills: ["Git", "GitHub", "ESLint", "Prettier", "Figma"],
   },
 ];
