@@ -109,6 +109,7 @@ export default async function MediumBlogPost({ params }: Props) {
           />
         </div>
       </article>
+      </div>
     );
   } catch (error) {
     if (error instanceof Error && error.message.includes("Rate limited")) {
