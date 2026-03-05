@@ -11,7 +11,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 const routes = [
   { href: "/blog", label: "Blog" },
   { href: "/notes", label: "Dev Notes" },
-  { href: "/projects", label: "Projects" },
+  { href: "/projects", label: "Projeler" },
   { href: "/cv", label: "CV" },
 ];
 
@@ -217,8 +217,14 @@ export function Navigation() {
                 <a
                   key={social.label}
                   href={social.href}
-                  target={social.href.startsWith("mailto") ? undefined : "_blank"}
-                  rel={social.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
+                  target={
+                    social.href.startsWith("mailto") ? undefined : "_blank"
+                  }
+                  rel={
+                    social.href.startsWith("mailto")
+                      ? undefined
+                      : "noopener noreferrer"
+                  }
                   aria-label={social.label}
                   className="text-[#FFF8F0]/80 hover:text-[#FFF8F0] transition-colors duration-200"
                 >
