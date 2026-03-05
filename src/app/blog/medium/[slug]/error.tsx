@@ -14,14 +14,14 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="min-h-[400px] flex flex-col items-center justify-center space-y-4">
+    <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-16 lg:py-24 min-h-[400px] flex flex-col items-center justify-center space-y-4">
       <h2 className="text-2xl font-bold">Something went wrong!</h2>
-      <p className="text-zinc-600 dark:text-zinc-400">
+      <p className="text-[var(--color-text-muted)]">
         {error.message || "Failed to load the Medium post"}
       </p>
       <button
         onClick={reset}
-        className="px-4 py-2 bg-black text-white rounded-lg hover:bg-zinc-800 transition-colors"
+        className="px-4 py-2 rounded-lg gradient-bg text-white hover:opacity-90 transition-opacity"
       >
         Try again
       </button>

@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "medium.com",
       },
+      {
+        protocol: "https",
+        hostname: "cdn-images-1.medium.com",
+      },
     ],
   },
 };

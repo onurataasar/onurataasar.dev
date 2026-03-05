@@ -4,6 +4,7 @@ import {
   StaggerContainer,
   StaggerItem,
 } from "@/components/motion";
+import { MagneticButton } from "@/components/MagneticButton";
 import {
   HiOutlineBriefcase,
   HiOutlineAcademicCap,
@@ -80,15 +81,17 @@ export default function CVPage() {
           </FadeIn>
 
           <FadeIn delay={0.1}>
-            <a
+            <MagneticButton
+              as="a"
               href="/Onur-Ata-Asar-CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-xl gradient-bg text-white hover:opacity-90 transition-opacity shrink-0"
+              strength={0.25}
             >
               <HiOutlineDownload size={18} />
               Download PDF
-            </a>
+            </MagneticButton>
           </FadeIn>
         </div>
 

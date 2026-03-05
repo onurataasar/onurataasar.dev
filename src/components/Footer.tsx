@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { MagneticButton } from "@/components/MagneticButton";
 import { Section } from "@/components/Section";
 import { FaGithub, FaLinkedin, FaMedium } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
@@ -35,12 +36,14 @@ export default function Footer() {
         <p className="mt-4 text-lg opacity-90">
           Got a project? Want to collaborate? Just want to say hi?
         </p>
-        <Link
+        <MagneticButton
+          as="a"
           href="mailto:onurataasar@gmail.com"
-          className="mt-6 text-2xl lg:text-3xl font-semibold underline underline-offset-4 decoration-2 hover:opacity-90 transition-opacity"
+          className="mt-6 text-2xl lg:text-3xl font-semibold underline underline-offset-4 decoration-2 hover:opacity-90 transition-opacity inline-block"
+          strength={0.2}
         >
           onurataasar@gmail.com
-        </Link>
+        </MagneticButton>
       </div>
 
       <div className="col-span-12 lg:col-span-5 flex flex-col justify-center lg:items-end">
