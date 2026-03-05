@@ -217,8 +217,8 @@ export function Navigation() {
                 <a
                   key={social.label}
                   href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={social.href.startsWith("mailto") ? undefined : "_blank"}
+                  rel={social.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
                   aria-label={social.label}
                   className="text-[#FFF8F0]/80 hover:text-[#FFF8F0] transition-colors duration-200"
                 >

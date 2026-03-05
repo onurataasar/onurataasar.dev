@@ -1,62 +1,75 @@
 "use client";
-import { FaGithubSquare, FaLinkedin, FaMedium } from "react-icons/fa";
+
+import Link from "next/link";
 import { motion } from "framer-motion";
+import { Section } from "@/components/Section";
+import { FaGithub, FaLinkedin, FaMedium } from "react-icons/fa";
+import { HiOutlineMail } from "react-icons/hi";
 
 const socials = [
+  { href: "https://github.com/onurataasar", icon: FaGithub, label: "GitHub" },
+  {
+    href: "https://www.linkedin.com/in/onur-ata-asar/",
+    icon: FaLinkedin,
+    label: "LinkedIn",
+  },
   {
     href: "https://medium.com/@onurataasar",
     icon: FaMedium,
     label: "Medium",
   },
   {
-    href: "https://github.com/onurataasar",
-    icon: FaGithubSquare,
-    label: "GitHub",
-  },
-  {
-    href: "https://www.linkedin.com/in/onur-ata-asar/",
-    icon: FaLinkedin,
-    label: "LinkedIn",
+    href: "mailto:onurataasar@gmail.com",
+    icon: HiOutlineMail,
+    label: "Email",
   },
 ];
 
 export default function Footer() {
   return (
-    <footer className="mt-auto pt-8 pb-6">
-      {/* Gradient separator line */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-violet-500/40 to-transparent mb-8" />
+    <Section id="contact" colorToken="contact" grid>
+      <div className="col-span-12 lg:col-span-7 flex flex-col justify-center">
+        <h2 className="font-[family-name:var(--font-display)] text-[var(--font-size-h1)] font-bold">
+          Say hello
+        </h2>
+        <p className="mt-4 text-lg opacity-90">
+          Got a project? Want to collaborate? Just want to say hi?
+        </p>
+        <Link
+          href="mailto:onurataasar@gmail.com"
+          className="mt-6 text-2xl lg:text-3xl font-semibold underline underline-offset-4 decoration-2 hover:opacity-90 transition-opacity"
+        >
+          onurataasar@gmail.com
+        </Link>
+      </div>
 
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <div>
-            <h3 className="font-semibold">
-              Onur Ata Asar{" "}
-              <span className="text-zinc-500 dark:text-zinc-500 font-normal text-xs">
-                © {new Date().getFullYear()}
-              </span>
-            </h3>
-            <p className="text-sm text-zinc-500 dark:text-zinc-500 max-md:text-center">
-              Developer
-            </p>
-          </div>
-        </div>
-        <div className="flex gap-3">
+      <div className="col-span-12 lg:col-span-5 flex flex-col justify-center lg:items-end">
+        <div className="flex flex-wrap gap-6 lg:gap-8">
           {socials.map((social) => (
             <motion.a
               key={social.label}
               href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-lg text-zinc-500 dark:text-zinc-500 hover:text-violet-500 dark:hover:text-violet-400 hover:bg-violet-50 dark:hover:bg-violet-500/10 transition-colors"
-              whileHover={{ scale: 1.1, rotate: 3 }}
+              target={social.href.startsWith("mailto") ? undefined : "_blank"}
+              rel={
+                social.href.startsWith("mailto")
+                  ? undefined
+                  : "noopener noreferrer"
+              }
+              className="flex items-center gap-3 text-lg hover:opacity-80 transition-opacity"
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               aria-label={social.label}
             >
-              <social.icon size={22} />
+              <social.icon size={24} />
+              <span>{social.label}</span>
             </motion.a>
           ))}
         </div>
       </div>
-    </footer>
+
+      <div className="col-span-12 pt-8 mt-8 border-t border-current/20 text-sm opacity-75">
+        © {new Date().getFullYear()} Onur Ata Asar
+      </div>
+    </Section>
   );
 }

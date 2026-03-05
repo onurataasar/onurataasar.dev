@@ -5,7 +5,10 @@
       "Bash(wc:*)",
       "WebSearch",
       "Bash(node:*)",
-      "Bash(echo === Requirement Coverage Check ===:*)"
+      "Bash(echo === Requirement Coverage Check ===:*)",
+      "Bash(curl:*)",
+      "Bash(grep:*)",
+      "Bash(ls:*)"
     ]
   }
 }

@@ -1,7 +1,10 @@
 "use client";
+
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { FadeIn, StaggerContainer, StaggerItem } from "@/components/motion";
+import { Section } from "@/components/Section";
+import Footer from "@/components/Footer";
+import { ScrollReveal, ScrollStagger } from "@/components/motion";
 import { FaGithub, FaLinkedin, FaMedium } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 
@@ -35,7 +38,13 @@ const skillCategories = [
   },
   {
     label: "Styling",
-    skills: ["Tailwind CSS", "Styled Components", "Sass", "Framer Motion", "Material UI"],
+    skills: [
+      "Tailwind CSS",
+      "Styled Components",
+      "Sass",
+      "Framer Motion",
+      "Material UI",
+    ],
   },
   {
     label: "Testing & DevOps",
@@ -49,90 +58,95 @@ const skillCategories = [
 
 export default function Home() {
   return (
-    <div className="flex-1 flex flex-col gap-12 sm:gap-16 py-12 sm:py-20">
+    <>
       {/* Hero Section */}
-      <section className="space-y-6 max-w-2xl">
-        <FadeIn delay={0}>
-          <p className="text-sm font-medium tracking-widest uppercase text-violet-500 dark:text-violet-400">
-            Selam, ben
-          </p>
-        </FadeIn>
+      <Section id="hero" colorToken="hero" grid>
+        <div className="col-span-12 lg:col-span-8 lg:col-start-1 flex flex-col justify-center min-h-[inherit]">
+          <div className="space-y-6">
+            <ScrollReveal delay={0}>
+              <p className="text-sm font-medium tracking-widest uppercase text-[var(--color-accent)]">
+                Selam, ben
+              </p>
+            </ScrollReveal>
 
-        <FadeIn delay={0.1}>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
-            Onur Ata <span className="gradient-text">Asar</span>
-          </h1>
-        </FadeIn>
+            <ScrollReveal delay={0.1} direction="up">
+              <h1 className="font-[family-name:var(--font-display)] text-[var(--font-size-display)] font-bold tracking-tight">
+                Onur Ata <span className="gradient-text">Asar</span>
+              </h1>
+            </ScrollReveal>
 
-        <FadeIn delay={0.2}>
-          <p className="text-xl sm:text-2xl text-zinc-600 dark:text-zinc-400 font-light">
-            Software Developer
-          </p>
-        </FadeIn>
+            <ScrollReveal delay={0.2}>
+              <p className="text-xl sm:text-2xl text-[var(--color-text-muted)] font-light">
+                Software Developer
+              </p>
+            </ScrollReveal>
 
-        <FadeIn delay={0.3}>
-          <p className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-lg">
-            Yazılım geliştirme üzerine düşüncelerimi, öğrendiklerimi ve
-            deneyimlerimi paylaşıyorum.{" "}
-            <Link
-              href="/blog"
-              className="text-violet-500 dark:text-violet-400 hover:text-violet-600 dark:hover:text-violet-300 underline underline-offset-4 decoration-violet-500/30 hover:decoration-violet-500 transition-colors"
-            >
-              Bloglara
-            </Link>
-            ,{" "}
-            <Link
-              href="/notes"
-              className="text-violet-500 dark:text-violet-400 hover:text-violet-600 dark:hover:text-violet-300 underline underline-offset-4 decoration-violet-500/30 hover:decoration-violet-500 transition-colors"
-            >
-              dev notlarıma
-            </Link>{" "}
-            ve{" "}
-            <Link
-              href="/projects"
-              className="text-violet-500 dark:text-violet-400 hover:text-violet-600 dark:hover:text-violet-300 underline underline-offset-4 decoration-violet-500/30 hover:decoration-violet-500 transition-colors"
-            >
-              projelerime
-            </Link>{" "}
-            göz at.
-          </p>
-        </FadeIn>
-
-        <FadeIn delay={0.4}>
-          <div className="flex items-center gap-4 pt-2">
-            {socials.map((social) => (
-              <motion.a
-                key={social.label}
-                href={social.href}
-                target={
-                  social.href.startsWith("mailto") ? undefined : "_blank"
-                }
-                rel={
-                  social.href.startsWith("mailto")
-                    ? undefined
-                    : "noopener noreferrer"
-                }
-                className="p-2 rounded-lg text-zinc-500 hover:text-violet-500 dark:text-zinc-400 dark:hover:text-violet-400 hover:bg-violet-50 dark:hover:bg-violet-500/10 transition-colors"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                aria-label={social.label}
+            <ScrollReveal delay={0.3}>
+            <p className="text-base text-[var(--color-text-muted)] leading-relaxed max-w-lg">
+              Yazılım geliştirme üzerine düşüncelerimi, öğrendiklerimi ve
+              deneyimlerimi paylaşıyorum.{" "}
+              <Link
+                href="/blog"
+                className="text-[var(--color-accent)] hover:text-[var(--color-accent-secondary)] underline underline-offset-4 transition-colors"
               >
-                <social.icon size={22} />
-              </motion.a>
-            ))}
+                Bloglara
+              </Link>
+              ,{" "}
+              <Link
+                href="/notes"
+                className="text-[var(--color-accent)] hover:text-[var(--color-accent-secondary)] underline underline-offset-4 transition-colors"
+              >
+                dev notlarıma
+              </Link>{" "}
+              ve{" "}
+              <Link
+                href="/projects"
+                className="text-[var(--color-accent)] hover:text-[var(--color-accent-secondary)] underline underline-offset-4 transition-colors"
+              >
+                projelerime
+              </Link>{" "}
+              göz at.
+            </p>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.4}>
+            <div className="flex items-center gap-4 pt-2">
+              {socials.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target={
+                    social.href.startsWith("mailto") ? undefined : "_blank"
+                  }
+                  rel={
+                    social.href.startsWith("mailto")
+                      ? undefined
+                      : "noopener noreferrer"
+                  }
+                  className="p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-accent)] hover:bg-[var(--color-accent)]/10 transition-colors"
+                  aria-label={social.label}
+                >
+                  <social.icon size={22} />
+                </a>
+              ))}
+            </div>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.5}>
+            <div className="w-24 h-1 rounded-full gradient-bg opacity-60" />
+            </ScrollReveal>
           </div>
-        </FadeIn>
+        </div>
+      </Section>
 
-        <FadeIn delay={0.5}>
-          <div className="w-24 h-1 rounded-full gradient-bg opacity-60" />
-        </FadeIn>
-      </section>
-
-      {/* Profile Section */}
-      <FadeIn delay={0.6}>
-        <section className="relative overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-800/50 backdrop-blur-sm p-6">
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500 to-transparent opacity-60" />
-          <p className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
+      {/* About Section */}
+      <Section id="about" colorToken="about" grid>
+        <div className="col-span-12 lg:col-span-8 lg:col-start-4 flex flex-col justify-center">
+          <ScrollReveal>
+          <h2 className="font-[family-name:var(--font-display)] text-[var(--font-size-h2)] font-bold mb-6">
+            Hakkımda
+          </h2>
+          <p className="text-base leading-relaxed">
             Experienced Frontend Developer specializing in React, Next.js, and
             TypeScript, with a strong background in developing and maintaining
             production-level web applications. I focus on building scalable
@@ -142,39 +156,50 @@ export default function Home() {
             teams in Agile environments, always prioritizing code quality and
             long-term maintainability.
           </p>
-        </section>
-      </FadeIn>
+          </ScrollReveal>
+        </div>
+      </Section>
 
       {/* Skills Section */}
-      <section className="space-y-6">
-        <FadeIn delay={0.7}>
-          <h2 className="text-2xl font-bold">
-            Technical <span className="gradient-text">Skills</span>
+      <Section id="skills" colorToken="skills">
+        <div className="space-y-6">
+          <ScrollReveal>
+          <h2 className="font-[family-name:var(--font-display)] text-[var(--font-size-h2)] font-bold">
+            Technical <span className="opacity-90">Skills</span>
           </h2>
-        </FadeIn>
+          </ScrollReveal>
 
-        <StaggerContainer className="space-y-4" delay={0.8} staggerDelay={0.1}>
-          {skillCategories.map((category) => (
-            <StaggerItem key={category.label}>
-              <div className="space-y-2">
-                <h3 className="text-sm font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
+          <ScrollStagger staggerDelay={0.06}>
+          <div className="space-y-4">
+            {skillCategories.map((category) => (
+              <motion.div
+                key={category.label}
+                variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0 } }}
+                transition={{ duration: 0.4 }}
+                className="space-y-2"
+              >
+                <h3 className="text-sm font-medium opacity-80 uppercase tracking-wider">
                   {category.label}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {category.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="px-3 py-1 text-sm rounded-full border border-zinc-200 dark:border-zinc-700 bg-white/50 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 hover:border-violet-300 dark:hover:border-violet-700 hover:text-violet-600 dark:hover:text-violet-400 transition-colors"
+                      className="px-3 py-1 text-sm rounded-full border border-current/30 bg-white/20 hover:bg-white/30 transition-colors"
                     >
                       {skill}
                     </span>
                   ))}
                 </div>
-              </div>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
-      </section>
-    </div>
+              </motion.div>
+            ))}
+          </div>
+          </ScrollStagger>
+        </div>
+      </Section>
+
+      {/* Contact Section (Footer) */}
+      <Footer />
+    </>
   );
 }

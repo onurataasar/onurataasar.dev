@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { Syne, DM_Sans, Fira_Code } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/Navigation";
-import Footer from "@/components/Footer";
+import CompactFooter from "@/components/CompactFooter";
 import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { SmoothScroll } from "@/components/SmoothScroll";
+import { GrainOverlay } from "@/components/GrainOverlay";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -54,12 +56,15 @@ export default function RootLayout({
       <body
         className={`${dmSans.variable} ${syne.variable} ${firaCode.variable} ${dmSans.className} min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] relative overflow-x-hidden`}
       >
+        <GrainOverlay />
         <ThemeProvider>
-          <Navigation />
-          <main className="flex-1">
-            {children}
-          </main>
-          <Footer />
+          <SmoothScroll>
+            <Navigation />
+            <main className="flex-1">
+              {children}
+            </main>
+            <CompactFooter />
+          </SmoothScroll>
           <Analytics />
         </ThemeProvider>
       </body>
