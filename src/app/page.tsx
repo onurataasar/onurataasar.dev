@@ -7,6 +7,7 @@ import {
   ProjectsSection,
 } from "@/components/home";
 import Footer from "@/components/Footer";
+import { SectionStepper } from "@/components/SectionStepper";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <SkillsSection />
       <ProjectsSection />
       <Footer />
+      <SectionStepper />
     </>
   );
 }
