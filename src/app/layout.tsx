@@ -55,16 +55,11 @@ export default function RootLayout({
         className={`${dmSans.variable} ${syne.variable} ${firaCode.variable} ${dmSans.className} min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] relative overflow-x-hidden`}
       >
         <ThemeProvider>
-          <div className="sticky top-0 z-50 bg-[var(--color-bg)]/80 backdrop-blur-md">
-            <div className="max-w-4xl mx-auto px-4">
-              <Navigation />
-            </div>
-          </div>
-
-          <div className="max-w-4xl mx-auto px-4 py-2 sm:py-8 h-full min-h-screen flex flex-col relative">
+          <Navigation />
+          <main className="flex-1">
             {children}
-            <Footer />
-          </div>
+          </main>
+          <Footer />
           <Analytics />
         </ThemeProvider>
       </body>
