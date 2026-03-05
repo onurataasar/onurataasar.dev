@@ -50,7 +50,7 @@ export function MagneticButton({
   const handleMouseLeave = () => setPosition({ x: 0, y: 0 });
 
   const content = (
-    <Component className={className} {...props}>
+    <Component className={`cursor-pointer ${className}`} {...props}>
       {children}
     </Component>
   );

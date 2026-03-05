@@ -59,13 +59,13 @@ export const projects = [
     ],
   },
   {
-    title: "Beagle",
-    color: "#FF5E1E",
-    subtitle: "Hotel Service Car Tracking System",
-    description: "Web Application",
+    title: "Crystal Aligner",
+    color: "#fefefe",
+    subtitle: "Dental Aligner Tracking System",
+    description: "Admin Panel & Web Application",
     tech: ["React", "Next.js", "TypeScript"],
     bullets: [
-      "Designed and implemented a production ready web application for tracking service cars in hotels.",
+      "Designed and implemented a production ready admin panel and web application for tracking dental aligners.",
       "Integrated REST APIs using Axios and managed global state with Redux.",
     ],
   },
