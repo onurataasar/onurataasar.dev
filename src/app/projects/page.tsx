@@ -1,118 +1,87 @@
-import {
-  FadeIn,
-  PageTransition,
-  StaggerContainer,
-  StaggerItem,
-} from "@/components/motion";
-import { HiOutlineCode } from "react-icons/hi";
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Projects - Onur Ata Asar",
-  description:
-    "Production applications built by Onur Ata Asar as a frontend developer.",
-};
-
-const projects = [
-  {
-    title: "Ördek B2B",
-    subtitle: "VIP Vehicle Transfer Platform",
-    description: "Admin Panel & Web Application",
-    tech: ["React", "Next.js", "TypeScript"],
-    bullets: [
-      "Took ownership of frontend development from initial setup to production deployment.",
-      "Collaborated with backend developers to define API contracts and data models.",
-      "Ensured maintainable code structure by following best practices and frontend architecture patterns.",
-    ],
-  },
-  {
-    title: "Lokman E-Commerce",
-    subtitle: "B2B Platform for Pharmacies",
-    description: "Web Application",
-    tech: ["React", "Next.js", "TypeScript"],
-    bullets: [
-      "Collaborated with backend teams to align frontend requirements with business rules specific to pharmacy workflows.",
-      "Handled edge cases such as stock changes, pricing updates, and order validation on the frontend layer.",
-    ],
-  },
-  {
-    title: "Farmaborsa",
-    subtitle: "B2B E-Commerce Marketplace for Pharmacies",
-    description: "Frontend Application",
-    tech: ["Next.js", "TypeScript"],
-    bullets: [
-      "Developed the entire frontend of a B2B e-commerce platform where pharmacies compete by offering the same products at different prices.",
-      "Built dynamic product listing and comparison screens allowing users to evaluate multiple offers for a single product.",
-      "Implemented price-driven UI flows reflecting a competitive, marketplace-like structure rather than a fixed-price catalog.",
-      "Integrated REST APIs and handled complex state related to pricing, offers, and product availability.",
-      "Focused on performance, maintainability, and scalable frontend architecture using Next.js and TypeScript.",
-    ],
-  },
-];
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { HiOutlineCode, HiOutlineArrowLeft } from "react-icons/hi";
+import { projects } from "@/lib/projects";
+import { ScrollReveal, ScrollStagger } from "@/components/motion";
 
 export default function ProjectsPage() {
   return (
-    <PageTransition className="space-y-8 py-8">
-      <FadeIn>
-        <h1 className="text-4xl font-bold">
+    <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-16 lg:py-24">
+      <ScrollReveal>
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors mb-8"
+        >
+          <HiOutlineArrowLeft className="w-4 h-4" />
+          Ana sayfa
+        </Link>
+      </ScrollReveal>
+
+      <ScrollReveal delay={0.1}>
+        <h1 className="font-[family-name:var(--font-display)] text-[var(--font-size-h1)] font-bold">
           <span className="gradient-text">Projects</span>
         </h1>
-      </FadeIn>
+      </ScrollReveal>
 
-      <FadeIn delay={0.1}>
-        <p className="text-zinc-600 dark:text-zinc-400 max-w-2xl">
+      <ScrollReveal delay={0.2}>
+        <p className="text-[var(--color-text-muted)] max-w-2xl mt-4 text-lg">
           Production applications I&apos;ve built and contributed to as a
           frontend developer.
         </p>
-      </FadeIn>
+      </ScrollReveal>
 
-      <StaggerContainer className="grid gap-6" delay={0.2} staggerDelay={0.15}>
-        {projects.map((project) => (
-          <StaggerItem key={project.title}>
-            <article className="group relative overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-800/50 backdrop-blur-sm p-6 hover:border-violet-300 dark:hover:border-violet-800 shadow-sm hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
-              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <ScrollStagger className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-16" staggerDelay={0.12}>
+        {projects.map((project, index) => (
+          <motion.article
+            key={project.title}
+            variants={{ hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0 } }}
+            transition={{ duration: 0.5 }}
+            className={`group relative overflow-hidden rounded-2xl border-2 border-[var(--color-border)] bg-[var(--color-surface)] p-8 hover:border-[var(--color-accent)]/50 hover:shadow-lg hover:shadow-[var(--color-accent)]/5 transition-all duration-300 ${
+              index % 2 === 1 ? "lg:mt-12" : ""
+            }`}
+          >
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-              <div className="flex items-start gap-4">
-                <div className="p-2 rounded-lg bg-violet-50 dark:bg-violet-500/10 text-violet-500 dark:text-violet-400 shrink-0 mt-0.5">
-                  <HiOutlineCode size={20} />
-                </div>
-                <div className="space-y-3 flex-1 min-w-0">
-                  <div>
-                    <h2 className="text-xl font-semibold group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
-                      {project.title}
-                    </h2>
-                    <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                      {project.subtitle} — {project.description}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((t) => (
-                      <span
-                        key={t}
-                        className="px-2.5 py-0.5 text-xs font-medium rounded-full bg-violet-50 dark:bg-violet-500/10 text-violet-600 dark:text-violet-400 border border-violet-200 dark:border-violet-500/20"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-
-                  <ul className="space-y-1.5 text-sm text-zinc-600 dark:text-zinc-400">
-                    {project.bullets.map((bullet, i) => (
-                      <li key={i} className="flex gap-2">
-                        <span className="text-violet-400 mt-1.5 shrink-0">
-                          •
-                        </span>
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+            <div className="flex items-start gap-4">
+              <div className="p-3 rounded-xl bg-[var(--color-accent)]/10 text-[var(--color-accent)] shrink-0">
+                <HiOutlineCode size={24} />
               </div>
-            </article>
-          </StaggerItem>
+              <div className="space-y-4 flex-1 min-w-0">
+                <div>
+                  <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold group-hover:text-[var(--color-accent)] transition-colors">
+                    {project.title}
+                  </h2>
+                  <p className="text-[var(--color-text-muted)] mt-1">
+                    {project.subtitle} — {project.description}
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {project.tech.map((t) => (
+                    <span
+                      key={t}
+                      className="px-3 py-1 text-sm font-medium rounded-lg bg-[var(--color-accent)]/10 text-[var(--color-accent)] border border-[var(--color-accent)]/20"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+                <ul className="space-y-2 text-[var(--color-text-muted)]">
+                  {project.bullets.map((bullet, i) => (
+                    <li key={i} className="flex gap-2">
+                      <span className="text-[var(--color-accent)] mt-1.5 shrink-0">•</span>
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </motion.article>
         ))}
-      </StaggerContainer>
-    </PageTransition>
+      </ScrollStagger>
+    </div>
   );
 }

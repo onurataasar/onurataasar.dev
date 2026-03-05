@@ -31,12 +31,15 @@ export default async function BlogPage() {
   }));
 
   return (
-    <PageTransition className="space-y-4 sm:space-y-8">
-      <FadeIn>
-        <h1 className="text-4xl font-bold">Blog</h1>
-      </FadeIn>
+    <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-16 lg:py-24">
+      <PageTransition className="space-y-8">
+        <FadeIn>
+          <h1 className="font-[family-name:var(--font-display)] text-[var(--font-size-h1)] font-bold">
+            <span className="gradient-text">Blog</span>
+          </h1>
+        </FadeIn>
 
-      <StaggerContainer className="grid grid-cols-1 gap-6" delay={0.2}>
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8" delay={0.2}>
         {[...externalPosts, ...localPosts].map((post) => (
           <StaggerItem key={post.type === "local" ? post.slug : post.link}>
             <BlogCard post={post} />
@@ -44,5 +47,6 @@ export default async function BlogPage() {
         ))}
       </StaggerContainer>
     </PageTransition>
+    </div>
   );
 }
