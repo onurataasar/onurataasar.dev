@@ -29,7 +29,7 @@ export default async function NotesPage() {
             {notes.map((note) => (
               <StaggerItem key={note.slug}>
                 <Link href={`/notes/${note.slug}`} className="block group">
-                  <article className="relative overflow-hidden rounded-2xl border-2 border-[var(--color-border)] bg-[var(--color-surface)] p-6 hover:border-[var(--color-accent)]/50 shadow-sm hover:shadow-lg hover:shadow-[var(--color-accent)]/5 transition-all duration-300">
+                  <article className="relative overflow-hidden rounded-2xl border-2 border-[var(--color-border)] bg-[var(--color-surface)] p-6 hover:border-[var(--color-accent)]/50 shadow-sm hover:shadow-lg transition-all duration-300">
                     <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                     <div className="flex items-start gap-4">

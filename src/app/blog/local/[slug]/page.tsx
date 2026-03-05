@@ -36,20 +36,22 @@ export default async function LocalBlogPost({ params }: Props) {
     const htmlContent = marked.parse(content);
 
     return (
-      <article className="max-w-none">
-        <header className="mb-8">
-          <h1 className="text-4xl font-bold mb-4">{meta.title}</h1>
-          <div className="flex items-center gap-4">
-            <time className="text-sm text-zinc-600 dark:text-zinc-400">
-              {meta.date}
-            </time>
-          </div>
-        </header>
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-16 lg:py-24">
+        <article className="max-w-none">
+          <header className="mb-8">
+            <h1 className="font-[family-name:var(--font-display)] text-[var(--font-size-h1)] font-bold mb-4">{meta.title}</h1>
+            <div className="flex items-center gap-4">
+              <time className="text-sm text-[var(--color-text-muted)]">
+                {meta.date}
+              </time>
+            </div>
+          </header>
         <div
           className="prose prose-zinc dark:prose-invert max-w-none"
           dangerouslySetInnerHTML={{ __html: htmlContent as string }}
         />
-      </article>
+        </article>
+      </div>
     );
   } catch {
     notFound();

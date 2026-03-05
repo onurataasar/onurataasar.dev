@@ -64,147 +64,146 @@ const languages = [
 
 export default function CVPage() {
   return (
-    <PageTransition className="space-y-10 py-8">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-        <FadeIn>
-          <div>
-            <h1 className="text-4xl font-bold">
-              <span className="gradient-text">CV</span>
-            </h1>
-            <p className="text-lg text-zinc-600 dark:text-zinc-400 mt-1">
-              Frontend Web Developer — Computer Science Engineer
-            </p>
-          </div>
-        </FadeIn>
-
-        <FadeIn delay={0.1}>
-          <a
-            href="/Onur-Ata-Asar-CV.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg gradient-bg text-white hover:opacity-90 transition-opacity shrink-0"
-          >
-            <HiOutlineDownload size={18} />
-            Download PDF
-          </a>
-        </FadeIn>
-      </div>
-
-      {/* Work Experience */}
-      <section className="space-y-4">
-        <FadeIn delay={0.2}>
-          <h2 className="text-2xl font-bold flex items-center gap-3">
-            <span className="p-2 rounded-lg bg-violet-50 dark:bg-violet-500/10 text-violet-500 dark:text-violet-400">
-              <HiOutlineBriefcase size={20} />
-            </span>
-            Work Experience
-          </h2>
-        </FadeIn>
-
-        <StaggerContainer className="space-y-4" delay={0.3} staggerDelay={0.15}>
-          {experiences.map((exp) => (
-            <StaggerItem key={exp.period}>
-              <article className="group relative overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-800/50 backdrop-blur-sm p-6 hover:border-violet-300 dark:hover:border-violet-800 shadow-sm hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
-                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                <div className="space-y-3">
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
-                    <div>
-                      <h3 className="text-lg font-semibold group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
-                        {exp.role}
-                      </h3>
-                      <p className="text-sm text-violet-500 dark:text-violet-400 font-medium">
-                        {exp.company}
-                      </p>
-                    </div>
-                    <div className="text-sm text-zinc-500 dark:text-zinc-400 sm:text-right">
-                      <p>{exp.period}</p>
-                      <p>{exp.location}</p>
-                    </div>
-                  </div>
-
-                  <ul className="space-y-1.5 text-sm text-zinc-600 dark:text-zinc-400">
-                    {exp.bullets.map((bullet, i) => (
-                      <li key={i} className="flex gap-2">
-                        <span className="text-violet-400 mt-1.5 shrink-0">
-                          •
-                        </span>
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </article>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
-      </section>
-
-      {/* Education */}
-      <section className="space-y-4">
-        <FadeIn delay={0.2}>
-          <h2 className="text-2xl font-bold flex items-center gap-3">
-            <span className="p-2 rounded-lg bg-violet-50 dark:bg-violet-500/10 text-violet-500 dark:text-violet-400">
-              <HiOutlineAcademicCap size={20} />
-            </span>
-            Education
-          </h2>
-        </FadeIn>
-
-        <FadeIn delay={0.3}>
-          <article className="group relative overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-800/50 backdrop-blur-sm p-6 hover:border-violet-300 dark:hover:border-violet-800 shadow-sm hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
-              <div>
-                <h3 className="text-lg font-semibold group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
-                  {education.institution}
-                </h3>
-                <p className="text-sm text-violet-500 dark:text-violet-400 font-medium">
-                  {education.degree}
-                </p>
-              </div>
-              <div className="text-sm text-zinc-500 dark:text-zinc-400 sm:text-right">
-                <p>{education.period}</p>
-                <p>{education.location}</p>
-              </div>
+    <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-16 lg:py-24">
+      <PageTransition className="space-y-12">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+          <FadeIn>
+            <div>
+              <h1 className="font-[family-name:var(--font-display)] text-[var(--font-size-h1)] font-bold">
+                <span className="gradient-text">CV</span>
+              </h1>
+              <p className="text-lg text-[var(--color-text-muted)] mt-1">
+                Frontend Web Developer — Computer Science Engineer
+              </p>
             </div>
-          </article>
-        </FadeIn>
-      </section>
+          </FadeIn>
 
-      {/* Languages */}
-      <section className="space-y-4">
-        <FadeIn delay={0.2}>
-          <h2 className="text-2xl font-bold flex items-center gap-3">
-            <span className="p-2 rounded-lg bg-violet-50 dark:bg-violet-500/10 text-violet-500 dark:text-violet-400">
-              <HiOutlineGlobeAlt size={20} />
-            </span>
-            Languages
-          </h2>
-        </FadeIn>
+          <FadeIn delay={0.1}>
+            <a
+              href="/Onur-Ata-Asar-CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-xl gradient-bg text-white hover:opacity-90 transition-opacity shrink-0"
+            >
+              <HiOutlineDownload size={18} />
+              Download PDF
+            </a>
+          </FadeIn>
+        </div>
 
-        <StaggerContainer
-          className="grid grid-cols-1 sm:grid-cols-3 gap-4"
-          delay={0.3}
-          staggerDelay={0.1}
-        >
-          {languages.map((lang) => (
-            <StaggerItem key={lang.name}>
-              <div className="group relative overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-800/50 backdrop-blur-sm p-4 hover:border-violet-300 dark:hover:border-violet-800 shadow-sm hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300 text-center">
-                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <p className="font-semibold group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
-                  {lang.name}
-                </p>
-                <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                  {lang.level}
-                </p>
+        {/* Work Experience — Timeline */}
+        <section className="relative">
+          <div className="absolute left-4 top-0 bottom-0 w-px bg-[var(--color-border)]" />
+          <div className="space-y-8">
+            <FadeIn delay={0.2}>
+              <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold flex items-center gap-3 mb-8">
+                <span className="p-2 rounded-xl bg-[var(--color-accent)]/10 text-[var(--color-accent)]">
+                  <HiOutlineBriefcase size={22} />
+                </span>
+                Work Experience
+              </h2>
+            </FadeIn>
+
+            <StaggerContainer className="space-y-8" delay={0.3} staggerDelay={0.15}>
+              {experiences.map((exp) => (
+                <StaggerItem key={exp.period}>
+                  <article className="relative pl-12 group">
+                    <div className="absolute left-2 top-2 w-4 h-4 rounded-full bg-[var(--color-accent)] border-4 border-[var(--color-bg)]" />
+                    <div className="rounded-2xl border-2 border-[var(--color-border)] bg-[var(--color-surface)] p-6 hover:border-[var(--color-accent)]/50 shadow-sm hover:shadow-lg transition-all duration-300">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                        <div>
+                          <h3 className="text-xl font-bold group-hover:text-[var(--color-accent)] transition-colors font-[family-name:var(--font-display)]">
+                            {exp.role}
+                          </h3>
+                          <p className="text-[var(--color-accent)] font-medium mt-0.5">
+                            {exp.company}
+                          </p>
+                        </div>
+                        <div className="text-sm text-[var(--color-text-muted)] sm:text-right mt-1 sm:mt-0">
+                          <p>{exp.period}</p>
+                          <p>{exp.location}</p>
+                        </div>
+                      </div>
+
+                      <ul className="space-y-2 text-[var(--color-text-muted)] mt-4">
+                        {exp.bullets.map((bullet, i) => (
+                          <li key={i} className="flex gap-2">
+                            <span className="text-[var(--color-accent)] mt-1.5 shrink-0">•</span>
+                            <span>{bullet}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </article>
+                </StaggerItem>
+              ))}
+            </StaggerContainer>
+          </div>
+        </section>
+
+        {/* Education */}
+        <section className="space-y-4">
+          <FadeIn delay={0.2}>
+            <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold flex items-center gap-3">
+              <span className="p-2 rounded-xl bg-[var(--color-accent)]/10 text-[var(--color-accent)]">
+                <HiOutlineAcademicCap size={22} />
+              </span>
+              Education
+            </h2>
+          </FadeIn>
+
+          <FadeIn delay={0.3}>
+            <article className="rounded-2xl border-2 border-[var(--color-border)] bg-[var(--color-surface)] p-6 hover:border-[var(--color-accent)]/50 shadow-sm hover:shadow-lg transition-all duration-300">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                <div>
+                  <h3 className="text-xl font-bold font-[family-name:var(--font-display)]">
+                    {education.institution}
+                  </h3>
+                  <p className="text-[var(--color-accent)] font-medium mt-0.5">
+                    {education.degree}
+                  </p>
+                </div>
+                <div className="text-sm text-[var(--color-text-muted)] sm:text-right mt-1 sm:mt-0">
+                  <p>{education.period}</p>
+                  <p>{education.location}</p>
+                </div>
               </div>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
-      </section>
-    </PageTransition>
+            </article>
+          </FadeIn>
+        </section>
+
+        {/* Languages */}
+        <section className="space-y-4">
+          <FadeIn delay={0.2}>
+            <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold flex items-center gap-3">
+              <span className="p-2 rounded-xl bg-[var(--color-accent)]/10 text-[var(--color-accent)]">
+                <HiOutlineGlobeAlt size={22} />
+              </span>
+              Languages
+            </h2>
+          </FadeIn>
+
+          <StaggerContainer
+            className="grid grid-cols-1 sm:grid-cols-3 gap-4"
+            delay={0.3}
+            staggerDelay={0.1}
+          >
+            {languages.map((lang) => (
+              <StaggerItem key={lang.name}>
+                <div className="rounded-2xl border-2 border-[var(--color-border)] bg-[var(--color-surface)] p-5 hover:border-[var(--color-accent)]/50 shadow-sm hover:shadow-lg transition-all duration-300 text-center">
+                  <p className="font-semibold font-[family-name:var(--font-display)]">
+                    {lang.name}
+                  </p>
+                  <p className="text-sm text-[var(--color-text-muted)] mt-1">
+                    {lang.level}
+                  </p>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </section>
+      </PageTransition>
+    </div>
   );
 }

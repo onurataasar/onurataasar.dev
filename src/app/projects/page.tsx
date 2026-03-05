@@ -38,7 +38,7 @@ export default function ProjectsPage() {
             key={project.title}
             variants={{ hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0 } }}
             transition={{ duration: 0.5 }}
-            className={`group relative overflow-hidden rounded-2xl border-2 border-[var(--color-border)] bg-[var(--color-surface)] p-8 hover:border-[var(--color-accent)]/50 hover:shadow-lg hover:shadow-[var(--color-accent)]/5 transition-all duration-300 ${
+            className={`group relative overflow-hidden rounded-2xl border-2 border-[var(--color-border)] bg-[var(--color-surface)] p-8 hover:border-[var(--color-accent)]/50 hover:shadow-lg transition-all duration-300 ${
               index % 2 === 1 ? "lg:mt-12" : ""
             }`}
           >

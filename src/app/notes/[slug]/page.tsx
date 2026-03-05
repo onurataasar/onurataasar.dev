@@ -35,19 +35,21 @@ export default async function NotePage({ params }: Props) {
     const htmlContent = marked.parse(content);
 
     return (
-      <article className="space-y-8">
-        <header className="space-y-4">
-          <h1 className="text-4xl font-bold">{meta.title}</h1>
-          <p className="text-xl text-zinc-600 dark:text-zinc-400">
-            {meta.description}
-          </p>
-          <time className="text-sm text-zinc-500">{meta.date}</time>
-        </header>
-        <div
-          className="prose prose-zinc dark:prose-invert max-w-none"
-          dangerouslySetInnerHTML={{ __html: htmlContent as string }}
-        />
-      </article>
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-16 lg:py-24">
+        <article className="space-y-8">
+          <header className="space-y-4">
+            <h1 className="font-[family-name:var(--font-display)] text-[var(--font-size-h1)] font-bold">{meta.title}</h1>
+            <p className="text-xl text-[var(--color-text-muted)]">
+              {meta.description}
+            </p>
+            <time className="text-sm text-[var(--color-text-muted)]">{meta.date}</time>
+          </header>
+          <div
+            className="prose prose-zinc dark:prose-invert max-w-none"
+            dangerouslySetInnerHTML={{ __html: htmlContent as string }}
+          />
+        </article>
+      </div>
     );
   } catch {
     notFound();

@@ -58,38 +58,39 @@ export default async function MediumBlogPost({ params }: Props) {
     );
 
     return (
-      <article className="max-w-none">
-        <header className="mb-8">
-          <div className="flex flex-col md:flex-row max-md:mb-4 justify-between items-start">
-            <h1 className="text-4xl font-bold mb-4">{mediumPost.title}</h1>
-            <div className="not-prose">
-              <a
-                href={mediumPost.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center px-4 py-2 bg-black text-white rounded-lg hover:bg-zinc-800 transition-colors italic text-sm whitespace-nowrap"
-              >
-                <FaExternalLinkAlt size={16} className="mr-2" />
-                Medium&apos;da oku
-              </a>
-            </div>
-          </div>
-          <div className="flex flex-wrap items-center gap-4">
-            <time className="text-sm text-zinc-600 dark:text-zinc-400">
-              {new Date(mediumPost.pubDate).toLocaleDateString()}
-            </time>
-            <div className="flex flex-wrap gap-2">
-              {mediumPost.categories.map((category) => (
-                <span
-                  key={category}
-                  className="px-2 py-1 text-xs rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400"
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-16 lg:py-24">
+        <article className="max-w-none">
+          <header className="mb-8">
+            <div className="flex flex-col md:flex-row max-md:mb-4 justify-between items-start">
+              <h1 className="font-[family-name:var(--font-display)] text-[var(--font-size-h1)] font-bold mb-4">{mediumPost.title}</h1>
+              <div className="not-prose">
+                <a
+                  href={mediumPost.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-4 py-2 rounded-lg gradient-bg text-white hover:opacity-90 transition-opacity italic text-sm whitespace-nowrap"
                 >
-                  {category}
-                </span>
-              ))}
+                  <FaExternalLinkAlt size={16} className="mr-2" />
+                  Medium&apos;da oku
+                </a>
+              </div>
             </div>
-          </div>
-        </header>
+            <div className="flex flex-wrap items-center gap-4">
+              <time className="text-sm text-[var(--color-text-muted)]">
+                {new Date(mediumPost.pubDate).toLocaleDateString()}
+              </time>
+              <div className="flex flex-wrap gap-2">
+                {mediumPost.categories.map((category) => (
+                  <span
+                    key={category}
+                    className="px-2 py-1 text-xs rounded-full bg-[var(--color-accent)]/10 text-[var(--color-accent)]"
+                  >
+                    {category}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </header>
         {mediumPost.thumbnail && (
           <div className="relative h-[400px] w-full mb-8 rounded-lg overflow-hidden">
             <Image
@@ -112,18 +113,18 @@ export default async function MediumBlogPost({ params }: Props) {
   } catch (error) {
     if (error instanceof Error && error.message.includes("Rate limited")) {
       return (
-        <div className="flex flex-col items-center justify-center min-h-[50vh] text-center">
+        <div className="flex flex-col items-center justify-center min-h-[50vh] text-center max-w-[1400px] mx-auto px-6 py-16">
           <h1 className="text-2xl font-bold mb-4">
             Fuck! We got rate limited by Medium 😤
           </h1>
-          <p className="text-zinc-600 dark:text-zinc-400 mb-8">
+          <p className="text-[var(--color-text-muted)] mb-8">
             Try again in a few minutes or read the post directly on Medium
           </p>
           <a
             href="https://medium.com/@onurataasar"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center px-6 py-3 bg-black text-white rounded-lg hover:bg-zinc-800 transition-colors"
+            className="inline-flex items-center px-6 py-3 rounded-lg gradient-bg text-white hover:opacity-90 transition-opacity"
           >
             <FaExternalLinkAlt size={16} className="mr-2" />
             Go to Medium Profile
