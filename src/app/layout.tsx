@@ -52,7 +52,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${dmSans.variable} ${syne.variable} ${firaCode.variable} font-[family-name:var(--font-body)] min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] relative overflow-x-hidden`}
+        className={`${dmSans.variable} ${syne.variable} ${firaCode.variable} ${dmSans.className} min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] relative overflow-x-hidden`}
       >
         <ThemeProvider>
           <div className="sticky top-0 z-50 bg-[var(--color-bg)]/80 backdrop-blur-md">
