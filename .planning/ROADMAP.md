@@ -8,7 +8,7 @@
 
 | # | Phase | Goal | Requirements | Success Criteria |
 |---|-------|------|--------------|------------------|
-| 1 | 1/2 | In Progress|  | 4 |
+| 1 | 2/2 | Complete   | 2026-03-05 | 4 |
 | 2 | Layout & Navigation | Build full-viewport section structure and redesigned navigation | LAY-01..06 | 4 |
 | 3 | Animations & Scroll | Add smooth scroll, scroll-triggered reveals, grain, magnetic effects | ANIM-01..06 | 5 |
 | 4 | Homepage | Build the flagship page — proves the design end-to-end | HOME-01..05 | 4 |

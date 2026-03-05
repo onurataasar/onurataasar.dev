@@ -25,10 +25,10 @@
 
 ### Dark Mode
 
-- [ ] **DM-01**: User can toggle between light and dark mode manually
-- [ ] **DM-02**: Site respects system preference on first visit
-- [ ] **DM-03**: Theme preference persists across sessions via localStorage
-- [ ] **DM-04**: No flash of wrong theme on page load (FOUC prevented)
+- [x] **DM-01**: User can toggle between light and dark mode manually
+- [x] **DM-02**: Site respects system preference on first visit
+- [x] **DM-03**: Theme preference persists across sessions via localStorage
+- [x] **DM-04**: No flash of wrong theme on page load (FOUC prevented)
 
 ### Animations
 
@@ -126,10 +126,10 @@
 | LAY-04 | Phase 2 | Pending |
 | LAY-05 | Phase 2 | Pending |
 | LAY-06 | Phase 2 | Pending |
-| DM-01 | Phase 1 | Pending |
-| DM-02 | Phase 1 | Pending |
-| DM-03 | Phase 1 | Pending |
-| DM-04 | Phase 1 | Pending |
+| DM-01 | Phase 1 | Complete |
+| DM-02 | Phase 1 | Complete |
+| DM-03 | Phase 1 | Complete |
+| DM-04 | Phase 1 | Complete |
 | ANIM-01 | Phase 3 | Pending |
 | ANIM-02 | Phase 3 | Pending |
 | ANIM-03 | Phase 3 | Pending |
