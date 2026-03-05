@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navigation } from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/next";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -53,17 +54,19 @@ export default function RootLayout({
       <body
         className={`${dmSans.variable} ${syne.variable} ${firaCode.variable} font-[family-name:var(--font-body)] min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] relative overflow-x-hidden`}
       >
-        <div className="sticky top-0 z-50 bg-[var(--color-bg)]/80 backdrop-blur-md">
-          <div className="max-w-4xl mx-auto px-4">
-            <Navigation />
+        <ThemeProvider>
+          <div className="sticky top-0 z-50 bg-[var(--color-bg)]/80 backdrop-blur-md">
+            <div className="max-w-4xl mx-auto px-4">
+              <Navigation />
+            </div>
           </div>
-        </div>
 
-        <div className="max-w-4xl mx-auto px-4 py-2 sm:py-8 h-full min-h-screen flex flex-col relative">
-          {children}
-          <Footer />
-        </div>
-        <Analytics />
+          <div className="max-w-4xl mx-auto px-4 py-2 sm:py-8 h-full min-h-screen flex flex-col relative">
+            {children}
+            <Footer />
+          </div>
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   );
