@@ -25,6 +25,20 @@
   --font-size-body: clamp(1rem, 0.5vw + 0.875rem, 1.125rem);
   --font-size-small: clamp(0.875rem, 0.3vw + 0.75rem, 0.9375rem);
 
+  /* Section backgrounds — Light mode */
+  --color-section-hero: #FFF8F0;
+  --color-section-about: #1A1A2E;
+  --color-section-skills: #FF6B35;
+  --color-section-projects: #FF4444;
+  --color-section-contact: #FFD23F;
+
+  /* Section text colors — Light mode (WCAG AA compliant pairs) */
+  --color-section-hero-text: #1A1A2E;
+  --color-section-about-text: #FFF8F0;
+  --color-section-skills-text: #1A1A2E;
+  --color-section-projects-text: #FFFFFF;
+  --color-section-contact-text: #1A1A2E;
+
   /* Prose tokens */
   --tw-prose-code-bg: #F3ECE4;
   --tw-prose-pre-bg: #F3ECE4;
@@ -40,6 +54,20 @@
   --color-accent-secondary: #FF4444;
   --color-highlight: #FFD23F;
   --color-border: #2A2A4A;
+
+  /* Section backgrounds — Dark mode */
+  --color-section-hero: #1A1A2E;
+  --color-section-about: #0F0F23;
+  --color-section-skills: #CC5528;
+  --color-section-projects: #CC3636;
+  --color-section-contact: #CCA832;
+
+  /* Section text colors — Dark mode */
+  --color-section-hero-text: #F5F5F5;
+  --color-section-about-text: #F5F5F5;
+  --color-section-skills-text: #FFF8F0;
+  --color-section-projects-text: #FFFFFF;
+  --color-section-contact-text: #1A1A2E;
 
   --tw-prose-code-bg: #16213E;
   --tw-prose-pre-bg: #16213E;
