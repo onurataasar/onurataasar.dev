@@ -90,7 +90,7 @@ function SkillCard({
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className="embla__slide min-w-0 flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] pr-4 lg:pr-6 h-full"
+      className="embla__slide min-w-0 flex-[0_0_70%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] pr-4 lg:pr-6 h-full"
     >
       <motion.div
         onMouseMove={handleMouseMove}
@@ -135,7 +135,7 @@ function SkillCard({
           </div>
 
           <div className="p-4 lg:p-5 flex-1 min-h-0 overflow-y-auto">
-            <ul className="flex flex-wrap gap-4">
+            <ul className="flex flex-wrap gap-2 lg:gap-4">
               {category.skills.map((skill) => (
                 <motion.li
                   key={skill}
@@ -145,7 +145,7 @@ function SkillCard({
                     y: -2,
                     transition: { duration: 0.2 },
                   }}
-                  className="px-6 tracking-wider py-3 text-xl font-medium rounded-full bg-current/15 hover:bg-current/25 border border-current/20 hover:border-current/40 transition-colors cursor-default"
+                  className="px-6 tracking-wider py-3 text-sm lg:text-xl font-medium rounded-full bg-current/15 hover:bg-current/25 border border-current/20 hover:border-current/40 transition-colors cursor-default"
                 >
                   {skill}
                 </motion.li>
@@ -178,16 +178,23 @@ export function SkillsSection() {
 
   return (
     <Section id="skills" colorToken="skills" grid>
-      <div className="col-span-12 overflow-visible space-y-24">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+      <div className="col-span-12 overflow-visible lg:space-y-24 max-lg:pb-24">
+        <div className="max-w-[1400px] mx-auto">
           <ScrollReveal className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
             <div>
-              <h2 className="font-[family-name:var(--font-display)] text-[var(--font-size-h2)] font-bold mb-2">
-                Technical <span className="opacity-90">Skills</span>
-              </h2>
-              <p className="text-base lg:text-5xl opacity-90 max-w-2xl">
-                Alanımda kullandığım geliştirme araçları ve teknolojiler.
+              <p className="text-sm font-medium tracking-widest uppercase opacity-60 mb-4">
+                Teknik <span className="opacity-90">Yetenekler</span>
               </p>
+              <h2 className="font-[family-name:var(--font-display)] text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight">
+                Alanımda kullandığım{" "}
+                <span className="text-[var(--color-highlight)]">
+                  geliştirme araçları
+                </span>{" "}
+                ve{" "}
+                <span className="text-[var(--color-highlight)]">
+                  teknolojiler
+                </span>
+              </h2>
             </div>
             <div className="flex items-center gap-2 shrink-0">
               <button
