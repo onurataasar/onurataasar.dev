@@ -64,6 +64,13 @@
 
 **Dependencies:** Phase 1 (needs tokens and fonts).
 
+**Plans:** 3 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — Section system, color tokens, layout restructure (Wave 1)
+- [ ] 02-02-PLAN.md — Navigation redesign with maximalist aesthetic (Wave 1)
+- [ ] 02-03-PLAN.md — Footer variants and homepage section wiring (Wave 2)
+
 ---
 
 ## Phase 3: Animations & Scroll
@@ -192,4 +199,4 @@ All phases are sequential — each builds on the previous.
 
 ---
 *Roadmap created: 2026-03-04*
-*Last updated: 2026-03-04 after initial creation*
+*Last updated: 2026-03-05 after Phase 2 planning*
