@@ -18,7 +18,7 @@ const marked = new Marked(
       }
       return code;
     },
-  })
+  }),
 );
 
 interface Props {
@@ -100,10 +100,11 @@ export default async function LocalBlogPost({ params }: Props) {
 
           {/* Prose content */}
           <div
-            className="prose prose-zinc max-w-none" style={{ maxWidth: "800px" }}
+            className="prose prose-zinc max-w-none"
             style={{
               color: "#0a0a0a",
               fontFamily: "var(--font-inter), sans-serif",
+              maxWidth: "800px",
             }}
             dangerouslySetInnerHTML={{ __html: htmlContent as string }}
           />

@@ -28,7 +28,7 @@ async function getMediumPost(slug: string): Promise<MediumPost> {
           .split("/")
           .pop()
           ?.replace(/[^a-zA-Z0-9-]/g, "-")
-          .toLowerCase() === slug
+          .toLowerCase() === slug,
     );
 
     if (!mediumPost) {
@@ -52,7 +52,7 @@ export default async function MediumBlogPost({ params }: Props) {
 
     const mediumPost = await getMediumPost(slug);
     const sanitizedContent = DOMPurify.sanitize(
-      mediumPost.content || mediumPost.description
+      mediumPost.content || mediumPost.description,
     );
 
     return (
@@ -127,7 +127,14 @@ export default async function MediumBlogPost({ params }: Props) {
             </div>
 
             {/* Date + categories */}
-            <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 12 }}>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                alignItems: "center",
+                gap: 12,
+              }}
+            >
               <time
                 style={{
                   fontFamily: "var(--font-jetbrains-mono), monospace",
@@ -192,10 +199,11 @@ export default async function MediumBlogPost({ params }: Props) {
 
           {/* Prose content */}
           <div
-            className="prose prose-zinc max-w-none" style={{ maxWidth: "800px" }}
+            className="prose prose-zinc max-w-none"
             style={{
               color: "#0a0a0a",
               fontFamily: "var(--font-inter), sans-serif",
+              maxWidth: "800px",
             }}
             dangerouslySetInnerHTML={{ __html: sanitizedContent }}
           />

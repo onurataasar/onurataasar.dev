@@ -146,7 +146,15 @@ const TICKER_ITEMS = [
 function IconPill({ color }: { color: string }) {
   return (
     <svg width="96" height="96" viewBox="0 0 96 96" fill="none">
-      <rect x="12" y="36" width="72" height="24" rx="12" stroke={color} strokeWidth="3" />
+      <rect
+        x="12"
+        y="36"
+        width="72"
+        height="24"
+        rx="12"
+        stroke={color}
+        strokeWidth="3"
+      />
       <line x1="48" y1="36" x2="48" y2="60" stroke={color} strokeWidth="3" />
       <circle cx="30" cy="48" r="4" fill={color} />
       <circle cx="66" cy="48" r="4" fill={color} />
@@ -157,11 +165,32 @@ function IconPill({ color }: { color: string }) {
 function IconCart({ color }: { color: string }) {
   return (
     <svg width="96" height="96" viewBox="0 0 96 96" fill="none">
-      <path d="M12 20h10l14 36h32l10-28H30" stroke={color} strokeWidth="3" strokeLinejoin="round" />
+      <path
+        d="M12 20h10l14 36h32l10-28H30"
+        stroke={color}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
       <circle cx="44" cy="72" r="6" stroke={color} strokeWidth="3" />
       <circle cx="68" cy="72" r="6" stroke={color} strokeWidth="3" />
-      <line x1="44" y1="20" x2="44" y2="56" stroke={color} strokeWidth="2" strokeDasharray="4 4" />
-      <line x1="56" y1="20" x2="56" y2="56" stroke={color} strokeWidth="2" strokeDasharray="4 4" />
+      <line
+        x1="44"
+        y1="20"
+        x2="44"
+        y2="56"
+        stroke={color}
+        strokeWidth="2"
+        strokeDasharray="4 4"
+      />
+      <line
+        x1="56"
+        y1="20"
+        x2="56"
+        y2="56"
+        stroke={color}
+        strokeWidth="2"
+        strokeDasharray="4 4"
+      />
     </svg>
   );
 }
@@ -169,8 +198,18 @@ function IconCart({ color }: { color: string }) {
 function IconCar({ color }: { color: string }) {
   return (
     <svg width="96" height="96" viewBox="0 0 96 96" fill="none">
-      <path d="M8 56L20 36h56l12 20v8H8v-8z" stroke={color} strokeWidth="3" strokeLinejoin="round" />
-      <path d="M28 36l6-14h28l6 14" stroke={color} strokeWidth="3" strokeLinejoin="round" />
+      <path
+        d="M8 56L20 36h56l12 20v8H8v-8z"
+        stroke={color}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M28 36l6-14h28l6 14"
+        stroke={color}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
       <circle cx="28" cy="68" r="8" stroke={color} strokeWidth="3" />
       <circle cx="68" cy="68" r="8" stroke={color} strokeWidth="3" />
     </svg>
@@ -180,8 +219,21 @@ function IconCar({ color }: { color: string }) {
 function IconBulb({ color }: { color: string }) {
   return (
     <svg width="96" height="96" viewBox="0 0 96 96" fill="none">
-      <path d="M48 16C34 16 24 26 24 40c0 10 6 18 14 22v10h20V62c8-4 14-12 14-22 0-14-10-24-24-24z" stroke={color} strokeWidth="3" strokeLinejoin="round" />
-      <rect x="36" y="72" width="24" height="8" rx="2" stroke={color} strokeWidth="3" />
+      <path
+        d="M48 16C34 16 24 26 24 40c0 10 6 18 14 22v10h20V62c8-4 14-12 14-22 0-14-10-24-24-24z"
+        stroke={color}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+      <rect
+        x="36"
+        y="72"
+        width="24"
+        height="8"
+        rx="2"
+        stroke={color}
+        strokeWidth="3"
+      />
       <line x1="42" y1="40" x2="42" y2="56" stroke={color} strokeWidth="2" />
       <line x1="48" y1="36" x2="48" y2="56" stroke={color} strokeWidth="2" />
       <line x1="54" y1="40" x2="54" y2="56" stroke={color} strokeWidth="2" />
@@ -197,7 +249,13 @@ function IconChart({ color }: { color: string }) {
       <rect x="24" y="52" width="14" height="28" fill={color} opacity="0.8" />
       <rect x="42" y="36" width="14" height="44" fill={color} opacity="0.8" />
       <rect x="60" y="20" width="14" height="60" fill={color} opacity="0.8" />
-      <polyline points="24,56 42,40 60,48 76,28" stroke="#f4f3ee" strokeWidth="2" fill="none" strokeLinejoin="round" />
+      <polyline
+        points="24,56 42,40 60,48 76,28"
+        stroke="#f4f3ee"
+        strokeWidth="2"
+        fill="none"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
@@ -205,19 +263,36 @@ function IconChart({ color }: { color: string }) {
 function IconTooth({ color }: { color: string }) {
   return (
     <svg width="96" height="96" viewBox="0 0 96 96" fill="none">
-      <path d="M30 16c-8 0-14 6-14 14 0 6 2 10 4 14l4 32c1 4 4 6 6 6s5-2 6-6l4-16 4 16c1 4 4 6 6 6s5-2 6-6l4-32c2-4 4-8 4-14 0-8-6-14-14-14-4 0-8 2-10 4-2-2-6-4-10-4z" stroke={color} strokeWidth="3" strokeLinejoin="round" />
+      <path
+        d="M30 16c-8 0-14 6-14 14 0 6 2 10 4 14l4 32c1 4 4 6 6 6s5-2 6-6l4-16 4 16c1 4 4 6 6 6s5-2 6-6l4-32c2-4 4-8 4-14 0-8-6-14-14-14-4 0-8 2-10 4-2-2-6-4-10-4z"
+        stroke={color}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
 
-function ProjectIcon({ icon, color }: { icon: Project["icon"]; color: string }) {
+function ProjectIcon({
+  icon,
+  color,
+}: {
+  icon: Project["icon"];
+  color: string;
+}) {
   switch (icon) {
-    case "pill": return <IconPill color={color} />;
-    case "cart": return <IconCart color={color} />;
-    case "car": return <IconCar color={color} />;
-    case "bulb": return <IconBulb color={color} />;
-    case "chart": return <IconChart color={color} />;
-    case "tooth": return <IconTooth color={color} />;
+    case "pill":
+      return <IconPill color={color} />;
+    case "cart":
+      return <IconCart color={color} />;
+    case "car":
+      return <IconCar color={color} />;
+    case "bulb":
+      return <IconBulb color={color} />;
+    case "chart":
+      return <IconChart color={color} />;
+    case "tooth":
+      return <IconTooth color={color} />;
   }
 }
 
@@ -262,7 +337,7 @@ function Ticker({ dark = false }: { dark?: boolean }) {
             }}
           >
             <span style={{ color: "rgba(10,10,10,0.3)", fontSize: "11px" }}>
-              /{String(i % TICKER_ITEMS.length + 1).padStart(3, "0")}
+              /{String((i % TICKER_ITEMS.length) + 1).padStart(3, "0")}
             </span>
             {item}
             <span style={{ color: "#ff5b1f", marginLeft: "2px" }}> ✱</span>
@@ -326,7 +401,13 @@ function ProjectCard({
         }}
       >
         {/* Top row: number + year */}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
           <span
             style={{
               fontFamily: "var(--font-jetbrains-mono), monospace",
@@ -349,7 +430,13 @@ function ProjectCard({
         </div>
 
         {/* Icon */}
-        <div style={{ display: "flex", justifyContent: "center", padding: "16px 0" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            padding: "16px 0",
+          }}
+        >
           <ProjectIcon
             icon={project.icon}
             color={hovered ? "#ff5b1f" : "#0a0a0a"}
@@ -415,7 +502,13 @@ function ProjectCard({
         </p>
 
         {/* Stats row */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "8px" }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr 1fr",
+            gap: "8px",
+          }}
+        >
           {project.stats.map((s) => (
             <div key={s.label} style={{ textAlign: "center" }}>
               <div
@@ -678,18 +771,26 @@ export function BrutalistPage() {
         </div>
 
         {/* Massive hero name */}
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", padding: "40px 0" }}>
+        <div
+          style={{
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            padding: "40px 0",
+          }}
+        >
           {/* Line 1 */}
           <div style={{ display: "flex", alignItems: "flex-end", gap: "24px" }}>
             {/* Vertical writing-mode label */}
             <div
-            className="bm-vertical-label"
-            style={{
-              fontFamily: "var(--font-jetbrains-mono), monospace",
-              fontSize: "11px",
-              color: "rgba(10,10,10,0.4)",
-              letterSpacing: "0.15em",
-              writingMode: "vertical-lr",
+              className="bm-vertical-label"
+              style={{
+                fontFamily: "var(--font-jetbrains-mono), monospace",
+                fontSize: "11px",
+                color: "rgba(10,10,10,0.4)",
+                letterSpacing: "0.15em",
+                writingMode: "vertical-lr",
                 textOrientation: "mixed",
                 transform: "rotate(180deg)",
                 marginBottom: "16px",
@@ -768,7 +869,12 @@ export function BrutalistPage() {
           }}
         >
           {/* Left — summary */}
-          <div style={{ padding: "32px 24px 32px 0", borderRight: "1px solid #0a0a0a" }}>
+          <div
+            style={{
+              padding: "32px 24px 32px 0",
+              borderRight: "1px solid #0a0a0a",
+            }}
+          >
             <div
               style={{
                 fontFamily: "var(--font-jetbrains-mono), monospace",
@@ -842,7 +948,13 @@ export function BrutalistPage() {
             borderTop: "1px solid rgba(10,10,10,0.15)",
           }}
         >
-          <div style={{ flex: 1, height: "1px", background: "rgba(10,10,10,0.15)" }} />
+          <div
+            style={{
+              flex: 1,
+              height: "1px",
+              background: "rgba(10,10,10,0.15)",
+            }}
+          />
           <span
             style={{
               fontFamily: "var(--font-jetbrains-mono), monospace",
@@ -853,7 +965,9 @@ export function BrutalistPage() {
           >
             SCROLL · KAYDIR
           </span>
-          <span style={{ color: "rgba(10,10,10,0.4)", fontSize: "14px" }}>↓</span>
+          <span style={{ color: "rgba(10,10,10,0.4)", fontSize: "14px" }}>
+            ↓
+          </span>
         </div>
       </section>
 
@@ -899,7 +1013,8 @@ export function BrutalistPage() {
           <div style={{ position: "relative" }}>
             <span
               style={{
-                fontFamily: "var(--font-newsreader), 'Newsreader', Georgia, serif",
+                fontFamily:
+                  "var(--font-newsreader), 'Newsreader', Georgia, serif",
                 fontSize: "clamp(48px, 6vw, 96px)",
                 color: "#ff5b1f",
                 lineHeight: 0.8,
@@ -926,7 +1041,8 @@ export function BrutalistPage() {
             </p>
             <span
               style={{
-                fontFamily: "var(--font-newsreader), 'Newsreader', Georgia, serif",
+                fontFamily:
+                  "var(--font-newsreader), 'Newsreader', Georgia, serif",
                 fontSize: "clamp(48px, 6vw, 96px)",
                 color: "#ff5b1f",
                 lineHeight: 0.8,
@@ -1042,7 +1158,13 @@ export function BrutalistPage() {
           }}
         >
           {PROJECTS.map((project, i) => (
-            <div key={project.num} style={{ borderRight: "1px solid #0a0a0a", borderBottom: "1px solid #0a0a0a" }}>
+            <div
+              key={project.num}
+              style={{
+                borderRight: "1px solid #0a0a0a",
+                borderBottom: "1px solid #0a0a0a",
+              }}
+            >
               <ProjectCard
                 project={project}
                 dimmed={hoveredProject !== null && hoveredProject !== i}
@@ -1075,7 +1197,13 @@ export function BrutalistPage() {
         }}
       >
         {/* Header */}
-        <div style={{ marginBottom: "48px", borderBottom: "1px solid rgba(10,10,10,0.1)", paddingBottom: "24px" }}>
+        <div
+          style={{
+            marginBottom: "48px",
+            borderBottom: "1px solid rgba(10,10,10,0.1)",
+            paddingBottom: "24px",
+          }}
+        >
           <span
             style={{
               fontFamily: "var(--font-jetbrains-mono), monospace",
@@ -1108,8 +1236,8 @@ export function BrutalistPage() {
             display: "grid",
             gridTemplateColumns: "repeat(4, 1fr)",
             gap: "1px",
-          background: "#0a0a0a",
-          border: "1px solid #0a0a0a",
+            background: "#0a0a0a",
+            border: "1px solid #0a0a0a",
           }}
         >
           {[
@@ -1212,7 +1340,8 @@ export function BrutalistPage() {
               key={fact.label}
               style={{
                 padding: "48px 24px",
-                borderRight: i < 3 ? "1px solid rgba(244,243,238,0.08)" : "none",
+                borderRight:
+                  i < 3 ? "1px solid rgba(244,243,238,0.08)" : "none",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
@@ -1269,13 +1398,23 @@ export function BrutalistPage() {
             }}
           >
             <div style={{ textAlign: "left", color: "#0a0a0a" }}>BİR</div>
-            <div style={{ textAlign: "center", color: "#ff5b1f" }}>FİKRİN Mİ</div>
+            <div style={{ textAlign: "center", color: "#ff5b1f" }}>
+              FİKRİN Mİ
+            </div>
             <div style={{ textAlign: "right", color: "#0a0a0a" }}>VAR?</div>
           </div>
         </div>
 
         {/* Email pill CTA */}
-        <div style={{ display: "flex", justifyContent: "center", gap: 16, flexWrap: "wrap", marginBottom: "64px" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: 16,
+            flexWrap: "wrap",
+            marginBottom: "64px",
+          }}
+        >
           <a
             href="mailto:onurataasar@gmail.com"
             onMouseEnter={onLinkEnter}
@@ -1335,7 +1474,10 @@ export function BrutalistPage() {
         >
           {[
             { label: "GitHub", href: "https://github.com/onurataasar" },
-            { label: "LinkedIn", href: "https://www.linkedin.com/in/onur-ata-asar/" },
+            {
+              label: "LinkedIn",
+              href: "https://www.linkedin.com/in/onur-ata-asar/",
+            },
             { label: "Medium", href: "https://medium.com/@onurataasar" },
             { label: "CV", href: "/cv" },
           ].map((social, i) => (
@@ -1343,7 +1485,9 @@ export function BrutalistPage() {
               key={social.label}
               href={social.href}
               target={social.href.startsWith("/") ? undefined : "_blank"}
-              rel={social.href.startsWith("/") ? undefined : "noopener noreferrer"}
+              rel={
+                social.href.startsWith("/") ? undefined : "noopener noreferrer"
+              }
               onMouseEnter={onLinkEnter}
               onMouseLeave={onLinkLeave}
               style={{
@@ -1356,15 +1500,21 @@ export function BrutalistPage() {
                 transition: "background 0.15s",
               }}
               onMouseOver={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.background = "#0a0a0a";
-                const spans = (e.currentTarget as HTMLAnchorElement).querySelectorAll("span");
+                (e.currentTarget as HTMLAnchorElement).style.background =
+                  "#0a0a0a";
+                const spans = (
+                  e.currentTarget as HTMLAnchorElement
+                ).querySelectorAll("span");
                 spans.forEach((s) => {
                   (s as HTMLElement).style.color = "#f4f3ee";
                 });
               }}
               onMouseOut={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.background = "transparent";
-                const spans = (e.currentTarget as HTMLAnchorElement).querySelectorAll("span");
+                (e.currentTarget as HTMLAnchorElement).style.background =
+                  "transparent";
+                const spans = (
+                  e.currentTarget as HTMLAnchorElement
+                ).querySelectorAll("span");
                 spans.forEach((s) => {
                   (s as HTMLElement).style.color = "#0a0a0a";
                 });
@@ -1400,24 +1550,37 @@ export function BrutalistPage() {
       {/* ═══════════════════════════════════════════════════════════════════ */}
       <footer style={{ position: "relative", zIndex: 1, overflow: "hidden" }}>
         {/* Giant name — looping marquee */}
-        <div style={{ overflow: "hidden", padding: "40px 0 0", borderTop: "1px solid rgba(10,10,10,0.1)" }}>
-          <div style={{
-            display: "flex",
-            whiteSpace: "nowrap",
-            animation: "footerMarquee 40s linear infinite",
-            width: "max-content",
-          }}>
+        <div
+          style={{
+            overflow: "hidden",
+            padding: "40px 0 0",
+            borderTop: "1px solid rgba(10,10,10,0.1)",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              whiteSpace: "nowrap",
+              animation: "footerMarquee 40s linear infinite",
+              width: "max-content",
+            }}
+          >
             {[...Array(4)].map((_, i) => (
-              <span key={i} style={{
-                fontFamily: "var(--font-inter), sans-serif",
-                fontSize: "clamp(80px, 18vw, 280px)",
-                fontWeight: 900,
-                letterSpacing: "-0.05em",
-                lineHeight: 0.85,
-                color: i % 2 === 0 ? "#0a0a0a" : "transparent",
-                WebkitTextStroke: i % 2 !== 0 ? "2px #0a0a0a" : "none",
-                paddingRight: "0.3em",
-              }}>ONUR ATA ASAR ✱</span>
+              <span
+                key={i}
+                style={{
+                  fontFamily: "var(--font-inter), sans-serif",
+                  fontSize: "clamp(80px, 18vw, 280px)",
+                  fontWeight: 900,
+                  letterSpacing: "-0.05em",
+                  lineHeight: 0.85,
+                  color: i % 2 === 0 ? "#0a0a0a" : "transparent",
+                  WebkitTextStroke: i % 2 !== 0 ? "2px #0a0a0a" : "none",
+                  paddingRight: "0.3em",
+                }}
+              >
+                ONUR ATA ASAR ✱
+              </span>
             ))}
           </div>
         </div>
@@ -1473,7 +1636,7 @@ export function BrutalistPage() {
               letterSpacing: "0.06em",
             }}
           >
-            İSTANBUL / TR / UTC+3
+            ANTALYA / TR / UTC+3
           </span>
         </div>
       </footer>
