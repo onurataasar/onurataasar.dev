@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getContentBySlug } from "@/lib/mdx";
 import { notFound } from "next/navigation";
 import { Marked } from "marked";
@@ -36,20 +37,76 @@ export default async function LocalBlogPost({ params }: Props) {
     const htmlContent = marked.parse(content);
 
     return (
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-16 lg:py-24">
-        <article className="max-w-none">
-          <header className="mb-8">
-            <h1 className="font-[family-name:var(--font-display)] text-[var(--font-size-h1)] font-bold mb-4">{meta.title}</h1>
-            <div className="flex items-center gap-4">
-              <time className="text-sm text-[var(--color-text-muted)]">
+      <div
+        style={{
+          background: "#f4f3ee",
+          minHeight: "100vh",
+          padding: "64px 32px",
+        }}
+      >
+        {/* Back link */}
+        <div style={{ marginBottom: 48 }}>
+          <Link
+            href="/blog"
+            style={{
+              fontFamily: "var(--font-jetbrains-mono), monospace",
+              fontSize: 12,
+              letterSpacing: "0.08em",
+              color: "#ff5b1f",
+              textDecoration: "none",
+            }}
+          >
+            ← BLOG
+          </Link>
+        </div>
+
+        <article style={{ maxWidth: "none" }}>
+          {/* Article header */}
+          <header style={{ marginBottom: 48 }}>
+            <h1
+              style={{
+                fontFamily: "var(--font-inter), sans-serif",
+                fontSize: "clamp(32px, 5vw, 64px)",
+                fontWeight: 900,
+                letterSpacing: "-0.03em",
+                color: "#0a0a0a",
+                margin: "0 0 20px 0",
+                lineHeight: 1.05,
+              }}
+            >
+              {meta.title}
+            </h1>
+
+            <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+              <time
+                style={{
+                  fontFamily: "var(--font-jetbrains-mono), monospace",
+                  fontSize: 12,
+                  letterSpacing: "0.06em",
+                  color: "rgba(10,10,10,0.45)",
+                }}
+              >
                 {meta.date}
               </time>
             </div>
+
+            <div
+              style={{
+                borderBottom: "1px solid rgba(10,10,10,0.15)",
+                marginTop: 24,
+              }}
+            />
           </header>
-        <div
-          className="prose prose-zinc dark:prose-invert max-w-none"
-          dangerouslySetInnerHTML={{ __html: htmlContent as string }}
-        />
+
+          {/* Prose content */}
+          <div
+            className="prose prose-zinc max-w-none" style={{ maxWidth: "800px" }}
+            style={{
+              color: "#0a0a0a",
+              fontFamily: "var(--font-inter), sans-serif",
+            }}
+            dangerouslySetInnerHTML={{ __html: htmlContent as string }}
+          />
         </article>
       </div>
     );

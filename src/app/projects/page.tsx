@@ -1,87 +1,179 @@
-"use client";
-
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { HiOutlineCode, HiOutlineArrowLeft } from "react-icons/hi";
 import { projects } from "@/lib/projects";
-import { ScrollReveal, ScrollStagger } from "@/components/motion";
 
 export default function ProjectsPage() {
   return (
-    <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-16 lg:py-24">
-      <ScrollReveal>
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors mb-8"
+    <div
+      style={{
+        background: "#f4f3ee",
+        minHeight: "100vh",
+        padding: "64px 32px",
+      }}
+    >
+      {/* Section header */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "baseline",
+          gap: 16,
+          borderBottom: "1px solid #0a0a0a",
+          paddingBottom: 16,
+          marginBottom: 48,
+        }}
+      >
+        <span
+          style={{
+            fontFamily: "var(--font-jetbrains-mono), monospace",
+            fontSize: 11,
+            letterSpacing: "0.1em",
+            color: "#ff5b1f",
+          }}
         >
-          <HiOutlineArrowLeft className="w-4 h-4" />
-          Ana sayfa
-        </Link>
-      </ScrollReveal>
-
-      <ScrollReveal delay={0.1}>
-        <h1 className="font-[family-name:var(--font-display)] text-[var(--font-size-h1)] font-bold">
-          <span className="gradient-text">Projects</span>
+          04 / PROJELER
+        </span>
+        <h1
+          style={{
+            fontFamily: "var(--font-inter), sans-serif",
+            fontSize: "clamp(40px, 6vw, 80px)",
+            fontWeight: 900,
+            letterSpacing: "-0.03em",
+            margin: 0,
+            color: "#0a0a0a",
+          }}
+        >
+          ÇALIŞMALAR .
         </h1>
-      </ScrollReveal>
+      </div>
 
-      <ScrollReveal delay={0.2}>
-        <p className="text-[var(--color-text-muted)] max-w-2xl mt-4 text-lg">
-          Production applications I&apos;ve built and contributed to as a
-          frontend developer.
-        </p>
-      </ScrollReveal>
-
-      <ScrollStagger className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-16" staggerDelay={0.12}>
+      {/* 2-column project grid */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(480px, 1fr))",
+          gap: "1px",
+          background: "#0a0a0a",
+          border: "1px solid #0a0a0a",
+        }}
+      >
         {projects.map((project, index) => (
-          <motion.article
+          <article
             key={project.title}
-            variants={{ hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0 } }}
-            transition={{ duration: 0.5 }}
-            className={`group relative overflow-hidden rounded-2xl border-2 border-[var(--color-border)] bg-[var(--color-surface)] p-8 hover:border-[var(--color-accent)]/50 hover:shadow-lg transition-all duration-300 ${
-              index % 2 === 1 ? "lg:mt-12" : ""
-            }`}
+            style={{
+              background: "#f4f3ee",
+              padding: "36px",
+              display: "flex",
+              flexDirection: "column",
+              gap: 20,
+              position: "relative",
+            }}
           >
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            {/* Number */}
+            <span
+              style={{
+                fontFamily: "var(--font-jetbrains-mono), monospace",
+                fontSize: 12,
+                color: "#ff5b1f",
+                letterSpacing: "0.08em",
+              }}
+            >
+              {String(index + 1).padStart(2, "0")}
+            </span>
 
-            <div className="flex items-start gap-4">
-              <div className="p-3 rounded-xl bg-[var(--color-accent)]/10 text-[var(--color-accent)] shrink-0">
-                <HiOutlineCode size={24} />
-              </div>
-              <div className="space-y-4 flex-1 min-w-0">
-                <div>
-                  <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold group-hover:text-[var(--color-accent)] transition-colors">
-                    {project.title}
-                  </h2>
-                  <p className="text-[var(--color-text-muted)] mt-1">
-                    {project.subtitle} — {project.description}
-                  </p>
-                </div>
+            {/* Project name */}
+            <h2
+              style={{
+                fontFamily: "var(--font-inter), sans-serif",
+                fontSize: 28,
+                fontWeight: 700,
+                color: "#0a0a0a",
+                margin: 0,
+                letterSpacing: "-0.02em",
+                lineHeight: 1.1,
+              }}
+            >
+              {project.title}
+            </h2>
 
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map((t) => (
-                    <span
-                      key={t}
-                      className="px-3 py-1 text-sm font-medium rounded-lg bg-[var(--color-accent)]/10 text-[var(--color-accent)] border border-[var(--color-accent)]/20"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-
-                <ul className="space-y-2 text-[var(--color-text-muted)]">
-                  {project.bullets.map((bullet, i) => (
-                    <li key={i} className="flex gap-2">
-                      <span className="text-[var(--color-accent)] mt-1.5 shrink-0">•</span>
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            {/* Subtitle + description */}
+            <div>
+              <p
+                style={{
+                  fontFamily: "var(--font-inter), sans-serif",
+                  fontSize: 14,
+                  fontWeight: 600,
+                  color: "#0a0a0a",
+                  margin: "0 0 4px 0",
+                }}
+              >
+                {project.subtitle}
+              </p>
+              <p
+                style={{
+                  fontFamily: "var(--font-inter), sans-serif",
+                  fontSize: 13,
+                  color: "rgba(10,10,10,0.5)",
+                  margin: 0,
+                  letterSpacing: "0.02em",
+                }}
+              >
+                {project.description}
+              </p>
             </div>
-          </motion.article>
+
+            {/* Tech stack tags */}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+              {project.tech.map((t) => (
+                <span
+                  key={t}
+                  style={{
+                    fontFamily: "var(--font-jetbrains-mono), monospace",
+                    fontSize: 11,
+                    letterSpacing: "0.04em",
+                    color: "#0a0a0a",
+                    border: "1px solid #0a0a0a",
+                    padding: "4px 10px",
+                  }}
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+
+            {/* Bullets */}
+            <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 8 }}>
+              {project.bullets.map((bullet, i) => (
+                <li
+                  key={i}
+                  style={{
+                    display: "flex",
+                    gap: 10,
+                    fontFamily: "var(--font-inter), sans-serif",
+                    fontSize: 13,
+                    color: "rgba(10,10,10,0.65)",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  <span style={{ color: "#ff5b1f", flexShrink: 0 }}>—</span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+
+            {/* CTA */}
+            <div style={{ marginTop: "auto", paddingTop: 8 }}>
+              <span
+                style={{
+                  fontFamily: "var(--font-jetbrains-mono), monospace",
+                  fontSize: 11,
+                  letterSpacing: "0.08em",
+                  color: "#ff5b1f",
+                }}
+              >
+                DETAYLAR ↗
+              </span>
+            </div>
+          </article>
         ))}
-      </ScrollStagger>
+      </div>
     </div>
   );
 }

@@ -217,3 +217,18 @@
     background: linear-gradient(135deg, var(--color-accent), var(--color-highlight));
   }
 }
+
+/* Brutalist design tokens */
+:root {
+  --bm-cream: #f4f3ee;
+  --bm-ink: #0a0a0a;
+  --bm-accent: #ff5b1f;
+  --font-mono: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
+  --font-serif: var(--font-newsreader), 'Newsreader', Georgia, serif;
+}
+
+/* Ticker marquee animation */
+@keyframes sbTicker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-33.333%); }
+}

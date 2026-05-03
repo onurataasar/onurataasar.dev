@@ -1,16 +1,3 @@
-import {
-  FadeIn,
-  PageTransition,
-  StaggerContainer,
-  StaggerItem,
-} from "@/components/motion";
-import { MagneticButton } from "@/components/MagneticButton";
-import {
-  HiOutlineBriefcase,
-  HiOutlineAcademicCap,
-  HiOutlineGlobeAlt,
-  HiOutlineDownload,
-} from "react-icons/hi";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -57,156 +44,393 @@ const education = {
   location: "Antalya, Turkey",
 };
 
+const skills = [
+  "React",
+  "Next.js",
+  "TypeScript",
+  "JavaScript",
+  "Node.js",
+  "Redux",
+  "Tailwind CSS",
+  "REST API",
+  "GraphQL",
+  "Playwright",
+  "Jest",
+  "Azure DevOps",
+  "Git",
+  "Figma",
+];
+
 const languages = [
+  { name: "Turkish", level: "Native" },
   { name: "English", level: "B2 – Upper Intermediate" },
   { name: "German", level: "A1 – Beginner" },
-  { name: "Turkish", level: "Native" },
 ];
 
 export default function CVPage() {
   return (
-    <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-16 lg:py-24">
-      <PageTransition className="space-y-12">
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-          <FadeIn>
-            <div>
-              <h1 className="font-[family-name:var(--font-display)] text-[var(--font-size-h1)] font-bold">
-                <span className="gradient-text">CV</span>
-              </h1>
-              <p className="text-lg text-[var(--color-text-muted)] mt-1">
-                Frontend Web Developer — Computer Science Engineer
-              </p>
-            </div>
-          </FadeIn>
+    <div
+      style={{
+        background: "#f4f3ee",
+        minHeight: "100vh",
+        padding: "64px 32px",
+      }}
+    >
+      <style>{`
+        .cv-dl-btn:hover { background: #ff5b1f !important; border-color: #ff5b1f !important; }
+      `}</style>
+      {/* Section header */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "baseline",
+          gap: 16,
+          borderBottom: "1px solid #0a0a0a",
+          paddingBottom: 16,
+          marginBottom: 48,
+        }}
+      >
+        <span
+          style={{
+            fontFamily: "var(--font-jetbrains-mono), monospace",
+            fontSize: 11,
+            letterSpacing: "0.1em",
+            color: "#ff5b1f",
+          }}
+        >
+          03 / CV
+        </span>
+        <h1
+          style={{
+            fontFamily: "var(--font-inter), sans-serif",
+            fontSize: "clamp(40px, 6vw, 80px)",
+            fontWeight: 900,
+            letterSpacing: "-0.03em",
+            margin: 0,
+            color: "#0a0a0a",
+          }}
+        >
+          ÖZGEÇMİŞ .
+        </h1>
+      </div>
 
-          <FadeIn delay={0.1}>
-            <MagneticButton
-              as="a"
-              href="/Onur-Ata-Asar-CV.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-xl gradient-bg text-white hover:opacity-90 transition-opacity shrink-0"
-              strength={0.25}
-            >
-              <HiOutlineDownload size={18} />
-              Download PDF
-            </MagneticButton>
-          </FadeIn>
+      {/* Download button */}
+      <div style={{ marginBottom: 64 }}>
+        <a
+          href="/Onur-Ata-Asar-CV.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 8,
+            fontFamily: "var(--font-jetbrains-mono), monospace",
+            fontSize: 12,
+            letterSpacing: "0.08em",
+            color: "#f4f3ee",
+            background: "#0a0a0a",
+            border: "1px solid #0a0a0a",
+            padding: "10px 20px",
+            textDecoration: "none",
+            transition: "background 0.15s, color 0.15s",
+          }}
+          className="cv-dl-btn"
+        >
+          CV İNDİR ↓
+        </a>
+      </div>
+
+      {/* Experience section */}
+      <section style={{ marginBottom: 64 }}>
+        <div
+          style={{
+            borderTop: "1px solid #0a0a0a",
+            paddingTop: 24,
+            marginBottom: 32,
+          }}
+        >
+          <span
+            style={{
+              fontFamily: "var(--font-jetbrains-mono), monospace",
+              fontSize: 11,
+              letterSpacing: "0.1em",
+              color: "#ff5b1f",
+            }}
+          >
+            DENEYIM
+          </span>
         </div>
 
-        {/* Work Experience — Timeline */}
-        <section className="relative">
-          <div className="absolute left-4 top-0 bottom-0 w-px bg-[var(--color-border)]" />
-          <div className="space-y-8">
-            <FadeIn delay={0.2}>
-              <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold flex items-center gap-3 mb-8">
-                <span className="p-2 rounded-xl bg-[var(--color-accent)]/10 text-[var(--color-accent)]">
-                  <HiOutlineBriefcase size={22} />
+        <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
+          {experiences.map((exp) => (
+            <div
+              key={exp.period}
+              style={{
+                display: "grid",
+                gridTemplateColumns: "180px 1fr 180px",
+                gap: "0 32px",
+                padding: "32px 0",
+                borderBottom: "1px solid rgba(10,10,10,0.15)",
+              }}
+            >
+              {/* Period */}
+              <div>
+                <span
+                  style={{
+                    fontFamily: "var(--font-jetbrains-mono), monospace",
+                    fontSize: 12,
+                    color: "rgba(10,10,10,0.5)",
+                    letterSpacing: "0.04em",
+                    display: "block",
+                    paddingTop: 4,
+                  }}
+                >
+                  {exp.period}
                 </span>
-                Work Experience
-              </h2>
-            </FadeIn>
-
-            <StaggerContainer className="space-y-8" delay={0.3} staggerDelay={0.15}>
-              {experiences.map((exp) => (
-                <StaggerItem key={exp.period}>
-                  <article className="relative pl-12 group">
-                    <div className="absolute left-2 top-2 w-4 h-4 rounded-full bg-[var(--color-accent)] border-4 border-[var(--color-bg)]" />
-                    <div className="rounded-2xl border-2 border-[var(--color-border)] bg-[var(--color-surface)] p-6 hover:border-[var(--color-accent)]/50 shadow-sm hover:shadow-lg transition-all duration-300">
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
-                        <div>
-                          <h3 className="text-xl font-bold group-hover:text-[var(--color-accent)] transition-colors font-[family-name:var(--font-display)]">
-                            {exp.role}
-                          </h3>
-                          <p className="text-[var(--color-accent)] font-medium mt-0.5">
-                            {exp.company}
-                          </p>
-                        </div>
-                        <div className="text-sm text-[var(--color-text-muted)] sm:text-right mt-1 sm:mt-0">
-                          <p>{exp.period}</p>
-                          <p>{exp.location}</p>
-                        </div>
-                      </div>
-
-                      <ul className="space-y-2 text-[var(--color-text-muted)] mt-4">
-                        {exp.bullets.map((bullet, i) => (
-                          <li key={i} className="flex gap-2">
-                            <span className="text-[var(--color-accent)] mt-1.5 shrink-0">•</span>
-                            <span>{bullet}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </article>
-                </StaggerItem>
-              ))}
-            </StaggerContainer>
-          </div>
-        </section>
-
-        {/* Education */}
-        <section className="space-y-4">
-          <FadeIn delay={0.2}>
-            <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold flex items-center gap-3">
-              <span className="p-2 rounded-xl bg-[var(--color-accent)]/10 text-[var(--color-accent)]">
-                <HiOutlineAcademicCap size={22} />
-              </span>
-              Education
-            </h2>
-          </FadeIn>
-
-          <FadeIn delay={0.3}>
-            <article className="rounded-2xl border-2 border-[var(--color-border)] bg-[var(--color-surface)] p-6 hover:border-[var(--color-accent)]/50 shadow-sm hover:shadow-lg transition-all duration-300">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
-                <div>
-                  <h3 className="text-xl font-bold font-[family-name:var(--font-display)]">
-                    {education.institution}
-                  </h3>
-                  <p className="text-[var(--color-accent)] font-medium mt-0.5">
-                    {education.degree}
-                  </p>
-                </div>
-                <div className="text-sm text-[var(--color-text-muted)] sm:text-right mt-1 sm:mt-0">
-                  <p>{education.period}</p>
-                  <p>{education.location}</p>
-                </div>
               </div>
-            </article>
-          </FadeIn>
-        </section>
 
-        {/* Languages */}
-        <section className="space-y-4">
-          <FadeIn delay={0.2}>
-            <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold flex items-center gap-3">
-              <span className="p-2 rounded-xl bg-[var(--color-accent)]/10 text-[var(--color-accent)]">
-                <HiOutlineGlobeAlt size={22} />
-              </span>
-              Languages
-            </h2>
-          </FadeIn>
+              {/* Role + bullets */}
+              <div>
+                <h3
+                  style={{
+                    fontFamily: "var(--font-inter), sans-serif",
+                    fontSize: 20,
+                    fontWeight: 700,
+                    color: "#0a0a0a",
+                    margin: "0 0 16px 0",
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  {exp.role}
+                </h3>
+                <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 8 }}>
+                  {exp.bullets.map((bullet, i) => (
+                    <li
+                      key={i}
+                      style={{
+                        display: "flex",
+                        gap: 10,
+                        fontFamily: "var(--font-inter), sans-serif",
+                        fontSize: 14,
+                        color: "rgba(10,10,10,0.65)",
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      <span style={{ color: "#ff5b1f", flexShrink: 0 }}>—</span>
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-          <StaggerContainer
-            className="grid grid-cols-1 sm:grid-cols-3 gap-4"
-            delay={0.3}
-            staggerDelay={0.1}
+              {/* Company + location */}
+              <div style={{ textAlign: "right" }}>
+                <span
+                  style={{
+                    fontFamily: "var(--font-inter), sans-serif",
+                    fontSize: 14,
+                    fontWeight: 700,
+                    color: "#0a0a0a",
+                    display: "block",
+                    marginBottom: 4,
+                  }}
+                >
+                  {exp.company}
+                </span>
+                <span
+                  style={{
+                    fontFamily: "var(--font-jetbrains-mono), monospace",
+                    fontSize: 11,
+                    color: "rgba(10,10,10,0.45)",
+                    letterSpacing: "0.04em",
+                  }}
+                >
+                  {exp.location}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Education section */}
+      <section style={{ marginBottom: 64 }}>
+        <div
+          style={{
+            borderTop: "1px solid #0a0a0a",
+            paddingTop: 24,
+            marginBottom: 32,
+          }}
+        >
+          <span
+            style={{
+              fontFamily: "var(--font-jetbrains-mono), monospace",
+              fontSize: 11,
+              letterSpacing: "0.1em",
+              color: "#ff5b1f",
+            }}
           >
-            {languages.map((lang) => (
-              <StaggerItem key={lang.name}>
-                <div className="rounded-2xl border-2 border-[var(--color-border)] bg-[var(--color-surface)] p-5 hover:border-[var(--color-accent)]/50 shadow-sm hover:shadow-lg transition-all duration-300 text-center">
-                  <p className="font-semibold font-[family-name:var(--font-display)]">
-                    {lang.name}
-                  </p>
-                  <p className="text-sm text-[var(--color-text-muted)] mt-1">
-                    {lang.level}
-                  </p>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </section>
-      </PageTransition>
+            EĞİTİM
+          </span>
+        </div>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "180px 1fr",
+            gap: "0 32px",
+            padding: "32px 0",
+            borderBottom: "1px solid rgba(10,10,10,0.15)",
+          }}
+        >
+          {/* Period */}
+          <span
+            style={{
+              fontFamily: "var(--font-jetbrains-mono), monospace",
+              fontSize: 12,
+              color: "rgba(10,10,10,0.5)",
+              letterSpacing: "0.04em",
+              paddingTop: 4,
+            }}
+          >
+            {education.period}
+          </span>
+
+          {/* Institution + degree + location */}
+          <div>
+            <h3
+              style={{
+                fontFamily: "var(--font-inter), sans-serif",
+                fontSize: 20,
+                fontWeight: 700,
+                color: "#0a0a0a",
+                margin: "0 0 4px 0",
+                letterSpacing: "-0.01em",
+              }}
+            >
+              {education.institution}
+            </h3>
+            <p
+              style={{
+                fontFamily: "var(--font-inter), sans-serif",
+                fontSize: 14,
+                color: "rgba(10,10,10,0.65)",
+                margin: "0 0 4px 0",
+              }}
+            >
+              {education.degree}
+            </p>
+            <span
+              style={{
+                fontFamily: "var(--font-jetbrains-mono), monospace",
+                fontSize: 11,
+                color: "rgba(10,10,10,0.45)",
+                letterSpacing: "0.04em",
+              }}
+            >
+              {education.location}
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* Skills section */}
+      <section style={{ marginBottom: 64 }}>
+        <div
+          style={{
+            borderTop: "1px solid #0a0a0a",
+            paddingTop: 24,
+            marginBottom: 32,
+          }}
+        >
+          <span
+            style={{
+              fontFamily: "var(--font-jetbrains-mono), monospace",
+              fontSize: 11,
+              letterSpacing: "0.1em",
+              color: "#ff5b1f",
+            }}
+          >
+            TEKNİK BECERİLER
+          </span>
+        </div>
+
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+          {skills.map((skill) => (
+            <span
+              key={skill}
+              style={{
+                fontFamily: "var(--font-jetbrains-mono), monospace",
+                fontSize: 12,
+                letterSpacing: "0.04em",
+                color: "#0a0a0a",
+                border: "1px solid #0a0a0a",
+                padding: "6px 14px",
+              }}
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      {/* Languages section */}
+      <section>
+        <div
+          style={{
+            borderTop: "1px solid #0a0a0a",
+            paddingTop: 24,
+            marginBottom: 32,
+          }}
+        >
+          <span
+            style={{
+              fontFamily: "var(--font-jetbrains-mono), monospace",
+              fontSize: 11,
+              letterSpacing: "0.1em",
+              color: "#ff5b1f",
+            }}
+          >
+            DİLLER
+          </span>
+        </div>
+
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 0, border: "1px solid #0a0a0a" }}>
+          {languages.map((lang, index) => (
+            <div
+              key={lang.name}
+              style={{
+                padding: "20px 32px",
+                borderRight: index < languages.length - 1 ? "1px solid #0a0a0a" : "none",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "var(--font-inter), sans-serif",
+                  fontSize: 16,
+                  fontWeight: 700,
+                  color: "#0a0a0a",
+                  margin: "0 0 4px 0",
+                  letterSpacing: "-0.01em",
+                }}
+              >
+                {lang.name}
+              </p>
+              <p
+                style={{
+                  fontFamily: "var(--font-jetbrains-mono), monospace",
+                  fontSize: 11,
+                  color: "rgba(10,10,10,0.5)",
+                  margin: 0,
+                  letterSpacing: "0.04em",
+                }}
+              >
+                {lang.level}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

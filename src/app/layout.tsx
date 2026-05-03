@@ -1,33 +1,31 @@
 import type { Metadata } from "next";
-import { Syne, DM_Sans, Fira_Code } from "next/font/google";
+import { Inter, JetBrains_Mono, Newsreader } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/Navigation";
-import CompactFooter from "@/components/CompactFooter";
+import { FooterConditional } from "@/components/FooterConditional";
 import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { SmoothScroll } from "@/components/SmoothScroll";
-import { GrainOverlay } from "@/components/GrainOverlay";
-import { InitialLoader } from "@/components/InitialLoader";
 
-const syne = Syne({
+const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-display",
+  variable: "--font-inter",
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
-const dmSans = DM_Sans({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "700"],
-  variable: "--font-body",
+  variable: "--font-jetbrains-mono",
+  weight: ["400", "500", "600"],
 });
 
-const firaCode = Fira_Code({
+const newsreader = Newsreader({
   subsets: ["latin"],
   display: "swap",
+  variable: "--font-newsreader",
+  style: ["normal", "italic"],
   weight: ["400", "500"],
-  variable: "--font-code",
 });
 
 export const metadata: Metadata = {
@@ -53,22 +51,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="tr" suppressHydrationWarning>
       <body
-        className={`${dmSans.variable} ${syne.variable} ${firaCode.variable} ${dmSans.className} min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] relative overflow-x-hidden initial-load`}
+        className={`${inter.variable} ${jetbrainsMono.variable} ${newsreader.variable} min-h-screen relative overflow-x-hidden`}
+        style={{ fontFamily: "var(--font-inter), sans-serif" }}
       >
-        <GrainOverlay />
         <ThemeProvider>
-          <InitialLoader />
-          <div id="app-content">
-          <SmoothScroll>
-            <Navigation />
-            <main className="flex-1">
-              {children}
-            </main>
-            <CompactFooter />
-          </SmoothScroll>
-          </div>
+          <Navigation />
+          <main className="flex-1">
+            {children}
+          </main>
+          <FooterConditional />
           <Analytics />
         </ThemeProvider>
       </body>

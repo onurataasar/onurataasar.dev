@@ -3,53 +3,49 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
-import { FaGithub, FaLinkedin, FaMedium } from "react-icons/fa";
-import { HiOutlineMail } from "react-icons/hi";
-import { ThemeToggle } from "@/components/ThemeToggle";
 
-const routes = [
-  { href: "/blog", label: "Blog" },
-  { href: "/notes", label: "Dev Notes" },
-  { href: "/projects", label: "Projeler" },
-  { href: "/cv", label: "CV" },
+const navLinks = [
+  { href: "/blog", label: "Blog", num: "01" },
+  { href: "/projects", label: "Çalışmalar", num: "02" },
+  { href: "/notes", label: "Notlar", num: "03" },
+  { href: "/cv", label: "CV", num: "04" },
+  { href: "/iletisim", label: "İletişim", num: "05" },
 ];
 
-const socials = [
-  { href: "https://github.com/onurataasar", icon: FaGithub, label: "GitHub" },
-  {
-    href: "https://www.linkedin.com/in/onur-ata-asar/",
-    icon: FaLinkedin,
-    label: "LinkedIn",
-  },
-  {
-    href: "https://medium.com/@onurataasar",
-    icon: FaMedium,
-    label: "Medium",
-  },
-  {
-    href: "mailto:onurataasar@gmail.com",
-    icon: HiOutlineMail,
-    label: "Email",
-  },
-];
+/** Format current Antalya local time as HH:MM:SS */
+function useAntalyaTime(): string {
+  const [time, setTime] = useState<string>("");
+
+  useEffect(() => {
+    const fmt = new Intl.DateTimeFormat("tr-TR", {
+      timeZone: "Europe/Istanbul",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+    });
+
+    const tick = () => setTime(fmt.format(new Date()));
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  return time;
+}
 
 export function Navigation() {
   const pathname = usePathname();
+  const time = useAntalyaTime();
   const [isOpen, setIsOpen] = useState(false);
-
   // Close menu on route change
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
 
-  // Lock body scroll when overlay is open
+  // Lock body scroll when mobile overlay is open
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = isOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
@@ -57,189 +53,265 @@ export function Navigation() {
 
   return (
     <>
-      <nav
-        className="sticky top-0 w-full z-50 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]/50"
-        style={{ transition: "background-color 0.3s ease" }}
+      <header
+        style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 100,
+          background: "#f4f3ee",
+          borderBottom: "1px solid #0a0a0a",
+        }}
       >
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center justify-between py-4 lg:py-5">
-            {/* Left side - Name */}
-            <Link href="/" className="group">
-              <span className="font-[family-name:var(--font-display)] text-2xl lg:text-3xl font-bold tracking-tight text-[var(--color-text)] group-hover:gradient-text transition-all duration-300">
-                ONUR ATA ASAR
-              </span>
-            </Link>
-
-            {/* Right side - Links + Toggle */}
-            <div className="flex items-center">
-              <ul className="flex items-center gap-1 lg:gap-2">
-                {routes.map((route) => {
-                  const isActive =
-                    pathname === route.href ||
-                    pathname.startsWith(route.href + "/");
-                  return (
-                    <li key={route.href}>
-                      <Link
-                        href={route.href}
-                        className={`relative px-3 py-2 font-[family-name:var(--font-display)] text-lg lg:text-xl font-semibold tracking-tight transition-colors duration-200 ${
-                          isActive
-                            ? "text-[var(--color-accent)]"
-                            : "text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
-                        }`}
-                      >
-                        {route.label}
-                        {isActive && (
-                          <motion.div
-                            layoutId="nav-indicator"
-                            className="absolute bottom-0 left-3 right-3 h-[3px] bg-[var(--color-accent)] rounded-full"
-                            transition={{
-                              type: "spring",
-                              stiffness: 350,
-                              damping: 30,
-                            }}
-                          />
-                        )}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-              <div className="border-l border-[var(--color-border)] h-6 mx-2" />
-              <ThemeToggle />
-            </div>
-          </div>
-
-          {/* Mobile Header */}
-          <div className="flex md:hidden items-center justify-between py-3">
-            {/* Left - Name */}
-            <Link href="/" className="group">
-              <span className="font-[family-name:var(--font-display)] text-xl font-bold tracking-tight text-[var(--color-text)] group-hover:gradient-text transition-all duration-300">
-                ONUR ATA ASAR
-              </span>
-            </Link>
-
-            {/* Right - Toggle + Hamburger */}
-            <div className="flex items-center gap-2">
-              <ThemeToggle />
-              <button
-                className="relative w-8 h-8 flex items-center justify-center"
-                onClick={() => setIsOpen(!isOpen)}
-                aria-label={isOpen ? "Close menu" : "Open menu"}
-                aria-expanded={isOpen}
-              >
-                <span className="sr-only">
-                  {isOpen ? "Close menu" : "Open menu"}
-                </span>
-                <div className="w-5 h-4 relative flex flex-col justify-between">
-                  <motion.span
-                    className="block h-0.5 w-5 bg-[var(--color-text)] rounded-full origin-center"
-                    animate={
-                      isOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }
-                    }
-                    transition={{ duration: 0.2 }}
-                  />
-                  <motion.span
-                    className="block h-0.5 w-5 bg-[var(--color-text)] rounded-full"
-                    animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-                    transition={{ duration: 0.15 }}
-                  />
-                  <motion.span
-                    className="block h-0.5 w-5 bg-[var(--color-text)] rounded-full origin-center"
-                    animate={
-                      isOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }
-                    }
-                    transition={{ duration: 0.2 }}
-                  />
-                </div>
-              </button>
-            </div>
-          </div>
+        {/* Top info bar */}
+        <div
+          style={{
+            background: "#0a0a0a",
+            color: "#f4f3ee",
+            fontFamily: "var(--font-jetbrains-mono), 'JetBrains Mono', monospace",
+            fontSize: "10px",
+            letterSpacing: "0.08em",
+            padding: "6px 24px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: "8px",
+          }}
+        >
+          <span>ASAR/PORTFOLIO/MMXXVI</span>
+          <span style={{ opacity: 0.5 }}>v.04 — REDESIGN — RC.1</span>
+          <span className="hidden md:block">ANTALYA · 36.8969°N · 30.7133°E</span>
+          <span>
+            <span style={{ color: "#ff5b1f" }}>● </span>
+            MÜSAİT · UTC+3 · {time}
+          </span>
         </div>
-      </nav>
 
-      {/* Full-screen mobile overlay */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            className="fixed inset-0 z-[60] bg-[var(--color-accent)] flex flex-col items-center justify-center md:hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            {/* Close button */}
-            <button
-              className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center"
-              onClick={() => setIsOpen(false)}
-              aria-label="Close menu"
-            >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#FFF8F0"
-                strokeWidth="2.5"
-                strokeLinecap="round"
+        {/* Main nav bar */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "0 24px",
+            height: "64px",
+          }}
+        >
+          {/* Logo mark */}
+          <Link href="/" style={{ textDecoration: "none" }}>
+            <div style={{ display: "flex", flexDirection: "column", lineHeight: 1 }}>
+              <span
+                style={{
+                  fontFamily: "var(--font-inter), sans-serif",
+                  fontSize: "22px",
+                  fontWeight: 900,
+                  color: "#0a0a0a",
+                  letterSpacing: "-0.02em",
+                }}
               >
-                <line x1="4" y1="4" x2="20" y2="20" />
-                <line x1="20" y1="4" x2="4" y2="20" />
-              </svg>
-            </button>
+                OAA
+              </span>
+              <span
+                style={{
+                  fontFamily: "var(--font-jetbrains-mono), monospace",
+                  fontSize: "9px",
+                  color: "#0a0a0a",
+                  opacity: 0.5,
+                  letterSpacing: "0.1em",
+                }}
+              >
+                WEB DEVELOPER /2026
+              </span>
+            </div>
+          </Link>
 
-            {/* Overlay nav links */}
-            <nav className="flex flex-col items-center gap-6">
-              {routes.map((route) => {
-                const isActive =
-                  pathname === route.href ||
-                  pathname.startsWith(route.href + "/");
-                return (
-                  <Link
-                    key={route.href}
-                    href={route.href}
-                    onClick={() => setIsOpen(false)}
-                    className={`font-[family-name:var(--font-display)] text-4xl sm:text-5xl font-bold tracking-tight transition-colors duration-200 ${
-                      isActive
-                        ? "text-[var(--color-highlight)]"
-                        : "text-[#FFF8F0] hover:text-[var(--color-highlight)]"
-                    }`}
-                  >
-                    {route.label}
-                  </Link>
-                );
-              })}
-            </nav>
-
-            {/* Social icons */}
-            <div className="flex items-center gap-5 mt-8">
-              {socials.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target={
-                    social.href.startsWith("mailto") ? undefined : "_blank"
-                  }
-                  rel={
-                    social.href.startsWith("mailto")
-                      ? undefined
-                      : "noopener noreferrer"
-                  }
-                  aria-label={social.label}
-                  className="text-[#FFF8F0]/80 hover:text-[#FFF8F0] transition-colors duration-200"
+          {/* Desktop links */}
+          <nav className="hidden md:flex" style={{ gap: "0" }}>
+            {navLinks.map((link) => {
+              const isActive =
+                pathname === link.href || pathname.startsWith(link.href + "/");
+              return (
+                <Link
+                  key={`${link.num}-${link.href}`}
+                  href={link.href}
+                  style={{
+                    display: "flex",
+                    alignItems: "baseline",
+                    gap: "4px",
+                    padding: "8px 16px",
+                    textDecoration: "none",
+                    borderLeft: "1px solid rgba(10,10,10,0.1)",
+                    transition: "background 0.15s",
+                    background: isActive ? "#0a0a0a" : "transparent",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isActive) {
+                      (e.currentTarget as HTMLAnchorElement).style.background =
+                        "rgba(10,10,10,0.05)";
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive) {
+                      (e.currentTarget as HTMLAnchorElement).style.background =
+                        "transparent";
+                    }
+                  }}
                 >
-                  <social.icon size={28} />
-                </a>
-              ))}
-            </div>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-jetbrains-mono), monospace",
+                      fontSize: "9px",
+                      color: isActive ? "#ff5b1f" : "rgba(10,10,10,0.4)",
+                      letterSpacing: "0.05em",
+                    }}
+                  >
+                    {link.num}
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-inter), sans-serif",
+                      fontSize: "13px",
+                      fontWeight: 600,
+                      color: isActive ? "#f4f3ee" : "#0a0a0a",
+                      letterSpacing: "0.01em",
+                    }}
+                  >
+                    {link.label}
+                  </span>
+                </Link>
+              );
+            })}
+          </nav>
 
-            {/* Theme toggle in overlay */}
-            <div className="mt-6">
-              <ThemeToggle />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          {/* Mobile hamburger */}
+          <button
+            className="flex md:hidden"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? "Menüyü kapat" : "Menüyü aç"}
+            aria-expanded={isOpen}
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: "8px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "5px",
+            }}
+          >
+            <span
+              style={{
+                display: "block",
+                width: "24px",
+                height: "2px",
+                background: "#0a0a0a",
+                transition: "transform 0.2s",
+                transform: isOpen ? "rotate(45deg) translate(5px, 5px)" : "none",
+              }}
+            />
+            <span
+              style={{
+                display: "block",
+                width: "24px",
+                height: "2px",
+                background: "#0a0a0a",
+                opacity: isOpen ? 0 : 1,
+                transition: "opacity 0.15s",
+              }}
+            />
+            <span
+              style={{
+                display: "block",
+                width: "24px",
+                height: "2px",
+                background: "#0a0a0a",
+                transition: "transform 0.2s",
+                transform: isOpen ? "rotate(-45deg) translate(5px, -5px)" : "none",
+              }}
+            />
+          </button>
+        </div>
+      </header>
+
+      {/* Mobile full-screen overlay */}
+      {isOpen && (
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 200,
+            background: "#0a0a0a",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "8px",
+          }}
+        >
+          {/* Close button */}
+          <button
+            onClick={() => setIsOpen(false)}
+            aria-label="Menüyü kapat"
+            style={{
+              position: "absolute",
+              top: "24px",
+              right: "24px",
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              color: "#f4f3ee",
+              fontSize: "32px",
+              lineHeight: 1,
+            }}
+          >
+            ×
+          </button>
+
+          <nav style={{ display: "flex", flexDirection: "column", gap: "4px", width: "100%", maxWidth: "320px" }}>
+            {navLinks.map((link) => {
+              const isActive =
+                pathname === link.href || pathname.startsWith(link.href + "/");
+              return (
+                <Link
+                  key={`mob-${link.num}`}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  style={{
+                    display: "flex",
+                    alignItems: "baseline",
+                    gap: "12px",
+                    padding: "16px 24px",
+                    textDecoration: "none",
+                    borderBottom: "1px solid rgba(244,243,238,0.1)",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontFamily: "var(--font-jetbrains-mono), monospace",
+                      fontSize: "11px",
+                      color: "#ff5b1f",
+                      letterSpacing: "0.05em",
+                    }}
+                  >
+                    {link.num}
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-inter), sans-serif",
+                      fontSize: "32px",
+                      fontWeight: 900,
+                      color: isActive ? "#ff5b1f" : "#f4f3ee",
+                      letterSpacing: "-0.02em",
+                    }}
+                  >
+                    {link.label}
+                  </span>
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
+      )}
     </>
   );
 }

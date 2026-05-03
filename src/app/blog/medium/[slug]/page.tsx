@@ -1,9 +1,9 @@
+import Link from "next/link";
 import { getMediumPosts } from "@/lib/medium";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Metadata } from "next";
 import DOMPurify from "isomorphic-dompurify";
-import { FaExternalLinkAlt } from "react-icons/fa";
 
 interface MediumPost {
   link: string;
@@ -15,9 +15,8 @@ interface MediumPost {
   description: string;
 }
 
-// Updated Props type to treat params as a Promise to match the expected PageProps
 type Props = {
-  params: Promise<{ slug: string }>; // Dynamic route parameter as a promise
+  params: Promise<{ slug: string }>;
 };
 
 async function getMediumPost(slug: string): Promise<MediumPost> {
@@ -45,7 +44,6 @@ async function getMediumPost(slug: string): Promise<MediumPost> {
 
 export default async function MediumBlogPost({ params }: Props) {
   try {
-    // Await params to resolve the promise and access slug
     const { slug } = await params;
 
     if (!slug) {
@@ -58,77 +56,205 @@ export default async function MediumBlogPost({ params }: Props) {
     );
 
     return (
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-16 lg:py-24">
-        <article className="max-w-none">
-          <header className="mb-8">
-            <div className="flex flex-col md:flex-row max-md:mb-4 justify-between items-start">
-              <h1 className="font-[family-name:var(--font-display)] text-[var(--font-size-h1)] font-bold mb-4">{mediumPost.title}</h1>
-              <div className="not-prose">
+      <div
+        style={{
+          background: "#f4f3ee",
+          minHeight: "100vh",
+          padding: "64px 32px",
+        }}
+      >
+        {/* Back link */}
+        <div style={{ marginBottom: 48 }}>
+          <Link
+            href="/blog"
+            style={{
+              fontFamily: "var(--font-jetbrains-mono), monospace",
+              fontSize: 12,
+              letterSpacing: "0.08em",
+              color: "#ff5b1f",
+              textDecoration: "none",
+            }}
+          >
+            ← BLOG
+          </Link>
+        </div>
+
+        <article style={{ maxWidth: "none" }}>
+          {/* Article header */}
+          <header style={{ marginBottom: 48 }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 20,
+                marginBottom: 24,
+              }}
+            >
+              <h1
+                style={{
+                  fontFamily: "var(--font-inter), sans-serif",
+                  fontSize: "clamp(32px, 5vw, 64px)",
+                  fontWeight: 900,
+                  letterSpacing: "-0.03em",
+                  color: "#0a0a0a",
+                  margin: 0,
+                  lineHeight: 1.05,
+                }}
+              >
+                {mediumPost.title}
+              </h1>
+
+              {/* External link */}
+              <div>
                 <a
                   href={mediumPost.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center px-4 py-2 rounded-lg gradient-bg text-white hover:opacity-90 transition-opacity italic text-sm whitespace-nowrap"
+                  style={{
+                    fontFamily: "var(--font-jetbrains-mono), monospace",
+                    fontSize: 11,
+                    letterSpacing: "0.08em",
+                    color: "#ff5b1f",
+                    textDecoration: "none",
+                    border: "1px solid #ff5b1f",
+                    padding: "6px 12px",
+                    display: "inline-block",
+                  }}
                 >
-                  <FaExternalLinkAlt size={16} className="mr-2" />
-                  Medium&apos;da oku
+                  MEDIUM&apos;DA OKU ↗
                 </a>
               </div>
             </div>
-            <div className="flex flex-wrap items-center gap-4">
-              <time className="text-sm text-[var(--color-text-muted)]">
-                {new Date(mediumPost.pubDate).toLocaleDateString()}
+
+            {/* Date + categories */}
+            <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 12 }}>
+              <time
+                style={{
+                  fontFamily: "var(--font-jetbrains-mono), monospace",
+                  fontSize: 12,
+                  letterSpacing: "0.06em",
+                  color: "rgba(10,10,10,0.45)",
+                }}
+              >
+                {new Date(mediumPost.pubDate).toLocaleDateString("tr-TR", {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                })}
               </time>
-              <div className="flex flex-wrap gap-2">
-                {mediumPost.categories.map((category) => (
-                  <span
-                    key={category}
-                    className="px-2 py-1 text-xs rounded-full bg-[var(--color-accent)]/10 text-[var(--color-accent)]"
-                  >
-                    {category}
-                  </span>
-                ))}
-              </div>
+
+              {mediumPost.categories.map((category) => (
+                <span
+                  key={category}
+                  style={{
+                    fontFamily: "var(--font-jetbrains-mono), monospace",
+                    fontSize: 10,
+                    letterSpacing: "0.06em",
+                    color: "rgba(10,10,10,0.5)",
+                    border: "1px solid rgba(10,10,10,0.2)",
+                    padding: "2px 6px",
+                  }}
+                >
+                  {category}
+                </span>
+              ))}
             </div>
-          </header>
-        {mediumPost.thumbnail && (
-          <div className="relative h-[400px] w-full mb-8 rounded-lg overflow-hidden">
-            <Image
-              src={mediumPost.thumbnail}
-              alt={mediumPost.title}
-              fill
-              className="object-cover"
-              priority
+
+            <div
+              style={{
+                borderBottom: "1px solid rgba(10,10,10,0.15)",
+                marginTop: 24,
+              }}
             />
-          </div>
-        )}
-        <div className="space-y-6">
+          </header>
+
+          {/* Thumbnail */}
+          {mediumPost.thumbnail && (
+            <div
+              style={{
+                position: "relative",
+                height: 360,
+                width: "100%",
+                marginBottom: 40,
+                overflow: "hidden",
+                border: "1px solid rgba(10,10,10,0.15)",
+              }}
+            >
+              <Image
+                src={mediumPost.thumbnail}
+                alt={mediumPost.title}
+                fill
+                style={{ objectFit: "cover" }}
+                priority
+              />
+            </div>
+          )}
+
+          {/* Prose content */}
           <div
-            className="prose dark:prose-invert max-w-none"
+            className="prose prose-zinc max-w-none" style={{ maxWidth: "800px" }}
+            style={{
+              color: "#0a0a0a",
+              fontFamily: "var(--font-inter), sans-serif",
+            }}
             dangerouslySetInnerHTML={{ __html: sanitizedContent }}
           />
-        </div>
-      </article>
+        </article>
       </div>
     );
   } catch (error) {
     if (error instanceof Error && error.message.includes("Rate limited")) {
       return (
-        <div className="flex flex-col items-center justify-center min-h-[50vh] text-center max-w-[1400px] mx-auto px-6 py-16">
-          <h1 className="text-2xl font-bold mb-4">
-            Fuck! We got rate limited by Medium 😤
+        <div
+          style={{
+            background: "#f4f3ee",
+            minHeight: "100vh",
+            padding: "64px 32px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+          }}
+        >
+          <h1
+            style={{
+              fontFamily: "var(--font-inter), sans-serif",
+              fontSize: 28,
+              fontWeight: 700,
+              color: "#0a0a0a",
+              marginBottom: 16,
+              letterSpacing: "-0.02em",
+            }}
+          >
+            Medium rate limit aşıldı.
           </h1>
-          <p className="text-[var(--color-text-muted)] mb-8">
-            Try again in a few minutes or read the post directly on Medium
+          <p
+            style={{
+              fontFamily: "var(--font-inter), sans-serif",
+              fontSize: 15,
+              color: "rgba(10,10,10,0.55)",
+              marginBottom: 32,
+            }}
+          >
+            Birkaç dakika sonra tekrar dene ya da doğrudan Medium&apos;dan oku.
           </p>
           <a
             href="https://medium.com/@onurataasar"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center px-6 py-3 rounded-lg gradient-bg text-white hover:opacity-90 transition-opacity"
+            style={{
+              fontFamily: "var(--font-jetbrains-mono), monospace",
+              fontSize: 12,
+              letterSpacing: "0.08em",
+              color: "#f4f3ee",
+              background: "#0a0a0a",
+              border: "1px solid #0a0a0a",
+              padding: "10px 20px",
+              textDecoration: "none",
+            }}
           >
-            <FaExternalLinkAlt size={16} className="mr-2" />
-            Go to Medium Profile
+            MEDIUM PROFİLİ ↗
           </a>
         </div>
       );
@@ -154,9 +280,7 @@ export async function generateStaticParams() {
   }
 }
 
-// Updated generateMetadata to handle params as a Promise
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  // Await params to resolve the promise and access slug
   const { slug } = await params;
 
   if (!slug) {

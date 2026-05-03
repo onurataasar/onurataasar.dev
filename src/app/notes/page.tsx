@@ -1,60 +1,87 @@
 import Link from "next/link";
 import { getContentList } from "@/lib/mdx";
-import {
-  PageTransition,
-  StaggerContainer,
-  StaggerItem,
-  FadeIn,
-} from "@/components/motion";
-import { HiOutlineDocumentText } from "react-icons/hi";
 
 export default async function NotesPage() {
   const notes = await getContentList("notes");
 
   return (
-    <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-16 lg:py-24">
-      <PageTransition className="space-y-8">
-        <FadeIn>
-          <h1 className="font-[family-name:var(--font-display)] text-[var(--font-size-h1)] font-bold">
-            <span className="gradient-text">Dev Notes</span>
-          </h1>
-        </FadeIn>
+    <div style={{ background: "#f4f3ee", minHeight: "100vh", padding: "64px 32px" }}>
+      <style>{`
+        .note-row { transition: background 0.15s; }
+        .note-row:hover { background: rgba(10,10,10,0.03); }
+        .note-row:hover .note-title { color: #ff5b1f !important; }
+        .note-row:hover .note-arrow { color: #ff5b1f !important; }
+      `}</style>
 
-        {notes.length === 0 ? (
-          <FadeIn delay={0.2}>
-            <p className="text-[var(--color-text-muted)]">No notes yet...</p>
-          </FadeIn>
-        ) : (
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-6" delay={0.2}>
-            {notes.map((note) => (
-              <StaggerItem key={note.slug}>
-                <Link href={`/notes/${note.slug}`} className="block group">
-                  <article className="relative overflow-hidden rounded-2xl border-2 border-[var(--color-border)] bg-[var(--color-surface)] p-6 hover:border-[var(--color-accent)]/50 shadow-sm hover:shadow-lg transition-all duration-300">
-                    <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      {/* Section header */}
+      <div style={{
+        display: "flex", alignItems: "baseline", gap: 16,
+        borderBottom: "1px solid #0a0a0a", paddingBottom: 16, marginBottom: 48,
+      }}>
+        <span style={{
+          fontFamily: "var(--font-jetbrains-mono), monospace",
+          fontSize: 11, letterSpacing: "0.1em", color: "#ff5b1f",
+        }}>02 / NOTLAR</span>
+        <h1 style={{
+          fontFamily: "var(--font-inter), sans-serif",
+          fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 900,
+          letterSpacing: "-0.03em", margin: 0, color: "#0a0a0a",
+        }}>DEV NOTES .</h1>
+      </div>
 
-                    <div className="flex items-start gap-4">
-                      <div className="p-2 rounded-xl bg-[var(--color-accent)]/10 text-[var(--color-accent)] shrink-0">
-                        <HiOutlineDocumentText size={22} />
-                      </div>
-                      <div className="space-y-1 flex-1 min-w-0">
-                        <h2 className="text-lg font-semibold group-hover:text-[var(--color-accent)] transition-colors font-[family-name:var(--font-display)]">
-                          {note.title}
-                        </h2>
-                        <p className="text-sm text-[var(--color-text-muted)] line-clamp-2">
-                          {note.description}
-                        </p>
-                        <time className="text-xs text-[var(--color-text-muted)]">
-                          {note.date}
-                        </time>
-                      </div>
-                    </div>
-                  </article>
-                </Link>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        )}
-      </PageTransition>
+      {notes.length === 0 ? (
+        <p style={{
+          fontFamily: "var(--font-jetbrains-mono), monospace",
+          fontSize: 14, color: "rgba(10,10,10,0.45)",
+        }}>Henüz not yok...</p>
+      ) : (
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          {notes.map((note, index) => (
+            <Link key={note.slug} href={`/notes/${note.slug}`} style={{ textDecoration: "none", display: "block" }}>
+              <div className="note-row" style={{
+                display: "flex", alignItems: "center", gap: 24,
+                padding: "20px 8px",
+                borderBottom: "1px solid rgba(10,10,10,0.15)",
+                cursor: "pointer",
+              }}>
+                {/* Index */}
+                <span style={{
+                  fontFamily: "var(--font-jetbrains-mono), monospace",
+                  fontSize: 12, color: "#ff5b1f", letterSpacing: "0.05em",
+                  minWidth: 32, flexShrink: 0,
+                }}>
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+
+                {/* Title */}
+                <span className="note-title" style={{
+                  fontFamily: "var(--font-inter), sans-serif",
+                  fontSize: 18, fontWeight: 700, color: "#0a0a0a",
+                  letterSpacing: "-0.01em", flex: 1, transition: "color 0.15s",
+                }}>
+                  {note.title}
+                </span>
+
+                {/* Date */}
+                <time style={{
+                  fontFamily: "var(--font-jetbrains-mono), monospace",
+                  fontSize: 11, color: "rgba(10,10,10,0.45)",
+                  letterSpacing: "0.05em", flexShrink: 0, marginLeft: "auto",
+                }}>
+                  {note.date}
+                </time>
+
+                {/* Arrow */}
+                <span className="note-arrow" style={{
+                  fontFamily: "var(--font-jetbrains-mono), monospace",
+                  fontSize: 16, color: "rgba(10,10,10,0.3)", flexShrink: 0,
+                  transition: "color 0.15s",
+                }}>↗</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
